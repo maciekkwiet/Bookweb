@@ -3,7 +3,7 @@ import Book from '../models/book';
 module.exports = {
   getBook(req: any, res: any, next: any) {
     Book.get()
-      .then((data: any) => res.status(200).json({ success: true, articles: data }))
+      .then((data: any) => res.status(200).json({ success: true, books: data }))
       .catch((err: any) => res.status(400).json({ err }));
   },
 

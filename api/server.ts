@@ -6,7 +6,7 @@ import * as bodyParser from 'body-parser';
 import * as logger from 'morgan';
 import * as http from 'http';
 
-import articles from './routes/bookRoutes';
+import books from './routes/bookRoutes';
 
 const app = express();
 
@@ -31,7 +31,7 @@ app.all('/*', (req, res, next) => {
 
 app.disable('x-powered-by');
 
-articles(app);
+books(app);
 
 
 app.set('port', port);
