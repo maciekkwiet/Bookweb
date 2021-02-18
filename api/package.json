@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node-dev --clear -r tsconfig-paths/register ./server.ts "
   },
-  "author": "Gainor Bostwick",
+  "author": "THE BEST TEAM",
   "license": "ISC",
   "dependencies": {
     "@types/bluebird": "^3.5.33",
