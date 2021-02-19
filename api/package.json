@@ -4,7 +4,8 @@
   "description": "Bookweb",
   "main": "server.js",
   "scripts": {
-    "start": "ts-node-dev --clear -r tsconfig-paths/register ./server.ts "
+    "start": "ts-node-dev --clear -r tsconfig-paths/register ./server.ts ",
+    "debug": "ts-node-dev --inspect --clear -r tsconfig-paths/register ./server.ts "
   },
   "author": "THE BEST TEAM",
   "license": "ISC",
