@@ -47,7 +47,7 @@ app.use((err: any, req: any, res: any, next: any) => {
 });
 
 app.get('/', (request, response) => {
-  response.json({ info: 'Node.js, Express, and Postgres API' })
+  response.json({ info: 'Teraz tylko robić :P' })
 })
 
 module.exports = app;
