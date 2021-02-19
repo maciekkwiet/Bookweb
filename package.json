@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "install": "cd api && yarn",
+    "start": "cd api && yarn start"
+  }
+}
