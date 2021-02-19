@@ -1,25 +1,67 @@
-import db from '../config/config';
+import pool from '../config/config';
 
-const Book: any = {};
+export const getBooks = (request: any, response: any) => {
+  pool.query('SELECT * FROM books ORDER BY id ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
 
-Book.create = (title: string, content: string) => {
-  return db.none(`INSERT into books(title, content)` + `VALUES($1, $2)`, [title, content]);
-};
+export const getBookById = (request: any, response: any) => {
+  const id = parseInt(request.params.id)
 
-Book.get = () => {
-  return db.any('SELECT * FROM books');
-};
+  pool.query('SELECT * FROM books WHERE id = $1', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
 
-Book.update = (title: string, content: string, id: Number) => {
-  return db.none(`UPDATE books SET title = $1, content = $2 WHERE id = $3`, [
-    title,
-    content,
-    id
-  ]);
-};
+export const createBook = (request: any, response: any) => {
+  const { title, writer } = request.body
 
-Book.delete = (id: Number) => {
-  return db.none(`DELETE from books WHERE id = $1`, id);
-};
+  pool.query('INSERT INTO books (title, email) VALUES ($1, $2)', [title, writer], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(201).send(`User added`)
+  })
+}
 
-export default Book
+export const updateBook = (request: any, response: any) => {
+  const id = parseInt(request.params.id)
+  const { title, writer } = request.body
+
+  pool.query(
+    'UPDATE books SET name = $1, email = $2 WHERE id = $3',
+    [title, writer, id],
+    (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).send(`Book modified`)
+    }
+  )
+}
+
+export const deleteBook = (request: any, response: any) => {
+  const id = parseInt(request.params.id)
+
+  pool.query('DELETE FROM books WHERE id = $1', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).send(`Book deleted`)
+  })
+}
+
+module.exports = {
+  getBooks,
+  getBookById,
+  createBook,
+  updateBook,
+  deleteBook,
+}

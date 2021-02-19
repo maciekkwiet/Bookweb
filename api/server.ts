@@ -6,7 +6,8 @@ import * as bodyParser from 'body-parser';
 import * as logger from 'morgan';
 import * as http from 'http';
 
-import books from './routes/bookRoutes';
+
+const router = require('./routes/index');
 
 const app = express();
 
@@ -31,7 +32,7 @@ app.all('/*', (req, res, next) => {
 
 app.disable('x-powered-by');
 
-books(app);
+app.use('/api', router);
 
 
 app.set('port', port);
@@ -45,5 +46,8 @@ app.use((err: any, req: any, res: any, next: any) => {
   res.status(err.status || 500).send(err.stack);
 });
 
+app.get('/', (request, response) => {
+  response.json({ info: 'Node.js, Express, and Postgres API' })
+})
 
 module.exports = app;

@@ -1,10 +1,17 @@
-const BooksController = require('../controllers/booksController');
+import {
+  getBooks,
+  getBookById,
+  createBook,
+  updateBook,
+  deleteBook
+} from '../models/book';
 
 const bookRoutes = (app: any) => {
-  app.get('/', BooksController.getBook);
-  app.post('/new', BooksController.createBook);
-  app.put('/update/article/:id', BooksController.updateBook);
-  app.delete('/delete/article/:id', BooksController.deleteBook);
+  app.get('/users', getBooks)
+  app.get('/users/:id', getBookById)
+  app.post('/users', createBook)
+  app.put('/users/:id', updateBook)
+  app.delete('/users/:id', deleteBook)
 };
 
 export default bookRoutes

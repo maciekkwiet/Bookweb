@@ -1,14 +1,8 @@
-import promise from 'bluebird';
-
-const options = {
-  promiseLib: promise,
-  query: (e: any) => {
-    console.log(e.query);
+import { Pool } from 'pg';
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
   }
-};
-const pgp = require('pg-promise')(options);
-
-const connectionString = process.env.DATABASE_URL;
-const db = pgp(connectionString);
-
-export default db
+});
+export default pool
