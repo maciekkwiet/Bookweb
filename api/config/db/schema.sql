@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS bookweb_app;
+-- DROP DATABASE IF EXISTS bookweb_app;
 CREATE DATABASE bookweb_app;
 
 \c bookweb_app;
