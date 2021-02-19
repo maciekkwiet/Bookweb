@@ -1,6 +1,7 @@
 {
   "scripts": {
     "install": "cd api && yarn",
-    "start": "cd api && yarn start"
+    "start": "cd api && yarn start",
+    "debug": "cd api && yarn debug"
   }
 }

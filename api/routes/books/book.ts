@@ -1,4 +1,4 @@
-import pool from '../config/config';
+import pool from '../../configDB/config';
 
 export const getBooks = (request: any, response: any) => {
   pool.query('SELECT * FROM books ORDER BY id ASC', (error, results) => {
@@ -23,7 +23,7 @@ export const getBookById = (request: any, response: any) => {
 export const createBook = (request: any, response: any) => {
   const { title, writer } = request.body
 
-  pool.query('INSERT INTO books (title, email) VALUES ($1, $2)', [title, writer], (error, results) => {
+  pool.query('INSERT INTO books (title, writer) VALUES ($1, $2)', [title, writer], (error, results) => {
     if (error) {
       throw error
     }
