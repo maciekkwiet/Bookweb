@@ -15,13 +15,14 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write \"api/**/*.js\" \"api/**/*.ts\"",
       "yarn format",
       "git add"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn format"
+      "pre-commit": "lint-staged"
     }
   }
 }
