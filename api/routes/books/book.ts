@@ -21,9 +21,9 @@ export const getBookById = (request: any, response: any) => {
 }
 
 export const createBook = (request: any, response: any) => {
-  const { title, writer } = request.body
+  const { title, content } = request.body
 
-  pool.query('INSERT INTO books (title, writer) VALUES ($1, $2)', [title, writer], (error, results) => {
+  pool.query('INSERT INTO books (title, content) VALUES ($1, $2)', [title, content], (error, results) => {
     if (error) {
       throw error
     }
@@ -33,11 +33,11 @@ export const createBook = (request: any, response: any) => {
 
 export const updateBook = (request: any, response: any) => {
   const id = parseInt(request.params.id)
-  const { title, writer } = request.body
+  const { title, content } = request.body
 
   pool.query(
-    'UPDATE books SET name = $1, email = $2 WHERE id = $3',
-    [title, writer, id],
+    'UPDATE books SET title = $1, content = $2 WHERE id = $3',
+    [title, content, id],
     (error, results) => {
       if (error) {
         throw error
