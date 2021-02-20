@@ -15,7 +15,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "yarn prettier --write \"api/**/*.js\" \"api/**/*.ts\"",
+      "prettier --write \"api/**/*.js\" \"api/**/*.ts\"",
       "git add"
     ]
   },
