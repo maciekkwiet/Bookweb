@@ -1,4 +1,5 @@
 {
+  "name": "bookweb",
   "version": "1.0.0",
   "description": "Bookweb",
   "main": "server.ts",
