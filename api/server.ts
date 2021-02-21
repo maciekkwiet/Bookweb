@@ -6,9 +6,8 @@ import * as bodyParser from 'body-parser';
 import * as logger from 'morgan';
 import * as http from 'http';
 
-const router = require('./routes/index');
-
 const app = express();
+const router = require('./routes/index');
 
 const server = http.createServer(app);
 const port = process.env.PORT || '3000';
@@ -47,5 +46,9 @@ app.use((err: any, req: any, res: any, next: any) => {
 app.get('/', (request, response) => {
     response.json({ info: 'Teraz tylko robić :P' });
 });
+
+//register and login routes
+
+app.use('/auth', require('./routes/jwtAuth'));
 
 module.exports = app;
