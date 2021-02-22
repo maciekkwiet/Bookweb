@@ -48,7 +48,6 @@ app.get('/', (request, response) => {
 });
 
 //register and login routes
-
 app.use('/auth', require('./routes/jwtAuth'));
 
 module.exports = app;

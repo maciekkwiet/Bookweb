@@ -1,7 +1,7 @@
-module.exports = (req, res, next) => {
+module.exports = (req: any, res: any, next: any) => {
   const { email, name, password } = req.body;
 
-  function validEmail(userEmail) {
+  function validEmail(userEmail: string) {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userEmail);
   }
 
