@@ -2,7 +2,7 @@
   "name": "bookweb",
   "version": "1.0.0",
   "description": "Bookweb",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
     "start": "ts-node-dev --clear -r tsconfig-paths/register ./server.ts ",
     "debug": "ts-node-dev --inspect --clear -r tsconfig-paths/register ./server.ts ",
