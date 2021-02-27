@@ -4,7 +4,7 @@ import { getBooks, getBookById, createBook, updateBook, deleteBook, getBookByISB
 router.get('/books', getBooks);
 router.get('/book/:id', getBookById);
 router.get('/book/:isbn', getBookByISBN);
-router.get('/book/:isbn', getBookByTitle);
+router.get('/book/:title', getBookByTitle);
 router.post('/book', createBook);
 router.patch('/book/:id', updateBook);
 router.delete('/book/:id', deleteBook);
