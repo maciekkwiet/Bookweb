@@ -1,63 +1,92 @@
 import pool from '../../configDB/config';
+import { Request, Response } from 'express';
 
-export const getBooks = (request: any, response: any) => {
-    pool.query('SELECT * FROM books ORDER BY id ASC', (error, results) => {
-        if (error) {
-            throw error;
-        }
-        response.status(200).json(results.rows);
-    });
+export const getBooks = (request: Request, response: Response) => {
+  pool.query('SELECT * FROM books ORDER BY id ASC', (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
 };
 
-export const getBookById = (request: any, response: any) => {
-    const id = parseInt(request.params.id);
+export const getBookById = (request: Request, response: Response) => {
+  const bookId = parseInt(request.params.id);
 
-    pool.query('SELECT * FROM books WHERE id = $1', [id], (error, results) => {
-        if (error) {
-            throw error;
-        }
-        response.status(200).json(results.rows);
-    });
+  pool.query('SELECT * FROM books WHERE id = $1', [bookId], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
 };
 
-export const createBook = (request: any, response: any) => {
-    const { title, content } = request.body;
+export const getBookByISBN = (request: Request, response: Response) => {
+  const bookISBN = parseInt(request.params.isbn);
 
-    pool.query('INSERT INTO books (title, content) VALUES ($1, $2)', [title, content], (error, results) => {
-        if (error) {
-            throw error;
-        }
-        response.status(201).send(`User added`);
-    });
+  pool.query('SELECT * FROM books WHERE isbn = $1', [bookISBN], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
 };
 
-export const updateBook = (request: any, response: any) => {
-    const id = parseInt(request.params.id);
-    const { title, content } = request.body;
+export const getBookByTitle = (request: Request, response: Response) => {
+  const bookTitle = parseInt(request.params.title);
 
-    pool.query('UPDATE books SET title = $1, content = $2 WHERE id = $3', [title, content, id], (error, results) => {
-        if (error) {
-            throw error;
-        }
-        response.status(200).send(`Book modified`);
-    });
+  pool.query('SELECT * FROM books WHERE title = $1', [bookTitle], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
 };
 
-export const deleteBook = (request: any, response: any) => {
-    const id = parseInt(request.params.id);
+export const createBook = (request: Request, response: Response) => {
+  const { title, content } = request.body;
 
-    pool.query('DELETE FROM books WHERE id = $1', [id], (error, results) => {
-        if (error) {
-            throw error;
-        }
-        response.status(200).send(`Book deleted`);
-    });
+  pool.query('INSERT INTO books (title, content) VALUES ($1, $2)', [title, content], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(201).send(`User added`);
+  });
+};
+
+export const updateBook = (request: Request, response: Response) => {
+  const bookId = parseInt(request.params.id);
+  const { isbn, title, description, release_date, num_pages, cover } = request.body;
+
+  pool.query(
+    'UPDATE books SET isbn = $1, title = $2, description = $3, release_date = $4, num_pages = $5, cover = $6 WHERE id = $7',
+    [isbn, title, description, release_date, num_pages, cover, bookId],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).send(`Book modified`);
+    }
+  );
+};
+
+export const deleteBook = (request: Request, response: Response) => {
+  const bookId = parseInt(request.params.id);
+
+  pool.query('DELETE FROM books WHERE id = $1', [bookId], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).send(`Book deleted`);
+  });
 };
 
 module.exports = {
-    getBooks,
-    getBookById,
-    createBook,
-    updateBook,
-    deleteBook,
+  getBooks,
+  getBookById,
+  getBookByISBN,
+  getBookByTitle,
+  createBook,
+  updateBook,
+  deleteBook,
 };
