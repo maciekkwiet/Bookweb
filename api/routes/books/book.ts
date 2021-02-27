@@ -44,14 +44,18 @@ export const getBookByTitle = (request: Request, response: Response) => {
 };
 
 export const createBook = (request: Request, response: Response) => {
-  const { title, content } = request.body;
+  const { isbn, title, description, release_date, num_pages, cover } = request.body;
 
-  pool.query('INSERT INTO books (title, content) VALUES ($1, $2)', [title, content], (error, results) => {
-    if (error) {
-      throw error;
+  pool.query(
+    'INSERT INTO books ( isbn, title, description, release_date, num_pages, cover ) VALUES ($1, $2, $3, $4, $5, $6)',
+    [isbn, title, description, release_date, num_pages, cover],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(201).send(`Book added`);
     }
-    response.status(201).send(`User added`);
-  });
+  );
 };
 
 export const updateBook = (request: Request, response: Response) => {
