@@ -29,60 +29,48 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const getUser = async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
+  const user = await getById('users', id);
 
-  try {
-    const user = await getById('users', id);
-    if (user.length === 0) return res.status(400).json("User with given ID doesn't exist");
+  if (user.length === 0) return res.status(400).json("User with given ID doesn't exist");
 
-    res.status(200).json(user);
-  } catch (err) {
-    res.status(500).json(err.message);
-  }
+  res.status(200).json(user);
 };
 
 export const removeUser = async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
+  const user = await getById('users', id);
 
-  try {
-    const user = await getById('users', id);
-    if (user.length === 0) return res.status(400).json("User with given ID doesn't exist");
+  if (user.length === 0) return res.status(400).json("User with given ID doesn't exist");
 
-    pool.query('DELETE FROM users where id = $1', [id]).then(() => {
-      res.status(200).json({
-        message: 'User deleted',
-        user,
-      });
+  pool.query('DELETE FROM users where id = $1', [id]).then(() => {
+    res.status(200).json({
+      message: 'User deleted',
+      user,
     });
-  } catch (err) {
-    res.status(500).json(err.message);
-  }
+  });
 };
 
 export const updateUser = async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   const { email, password, name, surname, avatar } = req.body;
 
-  try {
-    let user = await getById('users', id);
-    if (user.length === 0) return res.status(400).json("User with given ID doesn't exist");
+  let user = await getById('users', id);
+  if (user.length === 0) return res.status(400).json("User with given ID doesn't exist");
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
 
-    pool
-      .query('UPDATE users SET email = $1, password = $2, name = $3, surname = $4, avatar = $5 WHERE id = $6', [
-        email,
-        hashedPassword,
-        name,
-        surname,
-        avatar,
-        id,
-      ])
-      .then(async () => {
-        user = await getById('users', id);
-        res.status(200).json({ message: 'User updated', user });
-      });
-  } catch (err) {
-    res.status(500).json(err.message);
-  }
+  pool
+    .query('UPDATE users SET email = $1, password = $2, name = $3, surname = $4, avatar = $5 WHERE id = $6', [
+      email,
+      hashedPassword,
+      name,
+      surname,
+      avatar,
+      id,
+    ])
+    .then(async () => {
+      user = await getById('users', id);
+      res.status(200).json({ message: 'User updated', user });
+    });
 };
