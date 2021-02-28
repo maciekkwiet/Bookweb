@@ -47,7 +47,4 @@ app.get('/', (request, response) => {
   response.json({ info: 'Teraz tylko robić :P' });
 });
 
-//register and login routes
-app.use('/auth', require('./routes/jwtAuth'));
-
 module.exports = app;

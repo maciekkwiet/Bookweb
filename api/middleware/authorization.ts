@@ -1,20 +1,20 @@
 import jwt from 'jsonwebtoken';
-require('dotenv').config();
+import { Request, Response, NextFunction } from 'express';
 
-module.exports = async (req: any, res: any, next: any) => {
+module.exports = async (request: Request, response: Response, next: NextFunction) => {
   try {
-    const jwtToken = req.header('token');
+    const jwtToken = request.header('token');
 
     if (!jwtToken) {
-      return res.status(403).json('Not authorize');
+      return response.status(403).json('Not authorize');
     }
 
-    const payload = jwt.verify(jwtToken, process.env.SECRET!);
+    const payload = jwt.verify(jwtToken, process.env.SECRET);
 
-    req.user = payload.user;
+    request.user = payload.user;
     next();
   } catch (err) {
-    console.error(err.message + 'dupa');
-    return res.status(403).json('Not authorize');
+    console.error(err.message);
+    return response.status(403).json('Not authorize');
   }
 };
