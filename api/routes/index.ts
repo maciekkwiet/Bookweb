@@ -8,4 +8,3 @@ router.use('/users', userRoutes);
 router.use('/authors', authorsRoutes);
 
 module.exports = router;
-
