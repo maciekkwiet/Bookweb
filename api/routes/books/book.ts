@@ -21,28 +21,6 @@ export const getBookById = (request: Request, response: Response) => {
   });
 };
 
-export const getBookByISBN = (request: Request, response: Response) => {
-  const bookISBN = parseInt(request.params.isbn);
-
-  pool.query('SELECT * FROM books WHERE isbn = $1', [bookISBN], (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).json(results.rows);
-  });
-};
-
-export const getBookByTitle = (request: Request, response: Response) => {
-  const bookTitle = parseInt(request.params.title);
-
-  pool.query('SELECT * FROM books WHERE title = $1', [bookTitle], (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).json(results.rows);
-  });
-};
-
 export const createBook = (request: Request, response: Response) => {
   const { isbn, title, description, release_date, num_pages, cover } = request.body;
 
@@ -88,8 +66,6 @@ export const deleteBook = (request: Request, response: Response) => {
 module.exports = {
   getBooks,
   getBookById,
-  getBookByISBN,
-  getBookByTitle,
   createBook,
   updateBook,
   deleteBook,
