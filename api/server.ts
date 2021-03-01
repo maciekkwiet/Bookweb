@@ -5,9 +5,11 @@ import * as path from 'path';
 import * as bodyParser from 'body-parser';
 import * as logger from 'morgan';
 import * as http from 'http';
+const errorMiddleware = require('./middleware/errorMiddleware');
+
+const router = require('./routes/index');
 
 const app = express();
-const router = require('./routes/index');
 
 const server = http.createServer(app);
 const port = process.env.PORT || '3000';
@@ -31,17 +33,13 @@ app.all('/*', (req, res, next) => {
 app.disable('x-powered-by');
 
 app.use('/api', router);
+app.use(errorMiddleware);
 
 app.set('port', port);
 
 server.listen(port);
 
 console.log('Server listening on port ' + port);
-
-app.use((err: any, req: any, res: any, next: any) => {
-  console.log(err);
-  res.status(err.status || 500).send(err.stack);
-});
 
 app.get('/', (request, response) => {
   response.json({ info: 'Teraz tylko robić :P' });
