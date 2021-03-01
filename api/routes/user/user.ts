@@ -1,9 +1,16 @@
 import pool from '../../configDB/config';
+import { Request, Response } from 'express';
 const bcrypt = require('bcrypt');
 const jwtGenerator = require('../../utils/jwtGenerator');
+const { validationResult } = require('express-validator');
 
-export const registerUser = async (req: any, res: any) => {
+export const registerUser = async (req: Request, res: Response) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(422).json({ errors: errors.array() });
+      return;
+    }
     //1. destructure the req.body (name, email, password)
     const { name, email, password } = req.body;
 
@@ -34,8 +41,13 @@ export const registerUser = async (req: any, res: any) => {
   }
 };
 
-export const loginUser = async (req: any, res: any) => {
+export const loginUser = async (req: Request, res: Response) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(422).json({ errors: errors.array() });
+      return;
+    }
     //1. destructure the req.body
     const { email, password } = req.body;
 
