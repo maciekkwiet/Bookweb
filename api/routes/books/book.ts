@@ -1,5 +1,6 @@
 import pool from '../../configDB/config';
 import { Request, Response } from 'express';
+import { uploadImage } from '../../utils/imageTools';
 
 export const getBooks = (request: Request, response: Response) => {
   pool.query('SELECT * FROM books ORDER BY id ASC', (error, results) => {
@@ -40,9 +41,11 @@ export const updateBook = (request: Request, response: Response) => {
   const bookId = parseInt(request.params.id);
   const { isbn, title, description, release_date, num_pages, cover } = request.body;
 
+  let image = uploadImage(cover);
+  console.log(image);
   pool.query(
     'UPDATE books SET isbn = $1, title = $2, description = $3, release_date = $4, num_pages = $5, cover = $6 WHERE id = $7',
-    [isbn, title, description, release_date, num_pages, cover, bookId],
+    [isbn, title, description, release_date, num_pages, image, bookId],
     (error, results) => {
       if (error) {
         throw error;
