@@ -22,12 +22,13 @@ export const getBookById = (request: Request, response: Response) => {
   });
 };
 
-export const createBook = (request: Request, response: Response) => {
+export const createBook = async (request: Request, response: Response) => {
   const { isbn, title, description, release_date, num_pages, cover } = request.body;
+  const image = await uploadImage(cover);
 
   pool.query(
     'INSERT INTO books ( isbn, title, description, release_date, num_pages, cover ) VALUES ($1, $2, $3, $4, $5, $6)',
-    [isbn, title, description, release_date, num_pages, cover],
+    [isbn, title, description, release_date, num_pages, image],
     (error, results) => {
       if (error) {
         throw error;
@@ -37,12 +38,11 @@ export const createBook = (request: Request, response: Response) => {
   );
 };
 
-export const updateBook = (request: Request, response: Response) => {
+export const updateBook = async (request: Request, response: Response) => {
   const bookId = parseInt(request.params.id);
   const { isbn, title, description, release_date, num_pages, cover } = request.body;
+  const image = await uploadImage(cover);
 
-  let image = uploadImage(cover);
-  console.log(image);
   pool.query(
     'UPDATE books SET isbn = $1, title = $2, description = $3, release_date = $4, num_pages = $5, cover = $6 WHERE id = $7',
     [isbn, title, description, release_date, num_pages, image, bookId],

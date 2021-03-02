@@ -8,17 +8,15 @@ cloudinary.config({
 });
 
 export async function uploadImage(image: any) {
-  await cloudinary.uploader
-    .upload(image)
-    .then((result: any) => {
-      return result.secure_url;
-    })
-    .catch((error: Error) => {
-      response.status(500).send({
-        message: 'fail',
-        error,
-      });
+  try {
+    const result = await cloudinary.uploader.upload(image);
+    return result.secure_url;
+  } catch (error) {
+    response.status(500).send({
+      message: 'fail',
+      error,
     });
+  }
 }
 
 export function retrieveImage(id: any) {}
