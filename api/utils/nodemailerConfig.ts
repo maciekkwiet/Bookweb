@@ -29,3 +29,5 @@ async function sendEmail(receiver: string, subject: string, text: string) {
     }
   });
 }
+
+export default sendEmail;
