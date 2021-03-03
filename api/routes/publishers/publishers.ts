@@ -1,7 +1,7 @@
 import pool from '../../configDB/config';
 import { Request, Response } from 'express';
 
-export const getPublishers = (request: Request, response: Response) => {
+export const getPublishers = async (request: Request, response: Response) => {
   pool.query('SELECT * FROM publishers ORDER BY id ASC', (error, results) => {
     if (error) {
       throw error;
@@ -10,7 +10,7 @@ export const getPublishers = (request: Request, response: Response) => {
   });
 };
 
-export const getPublisherById = (request: Request, response: Response) => {
+export const getPublisherById = async (request: Request, response: Response) => {
   const id = parseInt(request.params.id);
 
   pool.query('SELECT * FROM publishers WHERE id = $1', [id], (error, results) => {
@@ -21,7 +21,7 @@ export const getPublisherById = (request: Request, response: Response) => {
   });
 };
 
-export const createPublisher = (request: Request, response: Response) => {
+export const createPublisher = async (request: Request, response: Response) => {
   const { name, description } = request.body;
 
   pool.query('INSERT INTO publishers (name, description) VALUES ($1, $2)', [name, description], (error, results) => {
@@ -32,7 +32,7 @@ export const createPublisher = (request: Request, response: Response) => {
   });
 };
 
-export const updatePublisher = (request: Request, response: Response) => {
+export const updatePublisher = async (request: Request, response: Response) => {
   const id = parseInt(request.params.id);
   const { name, description } = request.body;
 
@@ -48,7 +48,7 @@ export const updatePublisher = (request: Request, response: Response) => {
   );
 };
 
-export const deletePublisher = (request: Request, response: Response) => {
+export const deletePublisher = async (request: Request, response: Response) => {
   const id = parseInt(request.params.id);
 
   pool.query('DELETE FROM publishers WHERE id = $1', [id], (error, results) => {
