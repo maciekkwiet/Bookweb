@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-function jwtGenerator(id: any) {
+function jwtGenerator(id: number) {
   const payload = {
     user: id,
   };

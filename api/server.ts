@@ -5,9 +5,10 @@ import * as path from 'path';
 import * as bodyParser from 'body-parser';
 import * as logger from 'morgan';
 import * as http from 'http';
+
 const errorMiddleware = require('./middleware/errorMiddleware');
 
-const router = require('./routes/index');
+const mountRoutes = require('./routes');
 
 const app = express();
 
@@ -32,7 +33,7 @@ app.all('/*', (req, res, next) => {
 
 app.disable('x-powered-by');
 
-app.use('/api', router);
+mountRoutes(app);
 app.use(errorMiddleware);
 
 app.set('port', port);

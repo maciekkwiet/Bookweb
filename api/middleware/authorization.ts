@@ -1,7 +1,9 @@
-import jwt from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
+import { UserInfoRequest } from './requests';
 
-module.exports = async (request: Request, response: Response, next: NextFunction) => {
+const jwt = require('jsonwebtoken');
+
+module.exports = async (request: UserInfoRequest, response: Response, next: NextFunction) => {
   try {
     const jwtToken = request.header('token');
 
@@ -9,7 +11,8 @@ module.exports = async (request: Request, response: Response, next: NextFunction
       return response.status(403).json('Not authorize');
     }
 
-    const payload = jwt.verify(jwtToken, process.env.SECRET);
+    const secret: string = process.env.SECRET || '';
+    const payload = jwt.verify(jwtToken, secret);
 
     request.user = payload.user;
     next();
