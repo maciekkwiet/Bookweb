@@ -1,11 +1,13 @@
-const router = require('express').Router();
+const Router = require('express-promise-router');
+
 import { getAuthors, getAuthorById, getBooksByAuthorId, createAuthor, updateAuthor, deleteAuthor } from './author';
 
-router.get('/authors', getAuthors);
-router.get('/author/:id', getAuthorById);
-router.get('/author/:id/books', getBooksByAuthorId);
-router.post('/author', createAuthor);
-router.put('/author/:id', updateAuthor);
-router.delete('/author/:id', deleteAuthor);
+const router = new Router();
+router.get('/', getAuthors);
+router.get('/:id', getAuthorById);
+router.get('/:id/books', getBooksByAuthorId);
+router.post('/', createAuthor);
+router.put('/:id', updateAuthor);
+router.delete('/:id', deleteAuthor);
 
 module.exports = router;
