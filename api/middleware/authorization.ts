@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
-import { UserInfoRequest } from './requests';
+import { UserInfoRequest } from '../types/requests';
 
-const jwt = require('jsonwebtoken');
+import { verify } from 'jsonwebtoken';
 
 module.exports = async (request: UserInfoRequest, response: Response, next: NextFunction) => {
   try {
@@ -11,10 +11,11 @@ module.exports = async (request: UserInfoRequest, response: Response, next: Next
       return response.status(403).json('Not authorize');
     }
 
-    const secret: string = process.env.SECRET || '';
-    const payload = jwt.verify(jwtToken, secret);
-
-    request.user = payload.user;
+    const secret: string | undefined = process.env.SECRET;
+    if (typeof secret === 'string') {
+      const payload = verify(jwtToken, secret);
+      request.userId = (payload as any).user;
+    }
     next();
   } catch (err) {
     console.error(err.message);
