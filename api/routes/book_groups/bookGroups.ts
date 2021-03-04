@@ -57,7 +57,27 @@ export const deleteBookGroup = async (request: UserInfoRequest, response: Respon
     const userId: number = request.userId;
     const bookGroupId = parseInt(request.params.id);
     await pool.query('DELETE FROM book_groups WHERE (id=$1) AND (user_id=$2)', [bookGroupId, userId]);
-    response.status(201).send('Book group deleted');
+    response.status(204).send('Book group deleted');
+  } catch (err) {
+    response.status(500).json(err);
+  }
+};
+
+export const modifyBookGroup = async (request: UserInfoRequest, response: Response) => {
+  try {
+    const userId: number = request.userId;
+    const bookGroupId = parseInt(request.params.id);
+    const { is_public, name } = request.body;
+    const { rows } = await pool.query('SELECT * FROM book_groups WHERE (id=$1) AND (user_id=$2)', [
+      bookGroupId,
+      userId,
+    ]);
+    if (rows.length <= 0) {
+      response.status(403).json({ error: "You don't have permission to this resource or it doesn't exists" });
+    } else {
+      await pool.query('UPDATE book_groups SET is_public=$1, name=$2 WHERE id=$3', [is_public, name, bookGroupId]);
+      response.status(200).send('Book group updated');
+    }
   } catch (err) {
     response.status(500).json(err);
   }
