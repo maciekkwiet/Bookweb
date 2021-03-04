@@ -13,7 +13,6 @@ export default async (request: UserInfoRequest, response: Response, next: NextFu
   try {
     const payload = jwt.verify(jwtToken, secret);
     request.userId = payload.userId;
-    console.log(request.userId);
     next();
   } catch (err) {
     response.status(401).json(err);
