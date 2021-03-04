@@ -12,7 +12,7 @@ module.exports = async (request: UserInfoRequest, response: Response, next: Next
     }
 
     const secret: string | undefined = process.env.SECRET;
-    if (typeof secret === 'string') {
+    if (secret) {
       const payload = verify(jwtToken, secret);
       request.userId = (payload as any).user;
     }

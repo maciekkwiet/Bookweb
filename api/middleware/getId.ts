@@ -1,20 +1,21 @@
 import { Response, NextFunction } from 'express';
 import { UserInfoRequest } from '../types/requests';
 
-const jwt = require('jsonwebtoken');
+import { verify } from 'jsonwebtoken';
 
 export default async (request: UserInfoRequest, response: Response, next: NextFunction) => {
-  const jwtToken = request.header('token');
-  if (!jwtToken) {
-    next();
+  const jwtToken: string | undefined = request.header('token');
+  if (jwtToken) {
+    const secret: string | undefined = process.env.SECRET;
+    if (secret) {
+      try {
+        const payload = verify(jwtToken, secret);
+        request.userId = (payload as any).userId;
+        next();
+      } catch (err) {
+        response.status(401).json(err);
+      }
+    }
   }
-
-  const secret: string = process.env.SECRET || '';
-  try {
-    const payload = jwt.verify(jwtToken, secret);
-    request.userId = payload.userId;
-    next();
-  } catch (err) {
-    response.status(401).json(err);
-  }
+  next();
 };
