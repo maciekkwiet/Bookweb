@@ -22,7 +22,19 @@ export const getPublisherById = async (request: Request, response: Response) => 
 };
 
 export const createPublisher = async (request: Request, response: Response) => {
-  const { name, description } = request.body;
+  const { name, description, street, city, number, zip_code, country } = request.body;
+
+  pool.query(
+    'INSERT INTO adresses (street,city,number,zip_code,country) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+    [street, city, number, zip_code, country],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      var newlyCreatedAdressID = results.rows[0].id;
+      response.status(201).send(`Publisher added`);
+    }
+  );
 
   pool.query('INSERT INTO publishers (name, description) VALUES ($1, $2)', [name, description], (error, results) => {
     if (error) {
