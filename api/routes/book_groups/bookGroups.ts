@@ -13,10 +13,3 @@ export const getBookGroups = async (request: UserInfoRequest, response: Response
     response.status(500).json(err);
   }
 };
-
-export const getBookGroup = async (req: Request, res: Response) => {
-  await pool
-    .query('SELECT * FROM book_groups WHERE (id=$1)', [req.params.id])
-    .then(results => res.status(200).json(results.rows))
-    .catch(error => res.status(500).json(error.message));
-};
