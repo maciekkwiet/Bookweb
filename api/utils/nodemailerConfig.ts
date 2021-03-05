@@ -1,8 +1,9 @@
 require('dotenv').config();
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 async function sendEmail(receiver: string, subject: string, text: string) {
   let transporter = nodemailer.createTransport({
+    //@ts-ignore - todo later
     service: 'gmail',
     auth: {
       type: 'OAuth2',
@@ -23,7 +24,7 @@ async function sendEmail(receiver: string, subject: string, text: string) {
 
   transporter.sendMail(mailOptions, function (err: Error, data: {}) {
     if (err) {
-      console.log('Error: ' + err);
+      console.error('Error: ' + err);
     } else {
       console.log('Email sent successfully to: ' + receiver);
     }
