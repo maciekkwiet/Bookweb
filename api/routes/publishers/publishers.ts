@@ -2,7 +2,7 @@ import pool from '../../configDB/config';
 import { Request, Response } from 'express';
 
 export const getPublishers = async (request: Request, response: Response) => {
-  pool.query('SELECT * FROM publishers ORDER BY id ASC', (error, results) => {
+  pool.query('SELECT * FROM publishers INNER JOIN addresses ON publishers.id = addresses.id', (error, results) => {
     if (error) {
       throw error;
     }
@@ -13,49 +13,68 @@ export const getPublishers = async (request: Request, response: Response) => {
 export const getPublisherById = async (request: Request, response: Response) => {
   const id = parseInt(request.params.id);
 
-  pool.query('SELECT * FROM publishers WHERE id = $1', [id], (error, results) => {
+  pool.query('SELECT * FROM publishers WHERE id = $1', [id], (error, publisherResults) => {
     if (error) {
       throw error;
     }
-    response.status(200).json(results.rows);
+
+    pool.query('SELECT * FROM addresses WHERE id = $1', [id], (error, addressResults) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json({ ...publisherResults.rows[0], ...addressResults.rows[0] });
+    });
   });
 };
 
 export const createPublisher = async (request: Request, response: Response) => {
-  const { name, description, street, city, number, zip_code, country } = request.body;
+  const { name, description, street, city, flat_number, zip_code, country } = request.body;
 
   pool.query(
-    'INSERT INTO adresses (street,city,number,zip_code,country) VALUES ($1, $2, $3, $4, $5) RETURNING id',
-    [street, city, number, zip_code, country],
+    'INSERT INTO addresses (street,city,flat_number,zip_code,country) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+    [street, city, flat_number, zip_code, country],
     (error, results) => {
       if (error) {
         throw error;
       }
-      var newlyCreatedAdressID = results.rows[0].id;
-      response.status(201).send(`Publisher added`);
+      const address_id = results.rows[0].id;
+
+      pool.query(
+        'INSERT INTO publishers (name, description, address_id) VALUES ($1, $2, $3)',
+        [name, description, address_id],
+        (error, results) => {
+          if (error) {
+            throw error;
+          }
+          response.status(201).send(`Publisher added`);
+        }
+      );
     }
   );
-
-  pool.query('INSERT INTO publishers (name, description) VALUES ($1, $2)', [name, description], (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(201).send(`Publisher added`);
-  });
 };
 
 export const updatePublisher = async (request: Request, response: Response) => {
   const id = parseInt(request.params.id);
-  const { name, description } = request.body;
+  const { name, description, street, city, flat_number, zip_code, country } = request.body;
 
   pool.query(
-    'UPDATE publishers SET name = $1, description = $2 WHERE id = $3',
+    'UPDATE publishers SET name = $1, description = $2 WHERE id = $3 RETURNING address_id',
     [name, description, id],
     (error, results) => {
       if (error) {
         throw error;
       }
-      response.status(200).send(`Publisher modified`);
+
+      pool.query(
+        'UPDATE addresses SET street = $1, city = $2, flat_number = $3, zip_code = $4, country = $5 WHERE id = $6',
+        [street, city, flat_number, zip_code, country, id],
+        (error, results) => {
+          if (error) {
+            throw error;
+          }
+          response.status(200).send(`Publishers and addressess modified`);
+        }
+      );
     }
   );
 };
@@ -67,7 +86,13 @@ export const deletePublisher = async (request: Request, response: Response) => {
     if (error) {
       throw error;
     }
-    response.status(200).send(`Publisher deleted`);
+
+    pool.query('DELETE FROM addresses WHERE id = $1', [id], (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).send(`Publisher deleted`);
+    });
   });
 };
 
