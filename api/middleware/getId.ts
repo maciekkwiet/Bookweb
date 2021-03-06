@@ -17,5 +17,4 @@ export default async (request: UserInfoRequest, response: Response, next: NextFu
       }
     }
   }
-  next();
 };
