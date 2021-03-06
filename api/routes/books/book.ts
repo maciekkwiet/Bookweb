@@ -1,7 +1,7 @@
 import pool from '../../configDB/config';
 import { Request, Response } from 'express';
 
-export const getBooks = (request: Request, response: Response) => {
+export const getBooks = async (request: Request, response: Response) => {
   pool.query('SELECT * FROM books ORDER BY id ASC', (error, results) => {
     if (error) {
       throw error;
@@ -10,7 +10,7 @@ export const getBooks = (request: Request, response: Response) => {
   });
 };
 
-export const getBookById = (request: Request, response: Response) => {
+export const getBookById = async (request: Request, response: Response) => {
   const bookId = parseInt(request.params.id);
 
   pool.query('SELECT * FROM books WHERE id = $1', [bookId], (error, results) => {
@@ -21,7 +21,7 @@ export const getBookById = (request: Request, response: Response) => {
   });
 };
 
-export const createBook = (request: Request, response: Response) => {
+export const createBook = async (request: Request, response: Response) => {
   const { isbn, title, description, release_date, num_pages, cover } = request.body;
 
   pool.query(
@@ -36,7 +36,7 @@ export const createBook = (request: Request, response: Response) => {
   );
 };
 
-export const updateBook = (request: Request, response: Response) => {
+export const updateBook = async (request: Request, response: Response) => {
   const bookId = parseInt(request.params.id);
   const { isbn, title, description, release_date, num_pages, cover } = request.body;
 
@@ -52,7 +52,7 @@ export const updateBook = (request: Request, response: Response) => {
   );
 };
 
-export const deleteBook = (request: Request, response: Response) => {
+export const deleteBook = async (request: Request, response: Response) => {
   const bookId = parseInt(request.params.id);
 
   pool.query('DELETE FROM books WHERE id = $1', [bookId], (error, results) => {
