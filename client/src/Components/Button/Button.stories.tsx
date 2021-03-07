@@ -2,6 +2,7 @@ import { Story } from '@storybook/react';
 
 import { Button, ButtonComponentProps } from './Button';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: 'Button',
   component: Button,
