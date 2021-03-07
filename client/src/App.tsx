@@ -1,5 +1,5 @@
 import { Theme } from './Theme';
-import { Button } from '../src/Components/Button/Button';
+import { Button } from './Components/Button/Button';
 
 function App() {
   return (

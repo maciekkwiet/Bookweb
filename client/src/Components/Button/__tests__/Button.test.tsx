@@ -29,7 +29,7 @@ describe('ButtonWithIcon', () => {
     );
 
     const button = screen.queryByTestId('ButtonId');
-    userEvent.click(button);
+    if (button) userEvent.click(button);
     expect(button).toHaveAttribute('disabled');
     expect(mockCallback).not.toHaveBeenCalled();
   });
@@ -43,7 +43,7 @@ describe('ButtonWithIcon', () => {
     );
 
     const button = screen.queryByTestId('ButtonId');
-    userEvent.click(button);
+    if (button) userEvent.click(button);
     expect(mockCallback).toHaveBeenCalled();
   });
 });
