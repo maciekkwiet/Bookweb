@@ -1,7 +1,9 @@
-import jwt from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
+import { UserInfoRequest } from '../types/requests';
 
-module.exports = async (request: Request, response: Response, next: NextFunction) => {
+import { verify } from 'jsonwebtoken';
+
+module.exports = async (request: UserInfoRequest, response: Response, next: NextFunction) => {
   try {
     const jwtToken = request.header('token');
 
@@ -9,9 +11,11 @@ module.exports = async (request: Request, response: Response, next: NextFunction
       return response.status(403).json('Not authorize');
     }
 
-    const payload = jwt.verify(jwtToken, process.env.SECRET);
-
-    request.user = payload.user;
+    const secret: string | undefined = process.env.SECRET;
+    if (secret) {
+      const payload = verify(jwtToken, secret);
+      request.userId = (payload as any).user;
+    }
     next();
   } catch (err) {
     console.error(err.message);
