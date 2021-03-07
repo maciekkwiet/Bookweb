@@ -10,7 +10,7 @@ import * as winston from 'winston';
 const logger = winston.add(new winston.transports.File({ filename: 'logfile.log', handleExceptions: true }));
 const myStream = {
   write: (text: string) => {
-    logger.info(text);
+    logger.log('info', text);
   },
 };
 
@@ -25,7 +25,7 @@ const port = process.env.PORT || '3000';
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(morgan('dev', { stream: myStream }));
+app.use(morgan('tiny', { stream: myStream }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
