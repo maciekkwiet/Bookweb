@@ -6,6 +6,7 @@ function App() {
     <Theme>
       <Button
         onClick={() => {
+          // eslint-disable-next-line no-console
           console.log('test');
         }}
       >

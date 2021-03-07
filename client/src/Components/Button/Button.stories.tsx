@@ -15,6 +15,7 @@ export const PrimaryButton = Template.bind({});
 PrimaryButton.args = {
   children: 'Button',
   onClick: () => {
+    // eslint-disable-next-line no-console
     console.log('test buton render');
   },
 };
@@ -23,6 +24,7 @@ export const SecondaryButton = Template.bind({});
 SecondaryButton.args = {
   children: 'Button',
   onClick: () => {
+    // eslint-disable-next-line no-console
     console.log('test buton render');
   },
   disabled: true,
