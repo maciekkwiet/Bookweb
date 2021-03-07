@@ -2,9 +2,8 @@
   "name": "bookweb",
   "version": "1.0.0",
   "description": "Bookweb",
-  "main": "server.ts",
   "scripts": {
-    "install": "(cd server && yarn) & (cd client && yarn)",
+    "install": "(cd api && yarn) & (cd client && yarn)",
     "start": "cd api && yarn start",
     "heroku-postbuild": "cd client && yarn build",
     "debugApi": "cd api && yarn debug",
