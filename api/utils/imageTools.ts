@@ -1,5 +1,5 @@
+const cloudinary = require('cloudinary');
 import { response } from 'express';
-import * as cloudinary from 'cloudinary';
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
