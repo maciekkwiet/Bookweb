@@ -3,11 +3,18 @@ require('dotenv').config();
 import * as express from 'express';
 import * as path from 'path';
 import * as bodyParser from 'body-parser';
-import * as logger from 'morgan';
+import * as morgan from 'morgan';
 import * as http from 'http';
+import * as winston from 'winston';
+
+const logger = winston.add(new winston.transports.File({ filename: 'logfile.log', handleExceptions: true }));
+const myStream = {
+  write: (text: string) => {
+    logger.info(text);
+  },
+};
 
 const errorMiddleware = require('./middleware/errorMiddleware');
-
 const mountRoutes = require('./routes');
 
 const app = express();
@@ -18,7 +25,7 @@ const port = process.env.PORT || '3000';
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
+app.use(morgan('dev', { stream: myStream }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
