@@ -1,0 +1,50 @@
+{
+  "name": "bookweb",
+  "version": "1.0.0",
+  "description": "Bookweb",
+  "main": "server.ts",
+  "scripts": {
+    "start": "ts-node-dev --clear -r tsconfig-paths/register ./server.ts ",
+    "debug": "ts-node-dev --inspect --clear -r tsconfig-paths/register ./server.ts ",
+    "test": "jest"
+  },
+  "author": "THE BEST TEAM",
+  "license": "ISC",
+  "dependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/bluebird": "^3.5.33",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.11",
+    "@types/jest": "^26.0.20",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/morgan": "^1.9.2",
+    "@types/node": "^14.14.31",
+    "@types/nodemailer": "^6.4.0",
+    "@types/nodemailer-direct-transport": "^1.0.31",
+    "@types/nodemailer-smtp-transport": "^2.7.4",
+    "@types/pg": "^7.14.10",
+    "bcrypt": "^5.0.0",
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.6",
+    "eslint": "^7.20.0",
+    "express": "^4.15.3",
+    "express-promise-router": "^4.0.1",
+    "express-validator": "^6.10.0",
+    "jest": "^26.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
+    "morgan": "^1.8.2",
+    "nodemailer": "^6.5.0",
+    "pg": "^8.5.1",
+    "ts-jest": "^26.5.1",
+    "ts-node": "^9.1.1",
+    "ts-node-dev": "^1.1.1",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^4.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
