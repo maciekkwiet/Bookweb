@@ -9,7 +9,7 @@
   "scripts": {
     "install": "(cd api && yarn) & (cd client && yarn)",
     "start": "cd api && yarn start",
-    "heroku-postbuild": "cd client && yarn build",
+    "heroku-postbuild": "cd client && yarn start",
     "debugApi": "cd api && yarn debug",
     "format": "prettier --write",
     "chromatic": "cd client && yarn chromatic"
