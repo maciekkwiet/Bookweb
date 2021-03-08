@@ -14,7 +14,7 @@
     "format": "prettier --write",
     "chromatic": "cd client && yarn chromatic"
   },
-  "author": "THE BEST",
+  "author": "THE BEST TEAM",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
