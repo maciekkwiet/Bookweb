@@ -8,7 +8,7 @@
   },
   "scripts": {
     "install": "(cd api && npm install) & (cd client && npm install)",
-    "start": "cd api && npm start:prod",
+    "start": "cd api && npm start",
     "heroku-postbuild": "cd client && npm build",
     "debugApi": "cd api && npm debug",
     "format": "prettier --write",
