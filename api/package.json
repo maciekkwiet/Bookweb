@@ -8,8 +8,8 @@
     "yarn": "1.22.5"
   },
   "scripts": {
-    "start": "ts-node-dev --clear -r tsconfig-paths/register ./server.ts ",
-    "start:prod": "node server.ts",
+    "dev": "ts-node-dev --clear -r tsconfig-paths/register ./server.ts ",
+    "start": "node server.ts",
     "debug": "ts-node-dev --inspect --clear -r tsconfig-paths/register ./server.ts ",
     "test": "jest"
   },
