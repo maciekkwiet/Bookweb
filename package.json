@@ -8,11 +8,11 @@
     "yarn": "1.22.5"
   },
   "scripts": {
-    "install": "(cd api && npm i) & (cd client && npm i)",
-    "start": "cd api && npm start",
-    "heroku-postbuild": "cd client && npm build",
+    "install": "(cd api && yarn i) & (cd client && yarn i)",
+    "start": "cd api && yarn start",
+    "heroku-postbuild": "cd client && yarn build",
     "format": "prettier --write",
-    "chromatic": "cd client && npm chromatic"
+    "chromatic": "cd client && yarn chromatic"
   },
   "author": "THE BEST",
   "license": "ISC",
