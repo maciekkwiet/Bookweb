@@ -30,11 +30,12 @@ app.all('/*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
+app.get('/', function (req, res) {
   const indexPath = path.join(publicPath, 'index.html');
   res.sendFile(indexPath);
-
-  next();
 });
 
 app.disable('x-powered-by');
