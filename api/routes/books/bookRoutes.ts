@@ -1,10 +1,11 @@
-const router = require('express').Router();
+const Router = require('express-promise-router');
 import { getBooks, getBookById, createBook, updateBook, deleteBook } from './book';
 
-router.get('/books', getBooks);
-router.get('/book/:id', getBookById);
-router.post('/book', createBook);
-router.put('/book/:id', updateBook);
-router.delete('/book/:id', deleteBook);
+const router = new Router();
+router.get('/', getBooks);
+router.get('/:id', getBookById);
+router.post('/', createBook);
+router.put('/:id', updateBook);
+router.delete('/:id', deleteBook);
 
 module.exports = router;

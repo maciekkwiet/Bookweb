@@ -1,12 +1,15 @@
-const router = require('express').Router();
+import { Express } from 'express';
+
 const bookRoutes = require('./books/bookRoutes');
 const userRoutes = require('./users/userRoutes');
 const authorsRoutes = require('./authors/authorsRoutes');
 const reviewsRoutes = require('./reviews/reviewsRoutes');
+const bookGroupsRoutes = require('./book_groups/bookGroupsRoutes');
 
-router.use('/books', bookRoutes);
-router.use('/users', userRoutes);
-router.use('/authors', authorsRoutes);
-router.use('/reviews', reviewsRoutes);
-
-module.exports = router;
+module.exports = (app: Express) => {
+  app.use('/api/books', bookRoutes);
+  app.use('/api/users', userRoutes);
+  app.use('/api/authors', authorsRoutes);
+  app.use('/api/reviews', reviewsRoutes);
+  app.use('/api/book-groups', bookGroupsRoutes);
+};

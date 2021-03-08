@@ -1,7 +1,7 @@
 import pool from '../../configDB/config';
 import { Request, Response } from 'express';
 
-export const getAuthors = (request: Request, response: Response) => {
+export const getAuthors = async (request: Request, response: Response) => {
   pool.query('SELECT * FROM authors ORDER BY id ASC', (error, results) => {
     if (error) {
       throw error;
@@ -10,7 +10,7 @@ export const getAuthors = (request: Request, response: Response) => {
   });
 };
 
-export const getAuthorById = (request: Request, response: Response) => {
+export const getAuthorById = async (request: Request, response: Response) => {
   const id = parseInt(request.params.id);
 
   pool.query('SELECT * FROM authors WHERE id = $1', [id], (error, results) => {
@@ -21,7 +21,7 @@ export const getAuthorById = (request: Request, response: Response) => {
   });
 };
 
-export const getBooksByAuthorId = (request: Request, response: Response) => {
+export const getBooksByAuthorId = async (request: Request, response: Response) => {
   const id = parseInt(request.params.id);
 
   pool.query(
@@ -36,7 +36,7 @@ export const getBooksByAuthorId = (request: Request, response: Response) => {
   );
 };
 
-export const createAuthor = (request: Request, response: Response) => {
+export const createAuthor = async (request: Request, response: Response) => {
   const { name, surname, description } = request.body;
 
   pool.query(
@@ -51,7 +51,7 @@ export const createAuthor = (request: Request, response: Response) => {
   );
 };
 
-export const updateAuthor = (request: Request, response: Response) => {
+export const updateAuthor = async (request: Request, response: Response) => {
   const id = parseInt(request.params.id);
   const { name, surname, description } = request.body;
 
@@ -67,7 +67,7 @@ export const updateAuthor = (request: Request, response: Response) => {
   );
 };
 
-export const deleteAuthor = (request: Request, response: Response) => {
+export const deleteAuthor = async (request: Request, response: Response) => {
   const id = parseInt(request.params.id);
 
   pool.query('DELETE FROM authors WHERE id = $1', [id], (error, results) => {

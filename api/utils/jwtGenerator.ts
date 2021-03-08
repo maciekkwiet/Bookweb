@@ -1,8 +1,10 @@
 const jwt = require('jsonwebtoken');
 
-function jwtGenerator(id: any) {
-  const payload = {
-    user: id,
+import { Payload } from '../types/payload';
+
+function jwtGenerator(id: number) {
+  const payload: Payload = {
+    userId: id,
   };
   return jwt.sign(payload, process.env.SECRET, { expiresIn: '1hr' });
 }

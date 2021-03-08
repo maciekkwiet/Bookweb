@@ -5,14 +5,15 @@ import * as path from 'path';
 import * as bodyParser from 'body-parser';
 import * as logger from 'morgan';
 import * as http from 'http';
+
 const errorMiddleware = require('./middleware/errorMiddleware');
 
-const router = require('./routes/index');
+const mountRoutes = require('./routes');
 
 const app = express();
 
 const server = http.createServer(app);
-const port = process.env.PORT || '3000';
+const port = process.env.PORT || '8080';
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -25,14 +26,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.all('/*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
 app.disable('x-powered-by');
 
-app.use('/api', router);
+mountRoutes(app);
 app.use(errorMiddleware);
 
 app.set('port', port);
