@@ -22,12 +22,18 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, 'public')));
+const publicPath = path.join(__dirname, '../', '/client', '/public');
+
+app.use(express.static(publicPath));
 
 app.all('/*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+  const indexPath = path.join(publicPath, 'index.html');
+  res.sendFile(indexPath);
+
   next();
 });
 

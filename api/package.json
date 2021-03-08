@@ -13,6 +13,7 @@
     "debug": "ts-node-dev --inspect --clear -r tsconfig-paths/register ./server.ts ",
     "test": "jest"
   },
+  "proxy": "http://localhost:8080",
   "author": "THE BEST TEAM",
   "license": "ISC",
   "dependencies": {
