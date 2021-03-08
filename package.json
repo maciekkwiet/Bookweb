@@ -4,6 +4,7 @@
   "description": "Bookweb",
   "engines": {
     "node": "12.18.4",
+    "npm": "6.14.6",
     "yarn": "1.22.5"
   },
   "scripts": {
