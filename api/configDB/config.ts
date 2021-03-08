@@ -6,13 +6,17 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false },
 });
 
-pool
-  .connect()
-  .then(() => {
-    winston.info('Connected with the Database');
-  })
-  .catch(err => {
-    winston.error(err.message);
-  });
+async function connectWithTheDatabase() {
+  await pool
+    .connect()
+    .then(() => {
+      winston.info('Connected with the Database');
+    })
+    .catch(err => {
+      winston.error(err.message);
+    });
+}
+
+connectWithTheDatabase();
 
 export default pool;
