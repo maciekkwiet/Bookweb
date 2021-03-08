@@ -2,12 +2,13 @@
   "name": "bookweb",
   "version": "1.0.0",
   "description": "Bookweb",
-  "main": "server.ts",
   "scripts": {
-    "install": "cd api && yarn",
+    "install": "(cd api && yarn) & (cd client && yarn)",
     "start": "cd api && yarn start",
-    "debug": "cd api && yarn debug",
-    "format": "prettier --write"
+    "heroku-postbuild": "cd client && yarn build",
+    "debugApi": "cd api && yarn debug",
+    "format": "prettier --write",
+    "chromatic": "cd client && yarn chromatic"
   },
   "author": "THE BEST TEAM",
   "license": "ISC",
