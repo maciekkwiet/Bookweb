@@ -1,5 +1,6 @@
 import { Theme } from './Theme';
 import { Button } from './Components/Button/Button';
+import Input from './Components/Input/Input';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       >
         Button
       </Button>
+      <Input type="text" placeholder="Wprowadź hasło" />
     </Theme>
   );
 }
