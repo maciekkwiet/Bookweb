@@ -7,14 +7,12 @@ const pool = new Pool({
 });
 
 async function connectWithTheDatabase() {
-  await pool
-    .connect()
-    .then(() => {
-      winston.info('Connected with the Database');
-    })
-    .catch(err => {
-      winston.error(err.message);
-    });
+  try {
+    await pool.connect();
+    winston.info('Connected with the Database');
+  } catch (err) {
+    winston.error(err.message);
+  }
 }
 
 connectWithTheDatabase();
