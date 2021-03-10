@@ -3,11 +3,6 @@
   "version": "1.0.0",
   "description": "Bookweb",
   "main": "server.ts",
-  "engines": {
-    "node": "12.18.4",
-    "npm": "6.14.6",
-    "yarn": "1.22.5"
-  },
   "scripts": {
     "dev": "ts-node-dev --clear -r tsconfig-paths/register ./server.ts ",
     "start": "ts-node-dev --max-old-space-size=8192 --clear -r tsconfig-paths/register ./server.ts ",
