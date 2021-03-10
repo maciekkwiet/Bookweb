@@ -4,20 +4,24 @@ import { InputComponent } from './InputStyles';
 export type InputProps = {
   type: string;
   placeholder?: string;
+  inputValue?: string;
   onChange?: () => void;
   isRequired?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-const Input = ({ type, placeholder, onChange, isRequired = false, ...otherProps }: InputProps) => {
+const Input = ({ type, placeholder, inputValue, onChange, isRequired = false, ...otherProps }: InputProps) => {
   return (
-    <InputComponent
-      type={type}
-      placeholder={placeholder}
-      onChange={onChange}
-      {...otherProps}
-      required={isRequired}
-      data-testid="InputId"
-    />
+    <label>
+      <InputComponent
+        type={type}
+        placeholder={placeholder}
+        value={inputValue}
+        onChange={onChange}
+        {...otherProps}
+        required={isRequired}
+        data-testid="InputId"
+      />
+    </label>
   );
 };
 
