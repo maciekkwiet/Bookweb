@@ -10,7 +10,7 @@ function App() {
           console.log('test');
         }}
       >
-        Button
+        Zobacz pełny opis
       </Button>
     </Theme>
   );
