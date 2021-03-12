@@ -1,5 +1,7 @@
 import { Theme } from './Theme';
 import { Button } from './Components/Button/Button';
+import { BigLabel } from './Components/BigLabel/BigLabel';
+
 
 function App() {
   return (
@@ -12,6 +14,7 @@ function App() {
       >
         Button
       </Button>
+      <BigLabel>Tytuł książki/Autor/Dodaj</BigLabel>
     </Theme>
   );
 }
