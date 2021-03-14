@@ -5,6 +5,7 @@ export const theme = {
   colors: {
     primary: `green`,
     secondary: `red`,
+    lightGray: '#505050',
   },
 };
 

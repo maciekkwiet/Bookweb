@@ -1,13 +1,13 @@
 import React from 'react';
 import { InputComponent } from './InputStyles';
 
-export type InputProps = {
+export interface InputProps {
   type: string;
   placeholder?: string;
   inputValue?: string;
   onChange?: () => void;
   isRequired?: boolean;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+}
 
 const Input = ({ type, placeholder, inputValue, onChange, isRequired = false, ...otherProps }: InputProps) => {
   return (
