@@ -8,9 +8,8 @@ export default {
   decorators: [(Story: any) => <Story />],
 };
 
-const Template: Story<InputProps> = (args) => <Input {...args} />;
+export const PrimaryInput: Story<InputProps> = (basePropsData) => <Input {...basePropsData} />;
 
-export const PrimaryInput = Template.bind({});
 PrimaryInput.args = {
   type: 'text',
   placeholder: 'Wpisz tekst',

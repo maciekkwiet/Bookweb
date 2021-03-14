@@ -11,17 +11,15 @@ export interface InputProps {
 
 const Input = ({ type, placeholder, inputValue, onChange, isRequired = false, ...otherProps }: InputProps) => {
   return (
-    <label>
-      <InputComponent
-        type={type}
-        placeholder={placeholder}
-        value={inputValue}
-        onChange={onChange}
-        {...otherProps}
-        required={isRequired}
-        data-testid="InputId"
-      />
-    </label>
+    <InputComponent
+      type={type}
+      placeholder={placeholder}
+      value={inputValue}
+      onChange={onChange}
+      {...otherProps}
+      required={isRequired}
+      data-testid="InputId"
+    />
   );
 };
 
