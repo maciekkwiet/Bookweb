@@ -1,5 +1,6 @@
 import { Theme } from './Theme';
 import { Button } from './Components/Button/Button';
+import { CheckboxComponent } from './Components/Checkbox/CheckboxComponent';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       >
         Button
       </Button>
+      <CheckboxComponent />
     </Theme>
   );
 }
