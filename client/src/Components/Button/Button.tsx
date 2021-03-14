@@ -5,6 +5,7 @@ export type ButtonComponentProps = {
   children: HTMLCollection | string;
   onClick: () => void;
   disabled?: boolean;
+  isLink?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button = ({ onClick, children, disabled = false, ...otherProps }: ButtonComponentProps) => {

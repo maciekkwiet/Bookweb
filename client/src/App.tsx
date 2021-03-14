@@ -15,7 +15,7 @@ function App() {
         >
           Button
         </Button>
-        <Tag url='api' children='Zobacz pelny opis'></Tag>
+        <Tag url="api" text="Zobacz pelny opis"></Tag>
       </Theme>
     </Router>
   );

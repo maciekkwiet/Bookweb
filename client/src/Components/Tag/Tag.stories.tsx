@@ -13,12 +13,6 @@ const Template: Story<TagComponentProps> = (args) => <Tag {...args} />;
 
 export const PrimaryTag = Template.bind({});
 PrimaryTag.args = {
-  children: "Kliknij mnie",
-  url: '/api',
+  text: 'Zobacz wiecej',
+  url: '/api/books/:id',
 };
-
-export const SecondaryTag = Template.bind({});
-SecondaryTag.args = {
-  children: 'Zobacz wincyj',
-  url: '/wincyj',
-}
