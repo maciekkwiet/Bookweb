@@ -10,9 +10,5 @@ export const Tag = ({ url, text }: TagComponentProps) => {
   const history = useHistory();
   const handleClick = () => history.push(url);
 
-  return (
-    <Button isLink onClick={handleClick}>
-      {text}
-    </Button>
-  );
+  return <Button onClick={handleClick}>{text}</Button>;
 };

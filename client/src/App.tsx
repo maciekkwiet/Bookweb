@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Theme>
         <Button onClick={() => {}}>Zobacz pełny opis</Button>
-        <Tag url="api" text="Zobacz pelny opis"></Tag>
+        <Tag url="/38" text="Zobacz pelny opis"></Tag>
       </Theme>
     </Router>
   );

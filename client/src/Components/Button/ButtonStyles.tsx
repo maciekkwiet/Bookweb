@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export const ButtonComponent = styled.button<{ isLink?: boolean }>`
+export const ButtonComponent = styled.button`
   font-size: 0.8em;
   padding: 5px 15px;
   margin: 5px 5px;
-  color: ${(props) => (props.isLink ? props.theme.colors.primary : props.theme.colors.secondary)};
-  background: ${(props) => (props.isLink ? props.theme.backgrounds.bright : props.theme.backgrounds.darkTransparent)};
+  color: #444444;
+  background: #f2f2f2;
   border: 1px #dadada solid;
   border-radius: 3px;
   outline: none;
