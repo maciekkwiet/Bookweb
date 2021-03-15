@@ -14,6 +14,4 @@ export const PrimaryImage = Template.bind({});
 PrimaryImage.args = {
   src: 'https://edit.org/images/cat/book-covers-big-2019101610.jpg',
   alt: 'cover',
-  width: '83',
-  height: '113',
 };
