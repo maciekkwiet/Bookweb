@@ -11,7 +11,7 @@ describe('BigLabel', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <BigLabel>Button</BigLabel>
+        <BigLabel>Tytuł książki/Autor/Dodaj książkę</BigLabel>
       </ThemeProvider>,
     );
   });

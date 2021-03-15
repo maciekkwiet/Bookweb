@@ -18,7 +18,15 @@ export const theme = {
     default: `Montserrat`,
     logo: `Esteban`,
     sentence: `Clicker Script`
+  },
+  h2: {
+    fontSize: `3vh`,
+    lineHeight: `2.5em`,
+  },
+  shadows: {
+    inset: `inset 0px 4px 4px rgba(0, 0, 0, 0.25)`,
   }
+
 };
 
 export const Theme: FC = ({ children }) => <ThemeProvider theme={theme}>{children}</ThemeProvider>;

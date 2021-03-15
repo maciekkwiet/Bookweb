@@ -4,9 +4,9 @@ export const BigLabelComponent = styled.h2`
   font-family:${(props) => props.theme.fonts.default};
   color: ${(props) => props.theme.colors.primary};
   height:2.5em;
-  line-height:2.5em;
-  font-size: 3vh;
+  line-height:${(props) => props.theme.h2.lineHeight};
+  font-size: ${(props) => props.theme.h2.fontSize};
   background: ${(props) => props.theme.backgrounds.lightTransparent};
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: ${(props) => props.theme.shadows.inset};
   text-align:center;
 `;

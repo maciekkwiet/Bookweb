@@ -14,7 +14,7 @@ function App() {
       >
         Button
       </Button>
-      <BigLabel>Tytuł książki/Autor/Dodaj</BigLabel>
+      <BigLabel title="Tytuł książki/Autor/Dodaj"></BigLabel>
     </Theme>
   );
 }

@@ -13,7 +13,7 @@ const Template: Story<BigLabelComponentProps> = (args) => <BigLabel {...args} />
 
 export const PrimaryBigLabel = Template.bind({});
 PrimaryBigLabel.args = {
-  children: 'Tytuł książki/Autor/Dodaj książkę',
+  title: 'Tytuł książki/Autor/Dodaj książkę',
 };
 
 

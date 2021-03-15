@@ -2,13 +2,13 @@ import React from 'react';
 import { BigLabelComponent } from './BigLabelStyles';
 
 export type BigLabelComponentProps = {
-  children: string;
+  title: string;
 }
 
-export const BigLabel = ({ children, ...otherProps }: BigLabelComponentProps) => {
+export const BigLabel = ({ title, ...otherProps }: BigLabelComponentProps) => {
   return (
     <BigLabelComponent  {...otherProps} data-testid="BigLabelId">
-      {children}
+      {title}
     </BigLabelComponent>
   );
 };
