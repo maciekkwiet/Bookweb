@@ -1,14 +1,23 @@
 import styled from 'styled-components';
 
 export const ButtonComponent = styled.button<{ isLink?: boolean }>`
-  padding: 5px 12px;
-  outline: none;
-  color: ${(props) => (props.isLink ? 'black' : 'white')};
-  font-size: 14px;
-  font-weight: 700;
-  background-color: ${(props) => (props.isLink ? '#F2F4F3' : props.theme.colors.primary)};
-  border: 0px;
+  font-size: 0.8em;
+  padding: 5px 15px;
+  margin: 5px 5px;
+  color: ${(props) => (props.isLink ? props.theme.colors.primary : props.theme.colors.secondary)};
+  background: ${(props) => (props.isLink ? props.theme.backgrounds.bright : props.theme.backgrounds.darkTransparent)};
+  border: 1px #dadada solid;
   border-radius: 3px;
-  appearance: none;
+  outline: none;
   cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 0px 2px #eaeaea;
+    color: #333333;
+    background: #f7f7f7;
+  }
+
+  &:active {
+    box-shadow: inset 1px 1px 1px #dfdfdf;
+  }
 `;

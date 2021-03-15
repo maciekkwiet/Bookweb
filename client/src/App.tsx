@@ -7,14 +7,7 @@ function App() {
   return (
     <Router>
       <Theme>
-        <Button
-          onClick={() => {
-            // eslint-disable-next-line no-console
-            console.log('test');
-          }}
-        >
-          Button
-        </Button>
+        <Button onClick={() => {}}>Zobacz pełny opis</Button>
         <Tag url="api" text="Zobacz pelny opis"></Tag>
       </Theme>
     </Router>
