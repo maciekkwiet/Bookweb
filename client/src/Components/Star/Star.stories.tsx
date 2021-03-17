@@ -1,5 +1,8 @@
 import { Story } from '@storybook/react';
+
 import StarRating from './StarRating';
+
+import { action } from '@storybook/addon-actions';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -13,8 +16,5 @@ const Template: Story = (args) => <StarRating {...args} />;
 export const Star = Template.bind({});
 Star.args = {
   children: 'Star',
-  onClick: () => {
-    // eslint-disable-next-line no-console
-    console.log('test star render');
-  },
+  onClick: action('onClick'),
 };
