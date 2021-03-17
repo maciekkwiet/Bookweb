@@ -1,6 +1,7 @@
 import { Theme } from './Theme';
 import { Button } from './Components/Button/Button';
 import StarRating from './Components/Star/StarRating';
+
 function App() {
   return (
     <Theme>
