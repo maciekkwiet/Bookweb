@@ -8,9 +8,9 @@ export default {
   decorators: [(Story: any) => <Story />],
 };
 
-export const PrimaryInput: Story<InputProps> = (basePropsData) => <Input {...basePropsData} />;
-
-PrimaryInput.args = {
+const basePropsData = {
   type: 'text',
   placeholder: 'Wpisz tekst',
 };
+
+export const PrimaryInput: Story<InputProps> = () => <Input {...basePropsData} />;
