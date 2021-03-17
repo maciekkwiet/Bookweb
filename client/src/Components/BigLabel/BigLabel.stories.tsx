@@ -8,12 +8,8 @@ export default {
   component: BigLabel,
   decorators: [(Story: any) => <Story />],
 };
-
-const Template: Story<BigLabelComponentProps> = (args) => <BigLabel {...args} />;
-
-export const PrimaryBigLabel = Template.bind({});
-PrimaryBigLabel.args = {
+const PrimaryBigLabelProps = {
   title: 'Tytuł książki/Autor/Dodaj książkę',
-};
-
+}
+export const PrimaryBigLabel: Story<BigLabelComponentProps> = () => <BigLabel {...PrimaryBigLabelProps} />
 
