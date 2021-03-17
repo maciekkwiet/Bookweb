@@ -9,9 +9,7 @@ describe('Stars', () => {
   it('render without crash', () => {
     render(
       <ThemeProvider theme={theme}>
-        <div>
-          <StarRating />
-        </div>
+        <StarRating />
       </ThemeProvider>,
     );
   });

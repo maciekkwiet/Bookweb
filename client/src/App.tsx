@@ -12,9 +12,7 @@ function App() {
       >
         Button
       </Button>
-      <div>
-        <StarRating />
-      </div>
+      <StarRating />
     </Theme>
   );
 }
