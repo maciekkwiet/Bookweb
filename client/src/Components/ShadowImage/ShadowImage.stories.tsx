@@ -1,6 +1,6 @@
 import { Story } from '@storybook/react';
 
-import { Image, ImageComponentProps } from './Image';
+import { ShadowImage, ShadowImageComponentProps } from './ShadowImage';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -8,7 +8,7 @@ export default {
   component: Image,
 };
 
-const Template: Story<ImageComponentProps> = (args) => <Image {...args} />;
+const Template: Story<ShadowImageComponentProps> = (args) => <ShadowImage {...args} />;
 
 export const PrimaryImage = Template.bind({});
 PrimaryImage.args = {
