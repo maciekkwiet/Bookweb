@@ -8,7 +8,7 @@ export type TagComponentProps = {
 
 export const Tag = ({ url, text }: TagComponentProps) => {
   const history = useHistory();
-  const handleClick = () => history.push(url);
+  const handleUrl = () => history.push(`/${url}`);
 
-  return <Button onClick={handleClick}>{text}</Button>;
+  return <Button onClick={handleUrl}>{text}</Button>;
 };
