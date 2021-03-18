@@ -1,14 +1,21 @@
 import { TextCardComponent } from './TextCardStyles';
-import { Name } from './TextCardStyles';
+import { AuthorName } from './TextCardStyles';
 import { Description } from './TextCardStyles';
 
-const TextCard = () => {
+export type TextCardComponentProps = {
+  authorName: string;
+  authorLastName: string;
+  description: string;
+};
+
+const TextCard = ({ authorName, authorLastName, description, ...otherProps }: TextCardComponentProps) => {
   return (
     <TextCardComponent>
-      <Name>Author's name</Name>
-      <Description>
-        Description lkshdshfdshfjdahfjsdhgkjdfshgkjfdhgkjdfhgkjdshfgjdshgjfdkhgjkhjeklasjlkaldjlksfjklsjdfskjfkjdsfkds
-      </Description>
+      <AuthorName>
+        {' '}
+        {authorName} {authorLastName}
+      </AuthorName>
+      <Description>{description}</Description>
     </TextCardComponent>
   );
 };
