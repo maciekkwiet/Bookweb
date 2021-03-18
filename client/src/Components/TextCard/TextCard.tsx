@@ -8,16 +8,13 @@ export type TextCardComponentProps = {
   description: string;
 };
 
-const TextCard = ({ authorName, authorLastName, description, ...otherProps }: TextCardComponentProps) => {
+export const TextCard = ({ authorName, authorLastName, description, ...otherProps }: TextCardComponentProps) => {
   return (
     <TextCardComponent>
       <AuthorName>
-        {' '}
         {authorName} {authorLastName}
       </AuthorName>
       <Description>{description}</Description>
     </TextCardComponent>
   );
 };
-
-export default TextCard;

@@ -8,7 +8,11 @@ export default {
   component: TextCard,
   decorators: [(Story: any) => <Story />],
 };
+
 const PrimaryTextCardProps = {
-  title: 'Tytuł książki/Autor/Dodaj książkę',
+  authorName: 'authorName',
+  authorLastName: 'authorLastName',
+  description: 'description',
 };
+
 export const PrimaryTextCard: Story<TextCardComponentProps> = () => <TextCard {...PrimaryTextCardProps} />;

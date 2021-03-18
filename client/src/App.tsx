@@ -1,6 +1,6 @@
 import { Theme } from './Theme';
 import { Button } from './Components/Button/Button';
-import TextCard from './Components/TextCard/TextCard';
+import { TextCard } from './Components/TextCard/TextCard';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       >
         Button
       </Button>
-      <TextCard></TextCard>
+      <TextCard authorName="authorName" authorLastName="authorLastName" description="description"></TextCard>
     </Theme>
   );
 }
