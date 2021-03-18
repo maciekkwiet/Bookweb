@@ -1,14 +1,16 @@
-import React from 'react';
 import { TextCardComponent } from './TextCardStyles';
+import { Name } from './TextCardStyles';
+import { Description } from './TextCardStyles';
 
-export type TextCardComponentProps = {
-  title: string;
-};
-
-export const TextCard = ({ title, ...otherProps }: TextCardComponentProps) => {
+const TextCard = () => {
   return (
-    <TextCardComponent {...otherProps} data-testid="TextCardId">
-      {title}
+    <TextCardComponent>
+      <Name>Author's name</Name>
+      <Description>
+        Description lkshdshfdshfjdahfjsdhgkjdfshgkjfdhgkjdfhgkjdshfgjdshgjfdkhgjkhjeklasjlkaldjlksfjklsjdfskjfkjdsfkds
+      </Description>
     </TextCardComponent>
   );
 };
+
+export default TextCard;
