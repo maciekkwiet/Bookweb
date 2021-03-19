@@ -1,32 +1,31 @@
 import styled from 'styled-components';
+import { theme } from '../../Theme';
 
 export const TextCardComponent = styled.div`
-  position: absolute;
   width: 755px;
   height: 180px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-color: #000000;
-  border-radius: 10px;
+  box-shadow: ${(props) => props.theme.borders.textCardBoxShadow};
+  border-color: ${(props) => props.theme.colors.primary};
+  border-radius: ${(props) => props.theme.borders.textCardRadius};
+  background: ${(props) => props.theme.backgrounds.darkTransparent};
+  text-align: justify;
+  padding: 20px;
+  color: ${(props) => props.theme.colors.fontTextCard};
 `;
 
-export const Name = styled.h1`
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 16px;
+export const AuthorName = styled.h1`
+  font-family: ${(props) => props.theme.fonts.default};
+  font-weight: ${(props) => props.theme.fonts.normalFontWeight};
+  font-style: ${(props) => props.theme.fonts.normalFontStyle};
+  font-size: ${(props) => props.theme.fonts.fontSizeAuthorName};
+  line-height: ${(props) => props.theme.fonts.fontHeightAuthorName};
   text-transform: uppercase;
-  color: #000000;
 `;
 
 export const Description = styled.p`
-  position: absolute;
-  width: 558px;
-  height: 102px;
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: #000000;
+  font-family: ${(props) => props.theme.fonts.default};
+  font-weight: ${(props) => props.theme.fonts.normalFontWeight};
+  font-style: ${(props) => props.theme.fonts.normalFontStyle};
+  font-size: ${(props) => props.theme.fonts.fontSizeAuthorDescription};
+  line-height: ${(props) => props.theme.fonts.fontHeightAuthorDescription};
 `;
