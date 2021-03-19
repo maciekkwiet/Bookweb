@@ -5,7 +5,8 @@ export const theme = {
   colors: {
     primary: `rgb(0,0,0)`,
     secondary: `rgb(255,255,255)`,
-    readMore: `rgb(61,90,128)`
+    readMore: `rgb(61,90,128)`,
+    lightGray: '#505050',
   },
   backgrounds: {
     bright: `rgb(242,243,244)`,
