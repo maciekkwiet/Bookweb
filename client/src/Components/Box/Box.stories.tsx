@@ -1,5 +1,4 @@
 import { Story } from '@storybook/react';
-
 import { Box, BoxComponentProps } from './Box';
 
 // eslint-disable-next-line import/no-anonymous-default-export

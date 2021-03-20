@@ -1,5 +1,5 @@
 import React from 'react';
-import { BoxComponent, ImgContainer, ContentContainer, BookParagraph, BoxBookReview, BoxReadMore, BookImage } from './BoxStyles';
+import { BoxComponent, ImgContainer, ContentContainer, BookParagraph, BookTitleParagraph, BoxBookReview, BoxReadMore, BookImage } from './BoxStyles';
 
 export type BoxComponentProps = {
   title: string;
@@ -19,7 +19,7 @@ export const Box = ({ title, author, rate, review, image }: any) => {
         <BookImage src={image}></BookImage>
       </ImgContainer>
       <ContentContainer>
-        <BookParagraph style={{ fontWeight: 'bold' }}>{title}</BookParagraph>
+        <BookTitleParagraph>{title}</BookTitleParagraph>
         <BookParagraph>{author}</BookParagraph>
         <BookParagraph>Średnia ocena: {rate}</BookParagraph>
         <BoxBookReview>
