@@ -6,7 +6,6 @@ export const theme = {
     primary: `rgb(0,0,0)`,
     secondary: `rgb(255,255,255)`,
     readMore: `rgb(61,90,128)`,
-    fontTextCard: '#FFFFFF',
   },
   backgrounds: {
     bright: `rgb(242,243,244)`,
@@ -19,16 +18,6 @@ export const theme = {
     default: `Montserrat`,
     logo: `Esteban`,
     sentence: `Clicker Script`,
-    normalFontWeight: 'normal',
-    normalFontStyle: 'normal',
-    fontSizeAuthorName: '15px',
-    fontSizeAuthorDescription: '14px',
-    lineHeightAuthorName: '16px',
-    lineHeightAuthorDescription: '17px',
-  },
-  borders: {
-    textCardBoxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-    textCardRadius: '10px',
   },
 };
 
