@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
+
 import { theme } from '../../Theme';
 import { Input } from './StarStyles';
 
