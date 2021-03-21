@@ -1,10 +1,10 @@
 import { Theme } from './Theme';
-
+import { AppRoutes } from './routing/AppRoutes';
 
 function App() {
   return (
     <Theme>
-      <p>Add pages</p>
+      <AppRoutes />
     </Theme>
   );
 }
