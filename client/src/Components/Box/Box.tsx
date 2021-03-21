@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { BoxComponent, ImgContainer, ContentContainer, BookParagraph, BookTitleParagraph, BoxBookReview, BoxReadMore, BookImage } from './BoxStyles';
 
 export type BoxComponentProps = {
@@ -9,7 +9,7 @@ export type BoxComponentProps = {
   image: string;
 }
 
-export const Box = ({ title, author, rate, review, image }: any) => {
+export const Box: FC<BoxComponentProps> = ({ title, author, rate, review, image }) => {
 
   const readMoreHandler = () => { };
 
