@@ -1,6 +1,6 @@
 import { Story } from '@storybook/react';
 
-import { BoxBooks, BoxBooksComponentProps } from './BoxBooks';
+import { BoxBooks } from './BoxBooks';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -8,7 +8,5 @@ export default {
   component: BoxBooks,
   decorators: [(Story: any) => <Story />],
 };
-const PrimaryBoxBooksProps = {
 
-}
-export const PrimaryBoxBooks: Story<BoxBooksComponentProps> = () => <BoxBooks {...PrimaryBoxBooksProps} />
+export const PrimaryBoxBooks: Story = () => <BoxBooks />

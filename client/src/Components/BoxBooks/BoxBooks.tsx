@@ -1,11 +1,7 @@
 import { FC } from 'react';
 import { BoxBooksComponent, BoxBooksTitle, BoxBooksParagraph, BoxBooksImage } from './BoxBooksStyles';
 
-export type BoxBooksComponentProps = {
-
-}
-
-export const BoxBooks: FC<BoxBooksComponentProps> = () => {
+export const BoxBooks = () => {
   return (
     <BoxBooksComponent data-testid="BoxBooksId">
       <BoxBooksTitle>
