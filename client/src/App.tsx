@@ -1,12 +1,10 @@
 import { Theme } from './Theme';
-import { Button } from './Components/Button/Button';
-import { Tag } from './Components/Tag/Tag';
+import { AppRoutes } from './routing/AppRoutes';
 
 function App() {
   return (
     <Theme>
-      <Button onClick={() => {}}>Zobacz pełny opis</Button>
-      <Tag url=":id/profil" text="Zobacz pelny opis"></Tag>
+      <AppRoutes />
     </Theme>
   );
 }

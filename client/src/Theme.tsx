@@ -6,6 +6,8 @@ export const theme = {
     primary: `rgb(0,0,0)`,
     secondary: `rgb(255,255,255)`,
     readMore: `rgb(61,90,128)`,
+    checkkedStars: 'C92523',
+    uncheckedStars: '#e4e5e9',
   },
   backgrounds: {
     bright: `rgb(242,243,244)`,
@@ -18,6 +20,14 @@ export const theme = {
     default: `Montserrat`,
     logo: `Esteban`,
     sentence: `Clicker Script`,
+    lightGray: '#505050',
+  },
+  h2: {
+    fontSize: `3vh`,
+    lineHeight: `2.5em`,
+  },
+  shadows: {
+    inset: `inset 0px 4px 4px rgba(0, 0, 0, 0.25)`,
   },
 };
 
