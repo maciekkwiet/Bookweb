@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Clicker+Script&family=Esteban&family=Montserrat:wght@400;700&display=swap');
 
 body {
+  background-image: linear-gradient(312.01deg, #CB997E 0.66%, #9EB2CD 100%);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', sans-serif;
