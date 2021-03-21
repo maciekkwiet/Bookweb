@@ -1,5 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
+
 import { Tag } from '../Tag';
 
 const mockHistoryPush = jest.fn();
