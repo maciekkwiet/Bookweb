@@ -1,28 +1,32 @@
 import styled from 'styled-components';
 
-import { theme } from '../../Theme';
-import { TextCardComponent } from '../TextCard/TextCardStyles';
-
-export const HeaderComponent = styled(TextCardComponent)`
-  width: 630px;
-  height: 485px;
-  border-radius: 25px;
-  background: ${(props) => props.theme.backgrounds.darkTransparent};
-  text-align: justify;
-  padding: 20px;
-  color: ${(props) => props.theme.colors.secondary};
-  font-family: ${(props) => props.theme.fonts.default};
+export const HeaderComponent = styled.div`
+  width: auto;
+  height: auto;
+  display: flex;
+  background-color: grey;
+  justify-content: flex-start;
+  padding: 1%;
 `;
 
-export const Head = styled.h1`
-  font-weight: normal;
-  font-size: 36px;
-  line-height: 44px;
+export const BookWebTitle = styled.h1`
+font-family: Esteban;
+font-weight: normal;
+font-size: 58px;
+line-height: 74px;
+color: #3D5A80;
+text-shadow: 1px 1px 1px black, 1px 1px 1px black, 0 0 1px black, 0 0 1px black;
+align-items: center;
+// margin-left:-9%;
+margin-top:0;
+margin-bottom 0;
+height:80%;
 `;
 
-export const HeaderList = styled.ul`
-  font-size: 24px;
-  line-height: 29px;
-  list-style-type: square;
-  text-transform: lowercase;
+export const HeaderImg = styled.img`
+  z-index: 1;
+  width: 13%;
+  // margin-top: 1%;
+  // margin-left: -3%;
+  // margin-bottom: 1%;
 `;
