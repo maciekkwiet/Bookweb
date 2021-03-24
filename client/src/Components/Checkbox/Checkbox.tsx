@@ -1,7 +1,4 @@
-import { CheckboxContainer } from './CheckboxContainer';
-import { HiddenCheckbox } from './HiddenCheckbox';
-import { VisibleCheckbox } from './VisibleCheckbox';
-import { Icon } from './Icon';
+import { CheckboxContainer, HiddenCheckbox, VisibleCheckbox, Icon } from './CheckboxStyles';
 
 export const Checkbox = ({ checked, ...props }) => (
   <CheckboxContainer>
