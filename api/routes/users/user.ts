@@ -3,6 +3,7 @@ import pool from '../../configDB/config';
 const bcrypt = require('bcrypt');
 const jwtGenerator = require('../../utils/jwtGenerator');
 const { validationResult } = require('express-validator');
+import { uploadImage } from '../../utils/imageTools';
 
 //Funkcja którą można by wynieść i używać do wyszukiwania po ID - nie wiem jak z obsługą błędów - może za pomocą try/catch
 const getById = async (table: string, id: number) => {
@@ -55,6 +56,7 @@ export const removeUser = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   const { email, password, name, surname, avatar } = req.body;
+  const avatarImage = await uploadImage(avatar);
 
   let user = await getById('users', id);
   if (user.length === 0) return res.status(400).json("User with given ID doesn't exist");
@@ -68,7 +70,7 @@ export const updateUser = async (req: Request, res: Response) => {
       hashedPassword,
       name,
       surname,
-      avatar,
+      avatarImage,
       id,
     ])
     .then(async () => {
