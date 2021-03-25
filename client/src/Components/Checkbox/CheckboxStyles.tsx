@@ -7,16 +7,11 @@ interface VisibleCheckboxProps {
 export const CheckboxContainer = styled.div`
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 `;
 
 export const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
-  border: 0;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+  display: none;
 `;
 
 export const Icon = styled.svg`
@@ -27,24 +22,22 @@ export const Icon = styled.svg`
 
 export const Label = styled.label`
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  width: 250px;
-  height: 35px;
+  width: 200px;
+  padding: 0.5em;
   background: #f2f4f3;
+  box-shadow: 0 0 3px 0.2px #000;
   border-radius: 5px;
 `;
 
 export const VisibleCheckbox = styled.div<VisibleCheckboxProps>`
   display: inline-block;
-  width: 16px;
-  height: 16px;
-  background: ${(props) => (props.checked ? '#9EB2CD' : '#CB997E')};
-  transition: all 150ms;
-
-  ${HiddenCheckbox}:focus + & {
-    box-shadow: 0 0 0 3px #9eb2cd;
-  }
+  width: 1em;
+  height: 1em;
+  margin: 0 0.5em;
+  background: ${(props) => (props.checked ? props.theme.colors.checkedInput : '#fff')};
+  border: solid 1px #000;
+  transition: background 150ms;
 
   ${Icon} {
     visibility: ${(props) => (props.checked ? 'visible' : 'hidden')};
