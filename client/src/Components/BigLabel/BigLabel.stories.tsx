@@ -10,6 +10,5 @@ export default {
 };
 const PrimaryBigLabelProps = {
   title: 'Tytuł książki/Autor/Dodaj książkę',
-}
-export const PrimaryBigLabel: Story<BigLabelComponentProps> = () => <BigLabel {...PrimaryBigLabelProps} />
-
+};
+export const PrimaryBigLabel: Story<BigLabelComponentProps> = () => <BigLabel {...PrimaryBigLabelProps} />;
