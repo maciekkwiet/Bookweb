@@ -1,18 +1,12 @@
-import React, { useState } from 'react';
-import { Checkbox } from './Checkbox';
-import { Label } from './CheckboxStyles';
+import { CheckboxContainer, HiddenCheckbox, VisibleCheckbox, Icon } from './CheckboxStyles';
 
-export const CheckboxComponent = () => {
-  const [checked, setChecked] = useState(false);
-
-  const handleCheckboxChange = (event) => setChecked(event.target.checked);
-
-  return (
-    <div>
-      <Label>
-        <Checkbox checked={checked} onChange={handleCheckboxChange} />
-        <span>Gatunek</span>
-      </Label>
-    </div>
-  );
-};
+export const CheckboxComponent = ({ checked, ...props }) => (
+  <CheckboxContainer>
+    <HiddenCheckbox checked={checked} {...props} />
+    <VisibleCheckbox checked={checked}>
+      <Icon viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12" />
+      </Icon>
+    </VisibleCheckbox>
+  </CheckboxContainer>
+);
