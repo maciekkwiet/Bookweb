@@ -26,7 +26,7 @@ export const Label = styled.label`
   width: 200px;
   padding: 0.5em;
   background: #f2f4f3;
-  box-shadow: 0 0 3px 0.2px #000;
+  box-shadow: 0 0 3px 1px #505050;
   border-radius: 5px;
 `;
 
@@ -35,7 +35,7 @@ export const VisibleCheckbox = styled.div<VisibleCheckboxProps>`
   width: 1em;
   height: 1em;
   margin: 0 0.5em;
-  background: ${(props) => (props.checked ? props.theme.colors.checkedInput : '#fff')};
+  background: ${(props) => (props.checked ? props.theme.colors.green : '#fff')};
   border: solid 1px #000;
   transition: background 150ms;
 

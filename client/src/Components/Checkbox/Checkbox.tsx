@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { CheckboxComponent } from './CheckboxComponent';
 import { Label } from './CheckboxStyles';
 
-export const Checkbox = ({ genre }) => {
+interface ICheckboxProps {
+  genre: string;
+}
+
+export const Checkbox = ({ genre }: ICheckboxProps): JSX.Element => {
   const [checked, setChecked] = useState(false);
 
   const handleCheckboxChange = () => {
