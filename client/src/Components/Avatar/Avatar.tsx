@@ -15,7 +15,7 @@ const Avatar: FC<avatarProps> = ({ userID }) => {
         setAvatarImage(user[0].avatar);
       })
       .catch((err) => setAvatarImage('https://data.whicdn.com/images/346235402/original.jpg'));
-  }, [userID, avatarImage]);
+  }, [userID]);
 
   return <AvatarComponent src={avatarImage} alt="User avatar" />;
 };

@@ -1,19 +1,35 @@
-import { screen, render } from '@testing-library/react';
-import { AvatarComponent } from '../AvatarStyles';
+import { screen, render, cleanup } from '@testing-library/react';
+import Avatar from '../Avatar';
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 describe('Avatar', () => {
+  afterAll(cleanup);
+
   const renderImage = (userID) => {
-    render(<AvatarComponent src={`http://localhost:8080/api/users/${userID}`} alt="User avatar" />);
+    render(<Avatar userID={userID} />);
   };
 
   it('Renders without crash', () => {
     renderImage('39');
   });
 
-  it('Image should have alt = "User avatar", src = "..api../39" for user with ID=39', () => {
+  it('Image should have alt = "User avatar" and src attribute for user with ID=39', async () => {
     renderImage('39');
     const avatar = screen.getByRole('img');
+
+    await sleep(200);
     expect(avatar).toHaveAttribute('alt', 'User avatar');
-    expect(avatar).toHaveAttribute('src', 'http://localhost:8080/api/users/39');
+    expect(avatar).toHaveAttribute('src');
+  });
+
+  it('Should set backup image if fetch fails', async () => {
+    renderImage('a');
+    const avatar = screen.getByRole('img');
+
+    await sleep(200);
+    expect(avatar).toHaveAttribute('src', 'https://data.whicdn.com/images/346235402/original.jpg');
   });
 });
