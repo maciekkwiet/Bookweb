@@ -9,8 +9,6 @@ import { LogoutDiv } from './LogoutDiv';
 import { LoginDiv } from './LoginDiv';
 
 export const Header = () => {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
   const isLogged = false;
   let LogView;
 
