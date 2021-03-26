@@ -17,13 +17,7 @@ export const TitleDiv = styled.div`
   // justify-content: flex-start;
   justify-content: flex-start;
 `;
-export const LogDiv = styled.div`
-  // width: auto;
-  // height: auto;
-  display: flex;
-  // justify-content: flex-start;
-  justify-content: flex-end;
-`;
+
 export const LogedDiv = styled.div`
   // width: auto;
   // height: auto;
@@ -31,11 +25,7 @@ export const LogedDiv = styled.div`
   // justify-content: flex-start;
   justify-content: flex-end;
 `;
-// export const LogDiv = styled.div`
-//   // width: auto;
-//   // height: auto;
-//   display: flex;
-// `;
+
 export const LogInput = styled(InputComponent)`
   width: 30%;
   height: 20%;
