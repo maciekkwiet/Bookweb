@@ -5,8 +5,10 @@ export interface avatarProps {
   userID: string;
 }
 
+export const defaultAvatarImage = 'https://data.whicdn.com/images/346235402/original.jpg';
+
 const Avatar: FC<avatarProps> = ({ userID }) => {
-  const [avatarImage, setAvatarImage] = useState('');
+  const [avatarImage, setAvatarImage] = useState(defaultAvatarImage);
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/users/${userID}`)
@@ -14,7 +16,7 @@ const Avatar: FC<avatarProps> = ({ userID }) => {
       .then((user) => {
         setAvatarImage(user[0].avatar);
       })
-      .catch((err) => setAvatarImage('https://data.whicdn.com/images/346235402/original.jpg'));
+      .catch((err) => console.warn('Failed to fetch user data'));
   }, [userID]);
 
   return <AvatarComponent src={avatarImage} alt="User avatar" />;

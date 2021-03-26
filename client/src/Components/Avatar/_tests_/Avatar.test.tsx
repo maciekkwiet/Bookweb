@@ -1,6 +1,8 @@
 import { screen, render, cleanup } from '@testing-library/react';
-import Avatar from '../Avatar';
 
+import Avatar, { defaultAvatarImage } from '../Avatar';
+
+//Change to proper testing of async useEffect
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -8,28 +10,28 @@ function sleep(ms) {
 describe('Avatar', () => {
   afterAll(cleanup);
 
-  const renderImage = (userID) => {
+  const renderAvatarImage = (userID) => {
     render(<Avatar userID={userID} />);
   };
 
   it('Renders without crash', () => {
-    renderImage('39');
+    renderAvatarImage('1');
+    expect(screen.getByRole('img')).toBeTruthy();
   });
 
-  it('Image should have alt = "User avatar" and src attribute for user with ID=39', async () => {
-    renderImage('39');
+  it('Image should have alt = "User avatar"', async () => {
+    renderAvatarImage('1');
     const avatar = screen.getByRole('img');
 
     await sleep(200);
     expect(avatar).toHaveAttribute('alt', 'User avatar');
-    expect(avatar).toHaveAttribute('src');
   });
 
   it('Should set backup image if fetch fails', async () => {
-    renderImage('a');
+    renderAvatarImage('a');
     const avatar = screen.getByRole('img');
 
     await sleep(200);
-    expect(avatar).toHaveAttribute('src', 'https://data.whicdn.com/images/346235402/original.jpg');
+    expect(avatar).toHaveAttribute('src', defaultAvatarImage);
   });
 });
