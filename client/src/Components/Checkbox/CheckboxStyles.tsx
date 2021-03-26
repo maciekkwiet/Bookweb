@@ -26,7 +26,7 @@ export const Label = styled.label`
   width: 200px;
   padding: 0.5em;
   background: #f2f4f3;
-  box-shadow: 0 0 3px 1px #505050;
+  box-shadow: 0 0 3px 1px ${(props) => props.theme.colors.lightGray};
   border-radius: 5px;
 `;
 
