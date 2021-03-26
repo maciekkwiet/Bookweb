@@ -1,20 +1,31 @@
-import { Head } from './HeaderStyles';
-import { HeaderList } from './HeaderStyles';
+// import { useState } from 'react';
 import { HeaderComponent } from './HeaderStyles';
-import books from './books.png';
+import { BookWebTitle } from './HeaderStyles';
+import { HeaderImg } from './HeaderStyles';
+// import { LogInput } from './HeaderStyles';
+import { TitleDiv } from './HeaderStyles';
+// import { LogButton } from './HeaderStyles';
+import { LogoutDiv } from './LogoutDiv';
+import { LoginDiv } from './LoginDiv';
 
 export const Header = () => {
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  const isLogged = false;
+  let LogView;
+
+  if (isLogged) {
+    LogView = <LoginDiv />;
+  } else {
+    LogView = <LogoutDiv />;
+  }
   return (
     <HeaderComponent>
-      <Head>To tutaj:</Head>
-      <HeaderList>
-        <li>Dowiesz się co warto przeczytać</li>
-        <li>Zaplanujesz najbliższą przygodę z książką</li>
-        <li>Stworzysz kolekcję swoich ulubionych tytułów</li>
-        <li>Ocenisz przeczytane książki</li>
-        <li>Zaprosisz znajomych i dowiesz się co czytają</li>
-      </HeaderList>
-      <img src={books} alt="books icon"></img>
+      <TitleDiv>
+        <HeaderImg src={process.env.PUBLIC_URL + '/book.png'} alt="book icon"></HeaderImg>
+        <BookWebTitle>BookWeb</BookWebTitle>
+      </TitleDiv>
+      {LogView}
     </HeaderComponent>
   );
 };
