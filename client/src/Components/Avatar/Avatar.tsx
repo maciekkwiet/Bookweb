@@ -5,7 +5,7 @@ export interface avatarProps {
   userID: string;
 }
 
-const Avatar: FC<avatarProps> = ({ userID }) => {
+export const Avatar: FC<avatarProps> = ({ userID }) => {
   const [avatarImage, setAvatarImage] = useState('');
 
   useEffect(() => {
