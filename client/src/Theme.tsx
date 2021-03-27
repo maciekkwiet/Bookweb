@@ -31,14 +31,9 @@ export const theme = {
   },
   size: {
     xs: `320px`,
-    sm: `700px`,
+    sm: `800px`,
     lg: `1200px`,
   },
-  // device: {
-  //   xs: `(min-width: ${size.xs})`,
-  //   sm: `(min-width: ${size.sm})`,
-  //   lg: `(min-width: ${size.lg})`,
-  //  }
 };
 
 export const Theme: FC = ({ children }) => <ThemeProvider theme={theme}>{children}</ThemeProvider>;
