@@ -2,6 +2,7 @@
 import { Formik, Form, FormikHelpers } from 'formik';
 import { RegistrationFormContainer, RegistrationInput, RegistrationButton, RegistrationFormTitle, RegistrationErrorMessage } from './RegistrationFormStyles';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 interface Values {
   email: string;
@@ -20,6 +21,8 @@ const SignupSchema = Yup.object().shape({
     .required('Powtórzenie hasła jest wyamgane!'),
 });
 
+
+
 export const RegistrationForm = () => {
   return (
     <RegistrationFormContainer>
@@ -36,31 +39,13 @@ export const RegistrationForm = () => {
           { setSubmitting }: FormikHelpers<Values>
         ) => {
 
-          fetch('http://localhost:8080/api/users/register', {
-            method: 'post',
-            mode: 'no-cors',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              email: values.email,
-              password: values.password
-            })
-          }).then((Response) => Response.json())
-            .then((Result) => {
-              console.log(Result);
-              if (Result.Status === 200)
-                alert('Rejestracja się powiodła!');
-              else
-                alert('Coś poszło nie tak')
-            })
-
 
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
+            setSubmitting(true);
           }, 500);
+
+
 
         }}
       >
