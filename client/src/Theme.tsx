@@ -29,6 +29,16 @@ export const theme = {
   shadows: {
     inset: `inset 0px 4px 4px rgba(0, 0, 0, 0.25)`,
   },
+  size: {
+    xs: `320px`,
+    sm: `700px`,
+    lg: `1200px`,
+  },
+  // device: {
+  //   xs: `(min-width: ${size.xs})`,
+  //   sm: `(min-width: ${size.sm})`,
+  //   lg: `(min-width: ${size.lg})`,
+  //  }
 };
 
 export const Theme: FC = ({ children }) => <ThemeProvider theme={theme}>{children}</ThemeProvider>;
