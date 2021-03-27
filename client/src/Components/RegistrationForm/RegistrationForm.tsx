@@ -1,6 +1,6 @@
 
 import { Formik, Form, FormikHelpers } from 'formik';
-import { RegistrationFormContainer, RegistrationInput, RegistrationErrorEmail, RegistrationErrorPassword, RegistrationErrorConfirmPassword, RegistrationButton, RegistrationFormTitle } from './RegistryFormStyles';
+import { RegistrationFormContainer, RegistrationInput, RegistrationButton, RegistrationFormTitle, RegistrationErrorMessage } from './RegistrationFormStyles';
 import * as Yup from 'yup';
 
 interface Values {
@@ -11,19 +11,19 @@ interface Values {
 const SignupSchema = Yup.object().shape({
   email: Yup.string()
     .email("Niewłaściwy adres email")
-    .required("EMail jest wymagany!"),
+    .required("Email jest wymagany!"),
   password: Yup.string()
     .min(8, 'Hasło musi mieś conajmniej 8 znaków!')
     .required('Hasło jest wymagane!'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), ''], 'Hasło musi się zgadzać!')
-    .required('Required'),
+    .required('Powtórzenie hasła jest wyamgane!'),
 });
 
-export const RegistryForm = () => {
+export const RegistrationForm = () => {
   return (
     <RegistrationFormContainer>
-      <RegistrationFormTitle>NIe masz jeszcze konta?</RegistrationFormTitle>
+      <RegistrationFormTitle>Nie masz jeszcze konta?</RegistrationFormTitle>
       <Formik
         initialValues={{
           email: '',
@@ -35,14 +35,38 @@ export const RegistryForm = () => {
           values: Values,
           { setSubmitting }: FormikHelpers<Values>
         ) => {
+
+          fetch('http://localhost:8080/api/users/register', {
+            method: 'post',
+            mode: 'no-cors',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              email: values.email,
+              password: values.password
+            })
+          }).then((Response) => Response.json())
+            .then((Result) => {
+              console.log(Result);
+              if (Result.Status === 200)
+                alert('Rejestracja się powiodła!');
+              else
+                alert('Coś poszło nie tak')
+            })
+
+
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 500);
+
         }}
       >
         {({ errors, touched, values, handleChange }) => (
-          <Form>
+
+          <Form >
             <RegistrationInput
               id="email"
               name="email"
@@ -50,7 +74,8 @@ export const RegistryForm = () => {
               type="email"
               onChange={handleChange}
               value={values.email} />
-            {errors.email && touched.email ? <RegistrationErrorEmail>{errors.email}</RegistrationErrorEmail> : null}
+            <RegistrationErrorMessage>{errors.email && touched.email ? errors.email : null}
+            </RegistrationErrorMessage>
 
 
             <RegistrationInput
@@ -60,7 +85,9 @@ export const RegistryForm = () => {
               type="password"
               onChange={handleChange}
               value={values.password} />
-            {errors.password && touched.password ? <RegistrationErrorPassword>{errors.password}</RegistrationErrorPassword> : null}
+            <RegistrationErrorMessage>{errors.password && touched.password ? errors.password : null}
+            </RegistrationErrorMessage>
+
 
             <RegistrationInput
               type="password"
@@ -69,10 +96,12 @@ export const RegistryForm = () => {
               placeholder="powtórz hasło"
               onChange={handleChange}
               value={values.confirmPassword} />
-            {errors.confirmPassword && touched.confirmPassword ? <RegistrationErrorConfirmPassword>{errors.confirmPassword}</RegistrationErrorConfirmPassword> : null}
+            <RegistrationErrorMessage>{errors.confirmPassword && touched.confirmPassword ? errors.confirmPassword : null}
+            </RegistrationErrorMessage>
 
             <RegistrationButton type="submit">Zarejestruj</RegistrationButton>
           </Form>
+
         )}
       </Formik>
     </RegistrationFormContainer >

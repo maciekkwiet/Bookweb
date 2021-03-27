@@ -1,11 +1,11 @@
 import { Theme } from './Theme';
 import { AppRoutes } from './routing/AppRoutes';
-import { RegistryForm } from './Components/RegistryForm/RegistryForm'
+import { RegistrationForm } from './Components/RegistrationForm/RegistrationForm'
 
 function App() {
   return (
     <Theme>
-      <RegistryForm />
+      <RegistrationForm />
       <AppRoutes />
     </Theme>
   );
