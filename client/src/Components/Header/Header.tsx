@@ -1,21 +1,18 @@
-// import { useState } from 'react';
 import { HeaderComponent } from './HeaderStyles';
 import { BookWebTitle } from './HeaderStyles';
 import { HeaderImg } from './HeaderStyles';
-// import { LogInput } from './HeaderStyles';
 import { TitleDiv } from './HeaderStyles';
-// import { LogButton } from './HeaderStyles';
-import { LogoutDiv } from './LogoutDiv';
-import { LoginDiv } from './LoginDiv';
+import { AnonymousDiv } from './AnonymousDiv';
+import { LoggedDiv } from './LoggedDiv';
 
 export const Header = () => {
-  const isLogged = false;
+  const isLogged = true;
   let LogView;
 
   if (isLogged) {
-    LogView = <LoginDiv />;
+    LogView = <LoggedDiv userName="userName" userID="userName" />;
   } else {
-    LogView = <LogoutDiv />;
+    LogView = <AnonymousDiv />;
   }
   return (
     <HeaderComponent>

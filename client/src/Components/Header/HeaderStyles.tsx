@@ -9,6 +9,9 @@ export const HeaderComponent = styled.div`
   background-color: grey;
   justify-content: space-between;
   padding: 0.5%;
+  @media only screen and (max-width: ${(props) => props.theme.size.xs}) {
+    flex-direction: column;
+  }
 `;
 export const TitleDiv = styled.div`
   // width: auto;
