@@ -8,24 +8,20 @@ export const HeaderComponent = styled.div`
   display: flex;
   background-color: grey;
   justify-content: space-between;
-  padding: 0.5%;
-  @media only screen and (max-width: ${(props) => props.theme.size.xs}) {
-    flex-direction: column;
+  padding: 2%;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    align-items: center;
   }
 `;
 export const TitleDiv = styled.div`
-  // width: auto;
-  // height: auto;
   display: flex;
-  // justify-content: flex-start;
   justify-content: flex-start;
+  height: 50px;
+  align-items: center;
 `;
 
 export const LogedDiv = styled.div`
-  // width: auto;
-  // height: auto;
   display: flex;
-  // justify-content: flex-start;
   justify-content: flex-end;
 `;
 
@@ -39,20 +35,20 @@ export const BookWebTitle = styled.h1`
 font-family: Esteban;
 font-weight: normal;
 font-size: 58px;
-line-height: 74px;
 color: #3D5A80;
 text-shadow: 1px 1px 1px black, 1px 1px 1px black, 0 0 1px black, 0 0 1px black;
-// align-items: center;
-// margin-left:-9%;
-margin-top:0;
+margin-top: 0%;
 margin-bottom 0;
-height:80%;
+@media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+  font-size: 48px;
+}
 `;
 
 export const HeaderImg = styled.img`
   z-index: 1;
-  width: 25%;
-  // margin-top: 1%;
-  // margin-left: -10%;
-  // margin-bottom: 1%;
+  // width: 30%;
+  // height: 20%;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    height: 100%;
+  }
 `;
