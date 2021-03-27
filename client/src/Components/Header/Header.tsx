@@ -5,10 +5,8 @@ import { TitleDiv } from './HeaderStyles';
 import { AnonymousDiv } from './AnonymousDiv';
 import { LoggedDiv } from './LoggedDiv';
 
-export const Header = () => {
-  const isLogged = true;
+export const Header = ({ isLogged }) => {
   let LogView;
-
   if (isLogged) {
     LogView = <LoggedDiv userName="userName" userID="userName" />;
   } else {
