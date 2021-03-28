@@ -38,10 +38,15 @@ export const RegistrationButton = styled.button`
 align-self:start;
 box-sizing:border-box;
 font-size:16px;
-margin:20px 0 0 0;
+margin:10px 0 0 0;
 border-radius:5px;
 padding: 0.5em 2em;
 border: solid 1.5px ${(props) => props.theme.colors.lightGray};
+&:hover {
+  box-shadow: 0px 0px 2px #eaeaea;
+  color: #333333;
+  background: #f7f7f7;
+}
 `
 
 export const RegistrationErrorMessage = styled.div`

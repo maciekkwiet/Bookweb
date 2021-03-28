@@ -1,8 +1,7 @@
-
 import { Formik, Form, FormikHelpers } from 'formik';
 import { RegistrationFormContainer, RegistrationInput, RegistrationButton, RegistrationFormTitle, RegistrationErrorMessage } from './RegistrationFormStyles';
 import * as Yup from 'yup';
-import axios from 'axios';
+
 
 interface Values {
   email: string;
@@ -38,26 +37,37 @@ export const RegistrationForm = () => {
           values: Values,
           { setSubmitting }: FormikHelpers<Values>
         ) => {
+          setSubmitting(true);
 
+          fetch('http://localhost:8080/api/users/register', {
+            method: 'post',
+            mode: 'no-cors',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              values
+            })
+          }).then((res) => res.json())
+            .then((result) => {
+              alert(result);
+            });
 
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(true);
-          }, 500);
-
-
+          setSubmitting(false);
 
         }}
       >
-        {({ errors, touched, values, handleChange }) => (
+        {({ errors, touched, values, handleChange, handleSubmit, }) => (
 
-          <Form >
+          <Form onSubmit={handleSubmit}>
             <RegistrationInput
               id="email"
               name="email"
               placeholder="podaj email"
               type="email"
               onChange={handleChange}
+              data-testid="inputId"
               value={values.email} />
             <RegistrationErrorMessage>{errors.email && touched.email ? errors.email : null}
             </RegistrationErrorMessage>
@@ -84,7 +94,11 @@ export const RegistrationForm = () => {
             <RegistrationErrorMessage>{errors.confirmPassword && touched.confirmPassword ? errors.confirmPassword : null}
             </RegistrationErrorMessage>
 
-            <RegistrationButton type="submit">Zarejestruj</RegistrationButton>
+            <RegistrationButton
+              type="submit"
+              data-testid="buttonId"
+
+            >Zarejestruj</RegistrationButton>
           </Form>
 
         )}
