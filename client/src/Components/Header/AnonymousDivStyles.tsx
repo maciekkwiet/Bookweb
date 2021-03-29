@@ -34,7 +34,6 @@ export const LogButton = styled(ButtonComponent)`
   margin: 3% 0 0 0;
   padding-top: 7px;
   padding-bottom: 7px;
-  // border: 0;
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
     width: 60%;
     height: 100%;

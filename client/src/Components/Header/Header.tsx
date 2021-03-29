@@ -1,17 +1,10 @@
-import { HeaderComponent } from './HeaderStyles';
-import { BookWebTitle } from './HeaderStyles';
-import { HeaderImg } from './HeaderStyles';
-import { TitleDiv } from './HeaderStyles';
+import { HeaderComponent, BookWebTitle, HeaderImg, TitleDiv } from './HeaderStyles';
 import { AnonymousDiv } from './AnonymousDiv';
 import { LoggedDiv } from './LoggedDiv';
 
 export const Header = ({ isLogged }) => {
-  let LogView;
-  if (isLogged) {
-    LogView = <LoggedDiv userName="userName" userID="userName" />;
-  } else {
-    LogView = <AnonymousDiv />;
-  }
+  const LogView = isLogged ? <LoggedDiv userName="userName" userID="userName" /> : <AnonymousDiv />;
+
   return (
     <HeaderComponent>
       <TitleDiv>

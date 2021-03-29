@@ -1,6 +1,5 @@
-import { LogDiv } from './LoggedDivStyles';
+import { LogDiv, UserName } from './LoggedDivStyles';
 import { Avatar } from '../Avatar/Avatar';
-import { UserName } from './LoggedDivStyles';
 
 export const LoggedDiv = ({ userID, userName }) => {
   return (

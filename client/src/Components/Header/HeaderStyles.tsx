@@ -32,22 +32,19 @@ export const LogInput = styled(InputComponent)`
 `;
 
 export const BookWebTitle = styled.h1`
-font-family: Esteban;
-font-weight: normal;
-font-size: 58px;
-color: #3D5A80;
-text-shadow: 1px 1px 1px black, 1px 1px 1px black, 0 0 1px black, 0 0 1px black;
-margin-top: 0%;
-margin-bottom 0;
-@media only screen and (max-width: ${(props) => props.theme.size.sm}) {
-  font-size: 48px;
-}
+  font-family: Esteban;
+  font-weight: normal;
+  font-size: 58px;
+  color: #3D5A80;
+  text-shadow: 1px 1px 1px black, 1px 1px 1px black, 0 0 1px black, 0 0 1px black;
+  margin-top: 0%;
+  margin-bottom 0;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    font-size: 48px;
+  }
 `;
 
 export const HeaderImg = styled.img`
-  z-index: 1;
-  // width: 30%;
-  // height: 20%;
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
     height: 100%;
   }
