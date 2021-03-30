@@ -1,18 +1,41 @@
-import React from 'react';
-import { NavbarComponent, NavLink, Bars, NavMenu } from './NavbarStyles';
+import React, { useState } from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { IconContext } from 'react-icons/lib';
+import { theme } from '../../Theme';
+import { NavbarComponent, NavContainer, NavMenu, Burger, NavItem, NavLinks } from './NavbarStyles';
+
+export type NavbarComponentProps = {};
 
 export const Navbar = () => {
+  const [click, setClick] = useState(false);
+
+  const handleClick = () => setClick(!click);
+
   return (
-    <NavbarComponent>
-      <Bars />
-      <NavMenu>
-        <NavLink to="/bookscatalog">Katalog ksiazek</NavLink>
-        <NavLink to="/addbook">Dodaj ksiazke</NavLink>
-        <NavLink to="/mybooks">Moje ksiazki</NavLink>
-        <NavLink to="/top100">Top 100</NavLink>
-        <NavLink to="/bookprovidercatalog">Katalog ksiegarn i bibliotek</NavLink>
-      </NavMenu>
-    </NavbarComponent>
+    <IconContext.Provider value={{ color: theme.colors.secondary }}>
+      <NavbarComponent>
+        <NavContainer>
+          <Burger onClick={handleClick}>{click ? <FaTimes /> : <FaBars />}</Burger>
+          <NavMenu onClick={handleClick} click={click}>
+            <NavItem>
+              <NavLinks to="/catalog">Katalog książek</NavLinks>
+            </NavItem>
+            <NavItem>
+              <NavLinks to="/add">Dodaj książkę</NavLinks>
+            </NavItem>
+            <NavItem>
+              <NavLinks to="/mybooks">Moje książki</NavLinks>
+            </NavItem>
+            <NavItem>
+              <NavLinks to="/top">Top 100</NavLinks>
+            </NavItem>
+            <NavItem>
+              <NavLinks to="/catalog">Katalog księgarń i bibliotek</NavLinks>
+            </NavItem>
+          </NavMenu>
+        </NavContainer>
+      </NavbarComponent>
+    </IconContext.Provider>
   );
 };
 
