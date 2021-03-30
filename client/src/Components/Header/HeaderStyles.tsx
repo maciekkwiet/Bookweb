@@ -32,10 +32,10 @@ export const LogInput = styled(InputComponent)`
 `;
 
 export const BookWebTitle = styled.h1`
-  font-family: Esteban;
+  font-family: ${(props) => props.theme.fonts.headerTitleFont};
   font-weight: normal;
   font-size: 58px;
-  color: #3D5A80;
+  color: ${(props) => props.theme.fonts.headerTitleColor};
   text-shadow: 1px 1px 1px black, 1px 1px 1px black, 0 0 1px black, 0 0 1px black;
   margin-top: 0%;
   margin-bottom 0;

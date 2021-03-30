@@ -21,6 +21,8 @@ export const theme = {
     logo: `Esteban`,
     sentence: `Clicker Script`,
     lightGray: '#505050',
+    headerTitleFont: 'Esteban',
+    headerTitleColor: '#3D5A80',
   },
   h2: {
     fontSize: `3vh`,
