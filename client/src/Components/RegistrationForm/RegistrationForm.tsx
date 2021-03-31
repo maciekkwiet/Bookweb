@@ -1,6 +1,14 @@
 import { Formik, Form, FormikHelpers } from 'formik';
-import { RegistrationFormContainer, RegistrationInput, RegistrationButton, RegistrationFormTitle, RegistrationErrorMessage } from './RegistrationFormStyles';
 import * as Yup from 'yup';
+import axios from 'axios';
+import {
+  RegistrationFormContainer,
+  RegistrationInput,
+  RegistrationButton,
+  RegistrationFormTitle,
+  RegistrationErrorMessage
+} from './RegistrationFormStyles';
+
 
 
 interface Values {
@@ -25,6 +33,8 @@ const SignupSchema = Yup.object().shape({
 
 
 
+
+
 export const RegistrationForm = () => {
   return (
     <RegistrationFormContainer>
@@ -42,20 +52,17 @@ export const RegistrationForm = () => {
           { setSubmitting }: FormikHelpers<Values>
         ) => {
           setSubmitting(true);
-          fetch('http://localhost:8080/api/users/register', {
-            method: 'post',
-            mode: 'no-cors',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              values
+          const { name, email, password } = values;
+          axios.post('http://localhost:8080/api/users/register', {
+            name,
+            email,
+            password,
+          })
+            .then(res => {
+              alert(res.data)
+            }, (error) => {
+              alert(error);
             })
-          }).then((res) => res.json())
-            .then((result) => {
-              alert(result);
-            });
 
           setSubmitting(false);
 
