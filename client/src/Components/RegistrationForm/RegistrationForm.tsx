@@ -10,7 +10,6 @@ import {
 } from './RegistrationFormStyles';
 
 
-
 interface Values {
   name: string;
   email: string;
@@ -31,11 +30,15 @@ const SignupSchema = Yup.object().shape({
     .required('Powtórzenie hasła jest wyamgane!'),
 });
 
+type RegistrationFormType = {
+  onSubmit: (values: Values) => void;
+};
 
+export const RegistrationForm = ({ onSubmit }: RegistrationFormType) => {
+  const handleSubmit = async (values: Values) => {
+    onSubmit(values);
+  };
 
-
-
-export const RegistrationForm = () => {
   return (
     <RegistrationFormContainer>
       <RegistrationFormTitle>Nie masz jeszcze konta?</RegistrationFormTitle>
@@ -47,29 +50,10 @@ export const RegistrationForm = () => {
           confirmPassword: '',
         }}
         validationSchema={SignupSchema}
-        onSubmit={(
-          values: Values,
-          { setSubmitting }: FormikHelpers<Values>
-        ) => {
-          setSubmitting(true);
-          const { name, email, password } = values;
-          axios.post('http://localhost:8080/api/users/register', {
-            name,
-            email,
-            password,
-          })
-            .then(res => {
-              alert(res.data)
-            }, (error) => {
-              alert(error);
-            })
+        onSubmit={handleSubmit}
 
-          setSubmitting(false);
-
-        }}
       >
-        {({ errors, touched, values, handleChange, handleSubmit, }) => (
-
+        {({ errors, touched, values, handleChange, handleSubmit }) => (
           <Form onSubmit={handleSubmit}>
 
             <RegistrationInput
@@ -90,10 +74,9 @@ export const RegistrationForm = () => {
               type="email"
               onChange={handleChange}
               data-testid="inputId"
-              value={values.email} />
-            <RegistrationErrorMessage>{errors.email && touched.email ? errors.email : null}
-            </RegistrationErrorMessage>
-
+              value={values.email}
+            />
+            <RegistrationErrorMessage>{errors.email && touched.email ? errors.email : null}</RegistrationErrorMessage>
 
             <RegistrationInput
               id="password"
@@ -101,10 +84,11 @@ export const RegistrationForm = () => {
               placeholder="wpisz hasło"
               type="password"
               onChange={handleChange}
-              value={values.password} />
-            <RegistrationErrorMessage>{errors.password && touched.password ? errors.password : null}
+              value={values.password}
+            />
+            <RegistrationErrorMessage>
+              {errors.password && touched.password ? errors.password : null}
             </RegistrationErrorMessage>
-
 
             <RegistrationInput
               type="password"
@@ -112,19 +96,62 @@ export const RegistrationForm = () => {
               name="confirmPassword"
               placeholder="powtórz hasło"
               onChange={handleChange}
-              value={values.confirmPassword} />
-            <RegistrationErrorMessage>{errors.confirmPassword && touched.confirmPassword ? errors.confirmPassword : null}
+              value={values.confirmPassword}
+            />
+            <RegistrationErrorMessage>
+              {errors.confirmPassword && touched.confirmPassword ? errors.confirmPassword : null}
             </RegistrationErrorMessage>
 
-            <RegistrationButton
-              type="submit"
-              data-testid="buttonId"
-
-            >Zarejestruj</RegistrationButton>
+            <RegistrationButton type="submit" data-testid="buttonId">
+              Zarejestruj
+            </RegistrationButton>
           </Form>
-
         )}
       </Formik>
-    </RegistrationFormContainer >
+    </RegistrationFormContainer>
   );
 };
+
+// (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
+//   setSubmitting(true);
+//   fetch('http://localhost:8080/api/users/register', {
+//     method: 'post',
+//     mode: 'no-cors',
+//     headers: {
+//       Accept: 'application/json',
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({
+//       values,
+//     }),
+//   })
+//     .then((res) => res.json())
+//     .then((result) => {
+//       alert(result);
+//     });
+//   setSubmitting(false);
+// }
+
+
+
+
+// onSubmit={(
+//   values: Values,
+//   { setSubmitting }: FormikHelpers<Values>
+// ) => {
+//   setSubmitting(true);
+//   const { name, email, password } = values;
+//   axios.post('http://localhost:8080/api/users/register', {
+//     name,
+//     email,
+//     password,
+//   })
+//     .then(res => {
+//       alert(res.data)
+//     }, (error) => {
+//       alert(error);
+//     })
+
+//   setSubmitting(false);
+
+// }}
