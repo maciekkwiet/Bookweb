@@ -4,8 +4,8 @@
   "description": "Bookweb",
   "scripts": {
     "install": "(cd api && yarn) & (cd client && yarn)",
-    "start": "cd api && yarn start --max_old_space_size=4096",
-    "heroku-postbuild": "cd client && yarn build --max_old_space_size=4096",
+    "start": "cd api && yarn start --optimize_for_size --max_old_space_size=460",
+    "heroku-postbuild": "cd client && yarn build --optimize_for_size --max_old_space_size=460",
     "format": "prettier --write",
     "chromatic": "cd client && yarn chromatic"
   },
