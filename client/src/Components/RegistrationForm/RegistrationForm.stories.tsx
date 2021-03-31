@@ -9,4 +9,4 @@ export default {
   decorators: [(Story: any) => <Story />],
 };
 
-export const PrimaryRegistrationForm: Story = () => <RegistrationForm />
+export const PrimaryRegistrationForm: Story = () => <RegistrationForm onSubmit={()=>console.log('onSubmit')}/>
