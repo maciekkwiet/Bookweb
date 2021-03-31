@@ -1,6 +1,8 @@
 import { Story } from '@storybook/react';
+import { Provider } from 'react-redux';
 
-import Avatar, { avatarProps } from './Avatar';
+import Avatar from './Avatar';
+import store from '../../app/store';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -9,10 +11,8 @@ export default {
   decoators: [(Story: any) => <Story />],
 };
 
-const basePropsData = {
-  userID: '39',
-  src: 'https://data.whicdn.com/images/346235402/original.jpg',
-  alt: 'Avatar Image',
-};
-
-export const AvatarExample: Story<avatarProps> = () => <Avatar {...basePropsData} />;
+export const AvatarExample: Story = () => (
+  <Provider store={store}>
+    <Avatar />
+  </Provider>
+);
