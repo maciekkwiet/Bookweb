@@ -4,11 +4,14 @@ import * as Yup from 'yup';
 
 
 interface Values {
+  name: string;
   email: string;
   password: string;
   confirmPassword: string;
 }
 const SignupSchema = Yup.object().shape({
+  name: Yup.string()
+    .required('Nazwa użytkownika jest wymagana!'),
   email: Yup.string()
     .email("Niewłaściwy adres email")
     .required("Email jest wymagany!"),
@@ -28,6 +31,7 @@ export const RegistrationForm = () => {
       <RegistrationFormTitle>Nie masz jeszcze konta?</RegistrationFormTitle>
       <Formik
         initialValues={{
+          name: '',
           email: '',
           password: '',
           confirmPassword: '',
@@ -38,7 +42,6 @@ export const RegistrationForm = () => {
           { setSubmitting }: FormikHelpers<Values>
         ) => {
           setSubmitting(true);
-
           fetch('http://localhost:8080/api/users/register', {
             method: 'post',
             mode: 'no-cors',
@@ -61,10 +64,22 @@ export const RegistrationForm = () => {
         {({ errors, touched, values, handleChange, handleSubmit, }) => (
 
           <Form onSubmit={handleSubmit}>
+
+            <RegistrationInput
+              id="name"
+              name="name"
+              placeholder="podaj nazwę użytkownika"
+              type="name"
+              onChange={handleChange}
+              data-testid="inputId"
+              value={values.name} />
+            <RegistrationErrorMessage>{errors.name && touched.name ? errors.name : null}
+            </RegistrationErrorMessage>
+
             <RegistrationInput
               id="email"
               name="email"
-              placeholder="podaj email"
+              placeholder="podaj adres email"
               type="email"
               onChange={handleChange}
               data-testid="inputId"

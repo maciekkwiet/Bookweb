@@ -20,15 +20,15 @@ position:relative;
 `;
 
 export const RegistrationFormTitle = styled.h2`
-margin:0 0 30px 0;
+margin:0 0 20px 0;
 font-size: 24px;
 text-align:center;
 `;
 
 export const RegistrationInput = styled.input`
 width:100%;
-font-size:16px;
-margin:5px 0 0 0;
+font-size:14px;
+margin:0px 0 0 0;
 box-sizing:border-box;
 padding: 0.5em;
 border: solid 1.5px ${(props) => props.theme.colors.lightGray};
@@ -38,7 +38,7 @@ export const RegistrationButton = styled.button`
 align-self:start;
 box-sizing:border-box;
 font-size:16px;
-margin:10px 0 0 0;
+margin:0px 0 0 0;
 border-radius:5px;
 padding: 0.5em 2em;
 border: solid 1.5px ${(props) => props.theme.colors.lightGray};
