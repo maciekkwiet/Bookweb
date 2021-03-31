@@ -5,7 +5,7 @@
   "scripts": {
     "install": "(cd api && yarn) & (cd client && yarn)",
     "start": "cd api && yarn start",
-    "heroku-postbuild": "cd client && yarn build",
+    "heroku-postbuild": "cd client && yarn build --max_old_space_size=4096",
     "format": "prettier --write",
     "chromatic": "cd client && yarn chromatic"
   },
