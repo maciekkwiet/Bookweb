@@ -1,7 +1,7 @@
-import { BookImage, BookParagraph, BoxComponent, ContentContainer, ImgContainer } from '../Box/BoxStyles';
+import { BookImage, BoxComponent, ContentContainer, ImgContainer } from '../Box/BoxStyles';
 import { Description } from './BookDescriptionStyles';
 
-type BookProps = {
+export type BookProps = {
   image: string;
   author: string;
   releaseDate: string;
@@ -10,14 +10,14 @@ type BookProps = {
   averageRating: string;
 };
 
-export default function BookDescription({
+export const BookDescription = ({
   image,
   author,
   releaseDate,
   numberOfPages,
   isbn,
   averageRating,
-}: BookProps): JSX.Element {
+}: BookProps): JSX.Element => {
   return (
     <BoxComponent>
       <ImgContainer>
@@ -32,4 +32,4 @@ export default function BookDescription({
       </ContentContainer>
     </BoxComponent>
   );
-}
+};
