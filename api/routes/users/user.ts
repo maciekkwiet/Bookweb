@@ -80,7 +80,9 @@ export const updateUser = async (req: Request, res: Response) => {
 };
 
 export const registerUser = async (req: Request, res: Response) => {
+
   try {
+   
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.status(422).json({ errors: errors.array() });
@@ -88,9 +90,10 @@ export const registerUser = async (req: Request, res: Response) => {
     }
     //1. destructure the req.body (name, email, password)
     const { name, email, password } = req.body;
-console.log(req.body)
+  
     //2. check if user exist (if user exist then throw error)
     const user = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+ 
     if (user.rows.length !== 0) {
       return res.status(401).send('User already exist');
     }
