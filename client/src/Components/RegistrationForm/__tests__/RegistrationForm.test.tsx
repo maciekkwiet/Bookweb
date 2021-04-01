@@ -15,10 +15,12 @@ describe('RegistrationForm', () => {
       </ThemeProvider>,
     );
 
+    const name = screen.getByPlaceholderText('podaj nazwę użytkownika');
     const email = screen.getByPlaceholderText('podaj email');
     const password = screen.getByPlaceholderText('wpisz hasło');
     const confirmPassword = screen.getByPlaceholderText('powtórz hasło');
 
+    userEvent.type(name, 'test1');
     userEvent.type(email, 'test1@wp.pl');
     userEvent.type(password, 'test1test1');
     userEvent.type(confirmPassword, 'test1test1');
@@ -29,6 +31,7 @@ describe('RegistrationForm', () => {
     userEvent.click(button);
     await waitFor(() =>
       expect(handleSubmit).toHaveBeenCalledWith({
+        name: 'test1',
         email: 'test1@wp.pl',
         password: 'test1test1',
         confirmPassword: 'test1test1',

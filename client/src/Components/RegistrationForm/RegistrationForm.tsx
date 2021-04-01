@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import {
   RegistrationFormContainer,
   RegistrationInput,
@@ -6,20 +7,28 @@ import {
   RegistrationFormTitle,
   RegistrationErrorMessage,
 } from './RegistrationFormStyles';
-import * as Yup from 'yup';
+
 
 interface Values {
+  name: string;
   email: string;
   password: string;
   confirmPassword: string;
 }
 const SignupSchema = Yup.object().shape({
-  email: Yup.string().email('Niewłaściwy adres email').required('Email jest wymagany!'),
-  password: Yup.string().min(8, 'Hasło musi mieś conajmniej 8 znaków!').required('Hasło jest wymagane!'),
+  name: Yup.string()
+    .required('Nazwa użytkownika jest wymagana!'),
+  email: Yup.string()
+    .email("Niewłaściwy adres email")
+    .required("Email jest wymagany!"),
+  password: Yup.string()
+    .min(8, 'Hasło musi mieś conajmniej 8 znaków!')
+    .required('Hasło jest wymagane!'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), ''], 'Hasło musi się zgadzać!')
     .required('Powtórzenie hasła jest wyamgane!'),
 });
+
 
 type RegistrationFormType = {
   onSubmit: (values: Values) => void;
@@ -32,6 +41,7 @@ export const RegistrationForm = ({ onSubmit }: RegistrationFormType) => {
 
   const formik = useFormik({
     initialValues: {
+      name: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -47,6 +57,17 @@ export const RegistrationForm = ({ onSubmit }: RegistrationFormType) => {
       <RegistrationFormTitle>Nie masz jeszcze konta?</RegistrationFormTitle>
 
       <form onSubmit={formik.handleSubmit}>
+        <RegistrationInput
+          id="name"
+          name="name"
+          placeholder="podaj nazwę użytkownika"
+          type="name"
+          onChange={formik.handleChange}
+          data-testid="inputId"
+          value={formik.values.name} />
+        <RegistrationErrorMessage>{formik.errors.name && formik.touched.name ? formik.errors.name : null}
+        </RegistrationErrorMessage>
+
         <RegistrationInput
           id="email"
           name="email"
@@ -111,3 +132,25 @@ export const RegistrationForm = ({ onSubmit }: RegistrationFormType) => {
 //     });
 //   setSubmitting(false);
 // }
+
+
+// onSubmit={(
+//   values: Values,
+//   { setSubmitting }: FormikHelpers<Values>
+// ) => {
+//   setSubmitting(true);
+//   const { name, email, password } = values;
+//   axios.post('http://localhost:8080/api/users/register', {
+//     name,
+//     email,
+//     password,
+//   })
+//     .then(res => {
+//       alert(res.data)
+//     }, (error) => {
+//       alert(error);
+//     })
+
+//   setSubmitting(false);
+
+// }}
