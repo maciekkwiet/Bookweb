@@ -1,6 +1,9 @@
 import { ThemeProvider } from 'styled-components';
 import { screen, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import 'whatwg-fetch';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 
 import { theme } from '../../../Theme';
 import { RegistrationForm } from '../RegistrationForm';
