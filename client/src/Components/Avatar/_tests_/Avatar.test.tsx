@@ -1,37 +1,60 @@
 import { screen, render, cleanup } from '@testing-library/react';
+import { Provider } from 'react-redux';
 
 import Avatar, { defaultAvatarImage } from '../Avatar';
+import { IUser, login } from '../../../Features/User/UserSlice';
+import store from '../../../app/store';
 
-//Change to proper testing of async useEffect
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+const testImg = 'test-img.jpg';
+const exampleUser: IUser = {
+  id: 1,
+  name: 'user',
+  surname: 'user',
+  email: 'user@gmail.com',
+  password: 'hash',
+  avatar: testImg,
+};
+
 describe('Avatar', () => {
   afterAll(cleanup);
 
-  const renderAvatarImage = (userID) => {
-    render(<Avatar userID={userID} />);
+  const renderAvatarImage = () => {
+    render(
+      <Provider store={store}>
+        <Avatar />
+        );
+      </Provider>,
+    );
   };
 
   it('Renders without crash', () => {
-    renderAvatarImage('1');
-    expect(screen.getByRole('img')).toBeTruthy();
+    renderAvatarImage();
+    expect(screen.getByRole('img')).toBeInTheDocument();
   });
 
   it('Image should have alt = "User avatar"', async () => {
-    renderAvatarImage('1');
+    renderAvatarImage();
     const avatar = screen.getByRole('img');
 
-    await sleep(200);
     expect(avatar).toHaveAttribute('alt', 'User avatar');
   });
 
-  it('Should set backup image if fetch fails', async () => {
-    renderAvatarImage('a');
+  it('Should render with default image source', async () => {
+    renderAvatarImage();
     const avatar = screen.getByRole('img');
 
-    await sleep(200);
     expect(avatar).toHaveAttribute('src', defaultAvatarImage);
+  });
+
+  it('Should set image source to user avatar after logging in', () => {
+    store.dispatch(login([exampleUser]));
+    renderAvatarImage();
+
+    const avatar = screen.getByRole('img');
+    expect(avatar).toHaveAttribute('src', testImg);
   });
 });
