@@ -4,7 +4,7 @@ import { Avatar } from '../Avatar/Avatar';
 export const LoggedDiv = ({ userID, userName }) => {
   return (
     <LogDiv>
-      <Avatar userID={userID} />
+      <Avatar />
       <UserName>{userName}</UserName>
     </LogDiv>
   );
