@@ -5,7 +5,7 @@ export interface InputProps {
   type: string;
   placeholder?: string;
   inputValue?: string;
-  onChange?: () => void;
+  onChange?: (event) => void;
   isRequired?: boolean;
 }
 
