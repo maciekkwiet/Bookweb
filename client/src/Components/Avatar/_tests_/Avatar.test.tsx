@@ -1,19 +1,60 @@
-import { screen, render } from '@testing-library/react';
-import { AvatarComponent } from '../AvatarStyles';
+import { screen, render, cleanup } from '@testing-library/react';
+import { Provider } from 'react-redux';
+
+import Avatar, { defaultAvatarImage } from '../Avatar';
+import { IUser, login } from '../../../Features/User/UserSlice';
+import store from '../../../app/store';
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+const testImg = 'test-img.jpg';
+const exampleUser: IUser = {
+  id: 1,
+  name: 'user',
+  surname: 'user',
+  email: 'user@gmail.com',
+  password: 'hash',
+  avatar: testImg,
+};
 
 describe('Avatar', () => {
-  const renderImage = (userID) => {
-    render(<AvatarComponent src={`http://localhost:8080/api/users/${userID}`} alt="User avatar" />);
+  afterAll(cleanup);
+
+  const renderAvatarImage = () => {
+    render(
+      <Provider store={store}>
+        <Avatar />
+        );
+      </Provider>,
+    );
   };
 
   it('Renders without crash', () => {
-    renderImage('39');
+    renderAvatarImage();
+    expect(screen.getByRole('img')).toBeInTheDocument();
   });
 
-  it('Image should have alt = "User avatar", src = "..api../39" for user with ID=39', () => {
-    renderImage('39');
+  it('Image should have alt = "User avatar"', async () => {
+    renderAvatarImage();
     const avatar = screen.getByRole('img');
+
     expect(avatar).toHaveAttribute('alt', 'User avatar');
-    expect(avatar).toHaveAttribute('src', 'http://localhost:8080/api/users/39');
+  });
+
+  it('Should render with default image source', async () => {
+    renderAvatarImage();
+    const avatar = screen.getByRole('img');
+
+    expect(avatar).toHaveAttribute('src', defaultAvatarImage);
+  });
+
+  it('Should set image source to user avatar after logging in', () => {
+    store.dispatch(login([exampleUser]));
+    renderAvatarImage();
+
+    const avatar = screen.getByRole('img');
+    expect(avatar).toHaveAttribute('src', testImg);
   });
 });

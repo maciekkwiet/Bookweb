@@ -1,11 +1,16 @@
 import { Theme } from './Theme';
 import { AppRoutes } from './routing/AppRoutes';
+import { Provider } from 'react-redux';
+import store from './app/store';
+
 
 function App() {
   return (
-    <Theme>
-      <AppRoutes />
-    </Theme>
+    <Provider store={store}>
+      <Theme>
+        <AppRoutes />
+      </Theme>
+    </Provider>
   );
 }
 

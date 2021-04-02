@@ -1,21 +1,20 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import { AvatarComponent } from './AvatarStyles';
+import { IUser, selectUser } from '../../Features/User/UserSlice';
 
-export interface avatarProps {
-  userID: string;
-}
+export const defaultAvatarImage = 'https://data.whicdn.com/images/346235402/original.jpg';
 
-export const Avatar: FC<avatarProps> = ({ userID }) => {
-  const [avatarImage, setAvatarImage] = useState('');
+export const Avatar: FC = () => {
+  const [avatarImage, setAvatarImage] = useState(defaultAvatarImage);
+  const user: IUser = useSelector(selectUser);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/users/${userID}`)
-      .then((res) => res.json())
-      .then((user) => {
-        setAvatarImage(user[0].avatar);
-      })
-      .catch((err) => setAvatarImage('https://data.whicdn.com/images/346235402/original.jpg'));
-  }, [userID, avatarImage]);
+    if (user) {
+      setAvatarImage(user[0].avatar);
+    }
+  }, [user]);
 
   return <AvatarComponent src={avatarImage} alt="User avatar" />;
 };

@@ -3,16 +3,17 @@ import 'jest-styled-components';
 import { ThemeProvider } from 'styled-components';
 
 import { theme } from '../../../Theme';
-import { BigLabel } from '../BigLabel';
+import { BoxBooks } from '../BoxBooks';
 
-describe('BigLabel', () => {
+describe('BoxBooks', () => {
   it('render without crash', () => {
     const mockCallback = jest.fn();
 
     render(
       <ThemeProvider theme={theme}>
-        <BigLabel>Tytuł książki/Autor/Dodaj książkę</BigLabel>
+        <BoxBooks></BoxBooks>
       </ThemeProvider>,
     );
   });
+
 });

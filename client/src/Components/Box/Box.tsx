@@ -1,5 +1,14 @@
 import { FC } from 'react';
-import { BoxComponent, ImgContainer, ContentContainer, BookParagraph, BookTitleParagraph, BoxBookReview, BoxReadMore, BookImage } from './BoxStyles';
+import {
+  BoxComponent,
+  ImgContainer,
+  ContentContainer,
+  BookParagraph,
+  BookTitleParagraph,
+  BoxBookReview,
+  BoxReadMore,
+  BookImage,
+} from './BoxStyles';
 
 export type BoxComponentProps = {
   title: string;
@@ -7,11 +16,10 @@ export type BoxComponentProps = {
   rate: number;
   review: string;
   image: string;
-}
+};
 
 export const Box: FC<BoxComponentProps> = ({ title, author, rate, review, image }) => {
-
-  const readMoreHandler = () => { };
+  const readMoreHandler = () => {};
 
   return (
     <BoxComponent data-testid="BoxId">
@@ -24,7 +32,9 @@ export const Box: FC<BoxComponentProps> = ({ title, author, rate, review, image 
         <BookParagraph>Średnia ocena: {rate}</BookParagraph>
         <BoxBookReview>
           {review}
-          <BoxReadMore onClick={readMoreHandler} data-testid="BoxReadMoreId">czytaj więcej</BoxReadMore>
+          <BoxReadMore onClick={readMoreHandler} data-testid="BoxReadMoreId">
+            czytaj więcej
+          </BoxReadMore>
         </BoxBookReview>
       </ContentContainer>
     </BoxComponent>

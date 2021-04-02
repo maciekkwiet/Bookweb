@@ -8,6 +8,8 @@ export const theme = {
     readMore: `rgb(61,90,128)`,
     checkkedStars: 'C92523',
     uncheckedStars: '#e4e5e9',
+    green: '#008000',
+    lightGray: '#505050',
   },
   backgrounds: {
     bright: `rgb(242,243,244)`,
