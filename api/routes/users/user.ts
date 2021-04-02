@@ -80,9 +80,7 @@ export const updateUser = async (req: Request, res: Response) => {
 };
 
 export const registerUser = async (req: Request, res: Response) => {
-
   try {
-   
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.status(422).json({ errors: errors.array() });
@@ -90,10 +88,10 @@ export const registerUser = async (req: Request, res: Response) => {
     }
     //1. destructure the req.body (name, email, password)
     const { name, email, password } = req.body;
-  
+
     //2. check if user exist (if user exist then throw error)
     const user = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
- 
+
     if (user.rows.length !== 0) {
       return res.status(401).send('User already exist');
     }
@@ -108,11 +106,9 @@ export const registerUser = async (req: Request, res: Response) => {
       email,
       bcryptPassword,
     ]);
-    res.json(newUser.rows[0]);
+    newUser.rows[0].token = jwtGenerator(newUser.rows[0].id);
 
-    //5. generating our jwt token
-    const token = jwtGenerator(newUser.rows[0].id);
-    res.json({ token });
+    res.json(newUser.rows[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
