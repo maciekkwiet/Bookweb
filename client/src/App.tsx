@@ -5,12 +5,11 @@ import store from './app/store';
 
 function App() {
   return (
-    <h1>TEST JS</h1>
-    // <Provider store={store}>
-    //   <Theme>
-    //     <AppRoutes />
-    //   </Theme>
-    // </Provider>
+    <Provider store={store}>
+      <Theme>
+        <AppRoutes />
+      </Theme>
+    </Provider>
   );
 }
 
