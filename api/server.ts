@@ -29,7 +29,7 @@ app.use(morgan('tiny', { stream: myStream }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const publicPath = path.join(__dirname, '../', '/client', '/public');
+const publicPath = path.join(__dirname, '../', '/client', '/build');
 
 app.use(express.static(path.join(publicPath)));
 
