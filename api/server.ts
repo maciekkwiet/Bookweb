@@ -29,7 +29,9 @@ app.use(morgan('tiny', { stream: myStream }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, 'public')));
+const publicPath = path.join(__dirname, '../', '/client', '/public');
+
+app.use(express.static(path.join(publicPath)));
 
 app.all('/*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
