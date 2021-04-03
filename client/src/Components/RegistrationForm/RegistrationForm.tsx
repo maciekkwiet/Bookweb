@@ -8,7 +8,6 @@ import {
   RegistrationErrorMessage,
 } from './RegistrationFormStyles';
 
-
 interface Values {
   name: string;
   email: string;
@@ -16,19 +15,13 @@ interface Values {
   confirmPassword: string;
 }
 const SignupSchema = Yup.object().shape({
-  name: Yup.string()
-    .required('Nazwa użytkownika jest wymagana!'),
-  email: Yup.string()
-    .email("Niewłaściwy adres email")
-    .required("Email jest wymagany!"),
-  password: Yup.string()
-    .min(8, 'Hasło musi mieś conajmniej 8 znaków!')
-    .required('Hasło jest wymagane!'),
+  name: Yup.string().required('Nazwa użytkownika jest wymagana!'),
+  email: Yup.string().email('Niewłaściwy adres email').required('Email jest wymagany!'),
+  password: Yup.string().min(8, 'Hasło musi mieś conajmniej 8 znaków!').required('Hasło jest wymagane!'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), ''], 'Hasło musi się zgadzać!')
     .required('Powtórzenie hasła jest wyamgane!'),
 });
-
 
 type RegistrationFormType = {
   onSubmit: (values: Values) => void;
@@ -64,8 +57,10 @@ export const RegistrationForm = ({ onSubmit }: RegistrationFormType) => {
           type="name"
           onChange={formik.handleChange}
           data-testid="inputId"
-          value={formik.values.name} />
-        <RegistrationErrorMessage>{formik.errors.name && formik.touched.name ? formik.errors.name : null}
+          value={formik.values.name}
+        />
+        <RegistrationErrorMessage>
+          {formik.errors.name && formik.touched.name ? formik.errors.name : null}
         </RegistrationErrorMessage>
 
         <RegistrationInput
@@ -132,7 +127,6 @@ export const RegistrationForm = ({ onSubmit }: RegistrationFormType) => {
 //     });
 //   setSubmitting(false);
 // }
-
 
 // onSubmit={(
 //   values: Values,

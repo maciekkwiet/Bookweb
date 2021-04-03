@@ -88,7 +88,7 @@ export const registerUser = async (req: Request, res: Response) => {
     }
     //1. destructure the req.body (name, email, password)
     const { name, email, password } = req.body;
-console.log(req.body)
+    console.log(req.body);
     //2. check if user exist (if user exist then throw error)
     const user = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
     if (user.rows.length !== 0) {
