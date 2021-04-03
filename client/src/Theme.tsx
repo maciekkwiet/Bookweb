@@ -8,6 +8,8 @@ export const theme = {
     readMore: `rgb(61,90,128)`,
     checkkedStars: 'C92523',
     uncheckedStars: '#e4e5e9',
+    green: '#008000',
+    lightGray: '#505050',
   },
   backgrounds: {
     bright: `rgb(242,243,244)`,
@@ -21,6 +23,8 @@ export const theme = {
     logo: `Esteban`,
     sentence: `Clicker Script`,
     lightGray: '#505050',
+    headerTitleFont: 'Esteban',
+    headerTitleColor: '#3D5A80',
   },
   h2: {
     fontSize: `3vh`,
@@ -28,6 +32,11 @@ export const theme = {
   },
   shadows: {
     inset: `inset 0px 4px 4px rgba(0, 0, 0, 0.25)`,
+  },
+  size: {
+    xs: `320px`,
+    sm: `800px`,
+    lg: `1200px`,
   },
 };
 

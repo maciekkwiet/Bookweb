@@ -1,13 +1,15 @@
 import { Theme } from './Theme';
 import { AppRoutes } from './routing/AppRoutes';
-import { Navbar } from './Components/Navbar/Navbar';
+import { Provider } from 'react-redux';
+import store from './app/store';
 
 function App() {
   return (
-    <Theme>
-      <Navbar />
-      <AppRoutes />
-    </Theme>
+    <Provider store={store}>
+      <Theme>
+        <AppRoutes />
+      </Theme>
+    </Provider>
   );
 }
 
