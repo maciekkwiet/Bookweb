@@ -30,7 +30,7 @@ export const Navbar = () => {
               <NavLinks to="/top">Top 100</NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinks to="/catalog">Katalog księgarń i bibliotek</NavLinks>
+              <NavLinks to="/providers">Katalog księgarń i bibliotek</NavLinks>
             </NavItem>
           </NavMenu>
         </NavContainer>
