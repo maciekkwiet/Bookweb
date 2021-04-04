@@ -3,6 +3,7 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { AppRoute } from './AppRoute.enum';
 import { HomePage } from '../Pages/HomePage';
 import { LoginPage } from '../Pages/LoginPage';
+import { MyBooksPage } from '../Pages/MyBooksPage';
 import { RankingPage } from '../Pages/RankingPage';
 import { AuthorPage } from '../Pages/AuthorPage';
 import { BookPage } from '../Pages/BookPage';
@@ -16,6 +17,7 @@ export const AppRoutes = () => {
       <Switch>
         <Route path={AppRoute.Home} exact component={HomePage} />
         <Route path={AppRoute.Login} component={LoginPage} />
+        <Route path={AppRoute.MyBooks} component={MyBooksPage} />
         <Route path={AppRoute.Ranking} component={RankingPage} />
         <Route path={AppRoute.Author} component={AuthorPage} />
         <Route path={AppRoute.Book} component={BookPage} />
