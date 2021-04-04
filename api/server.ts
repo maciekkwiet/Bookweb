@@ -14,7 +14,10 @@ const myStream = {
     logger.log('info', text);
   },
 };
-const apiProxy = createProxyMiddleware('/api', { target: 'http://localhost:8080', changeOrigin: true });
+const apiProxy = createProxyMiddleware('/api', {
+  target: 'https://books-web-portal.herokuapp.com/',
+  changeOrigin: true,
+});
 
 const errorMiddleware = require('./middleware/errorMiddleware');
 const mountRoutes = require('./routes');
