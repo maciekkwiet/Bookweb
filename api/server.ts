@@ -43,7 +43,7 @@ app.all('/*', (req, res, next) => {
 app.disable('x-powered-by');
 
 mountRoutes(app);
-app.use(apiProxy);
+app.use('/api', apiProxy);
 
 if (process.env.NODE_ENV == undefined) {
   app.use(express.static(path.join(__dirname, '../', '/client', '/build')));
