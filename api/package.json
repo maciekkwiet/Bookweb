@@ -5,7 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "dev": "ts-node-dev --clear -r tsconfig-paths/register ./server.ts ",
-    "start": "ts-node-dev --inspect --clear -r tsconfig-paths/register ./server.ts ",
+    "start": "ts-node-dev ./server.ts ",
     "debug": "ts-node-dev --inspect --clear -r tsconfig-paths/register ./server.ts ",
     "test": "jest"
   },

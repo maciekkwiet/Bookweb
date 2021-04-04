@@ -9,4 +9,4 @@ export default {
   decorators: [(Story: any) => <Story />],
 };
 
-export const PrimaryBoxBooks: Story = () => <BoxBooks />
+export const PrimaryBoxBooks: Story = () => <BoxBooks />;
