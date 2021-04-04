@@ -6,6 +6,7 @@ import * as bodyParser from 'body-parser';
 import * as morgan from 'morgan';
 import * as http from 'http';
 import * as winston from 'winston';
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const logger = winston.add(new winston.transports.File({ filename: 'logfile.log', handleExceptions: true }));
 const myStream = {
@@ -13,6 +14,7 @@ const myStream = {
     logger.log('info', text);
   },
 };
+const apiProxy = createProxyMiddleware('/api', { target: 'http://localhost:8080', changeOrigin: true });
 
 const errorMiddleware = require('./middleware/errorMiddleware');
 const mountRoutes = require('./routes');
@@ -26,16 +28,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(morgan('tiny', { stream: myStream }));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../', '/client', '/build')));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../', '/client', '/build', '/index.html'));
-  });
-}
+app.use(express.json());
 
 app.all('/*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -47,6 +40,15 @@ app.all('/*', (req, res, next) => {
 app.disable('x-powered-by');
 
 mountRoutes(app);
+app.use(apiProxy);
+
+if (process.env.NODE_ENV == undefined) {
+  app.use(express.static(path.join(__dirname, '../', '/client', '/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../', '/client', '/build', '/index.html'));
+  });
+}
 app.use(errorMiddleware);
 
 app.set('port', port);
