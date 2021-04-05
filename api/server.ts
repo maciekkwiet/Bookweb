@@ -43,7 +43,6 @@ app.all('/*', (req, res, next) => {
 app.disable('x-powered-by');
 
 mountRoutes(app);
-app.use('/api', apiProxy);
 
 if (process.env.NODE_ENV == undefined) {
   app.use(express.static(path.join(__dirname, '../', '/client', '/build')));
@@ -51,6 +50,7 @@ if (process.env.NODE_ENV == undefined) {
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../', '/client', '/build', '/index.html'));
   });
+  app.use('/api', apiProxy);
 }
 app.use(errorMiddleware);
 
