@@ -17,8 +17,10 @@ interface Values {
 const SignupSchema = Yup.object().shape({
   name: Yup.string().required('Nazwa użytkownika jest wymagana!'),
   email: Yup.string().email('Niewłaściwy adres email').required('Email jest wymagany!'),
-  password: Yup.string().min(1, 'Hasło musi mieś conajmniej 8 znaków!').required('Hasło jest wymagane!'),
-  confirmPassword: Yup.string().required('Powtórzenie hasła jest wyamgane!'),
+  password: Yup.string().min(8, 'Hasło musi mieś conajmniej 8 znaków!').required('Hasło jest wymagane!'),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), ''], 'Hasło musi się zgadzać!')
+    .required('Powtórzenie hasła jest wyamgane!'),
 });
 
 type RegistrationFormType = {
