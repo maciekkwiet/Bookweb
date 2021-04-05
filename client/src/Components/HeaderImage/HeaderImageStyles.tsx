@@ -34,8 +34,8 @@ export const SecondTitle = styled.h1`
   margin: 2%;
   font-size: 45px;
   font-weight: normal;
-  font-family: ${(props) => props.theme.fonts.default} @media only screen and
-    (max-width: ${(props) => props.theme.size.sm}) {
+  font-family: ${(props) => props.theme.fonts.default};
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
     font-size: 35px;
   }
   @media only screen and (max-width: ${(props) => props.theme.size.xs}) {
