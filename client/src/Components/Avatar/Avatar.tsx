@@ -2,19 +2,19 @@ import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { AvatarComponent } from './AvatarStyles';
-import { IUser, selectUser } from '../../Features/User/UserSlice';
+// import { User } from '../../Actions/userSlice';
 
 export const defaultAvatarImage = 'https://data.whicdn.com/images/346235402/original.jpg';
 
 const Avatar: FC = () => {
   const [avatarImage, setAvatarImage] = useState(defaultAvatarImage);
-  const user: IUser = useSelector(selectUser);
+  //const user: IUser = useSelector(userReducer);
 
-  useEffect(() => {
-    if (user) {
-      setAvatarImage(user[0].avatar);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     setAvatarImage(user[0].avatar);
+  //   }
+  // }, [user]);
 
   return <AvatarComponent src={avatarImage} alt="User avatar" />;
 };

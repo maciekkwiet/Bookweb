@@ -8,7 +8,6 @@ import {
   RegistrationErrorMessage,
 } from './RegistrationFormStyles';
 
-
 interface Values {
   name: string;
   email: string;
@@ -16,19 +15,11 @@ interface Values {
   confirmPassword: string;
 }
 const SignupSchema = Yup.object().shape({
-  name: Yup.string()
-    .required('Nazwa użytkownika jest wymagana!'),
-  email: Yup.string()
-    .email("Niewłaściwy adres email")
-    .required("Email jest wymagany!"),
-  password: Yup.string()
-    .min(8, 'Hasło musi mieś conajmniej 8 znaków!')
-    .required('Hasło jest wymagane!'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), ''], 'Hasło musi się zgadzać!')
-    .required('Powtórzenie hasła jest wyamgane!'),
+  name: Yup.string().required('Nazwa użytkownika jest wymagana!'),
+  email: Yup.string().email('Niewłaściwy adres email').required('Email jest wymagany!'),
+  password: Yup.string().min(1, 'Hasło musi mieś conajmniej 8 znaków!').required('Hasło jest wymagane!'),
+  confirmPassword: Yup.string().required('Powtórzenie hasła jest wyamgane!'),
 });
-
 
 type RegistrationFormType = {
   onSubmit: (values: Values) => void;
@@ -64,8 +55,10 @@ export const RegistrationForm = ({ onSubmit }: RegistrationFormType) => {
           type="name"
           onChange={formik.handleChange}
           data-testid="inputId"
-          value={formik.values.name} />
-        <RegistrationErrorMessage>{formik.errors.name && formik.touched.name ? formik.errors.name : null}
+          value={formik.values.name}
+        />
+        <RegistrationErrorMessage>
+          {formik.errors.name && formik.touched.name ? formik.errors.name : null}
         </RegistrationErrorMessage>
 
         <RegistrationInput
@@ -112,45 +105,3 @@ export const RegistrationForm = ({ onSubmit }: RegistrationFormType) => {
     </RegistrationFormContainer>
   );
 };
-
-// (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-//   setSubmitting(true);
-//   fetch('http://localhost:8080/api/users/register', {
-//     method: 'post',
-//     mode: 'no-cors',
-//     headers: {
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//       values,
-//     }),
-//   })
-//     .then((res) => res.json())
-//     .then((result) => {
-//       alert(result);
-//     });
-//   setSubmitting(false);
-// }
-
-
-// onSubmit={(
-//   values: Values,
-//   { setSubmitting }: FormikHelpers<Values>
-// ) => {
-//   setSubmitting(true);
-//   const { name, email, password } = values;
-//   axios.post('http://localhost:8080/api/users/register', {
-//     name,
-//     email,
-//     password,
-//   })
-//     .then(res => {
-//       alert(res.data)
-//     }, (error) => {
-//       alert(error);
-//     })
-
-//   setSubmitting(false);
-
-// }}

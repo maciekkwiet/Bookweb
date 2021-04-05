@@ -2,7 +2,7 @@ import { screen, render, cleanup } from '@testing-library/react';
 import { Provider } from 'react-redux';
 
 import Avatar, { defaultAvatarImage } from '../Avatar';
-import { IUser, login } from '../../../Features/User/UserSlice';
+import { IUser, login } from '../../../Actions/userSlice';
 import store from '../../../app/store';
 
 function sleep(ms) {

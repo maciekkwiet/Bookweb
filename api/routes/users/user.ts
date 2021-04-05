@@ -80,6 +80,7 @@ export const updateUser = async (req: Request, res: Response) => {
 };
 
 export const registerUser = async (req: Request, res: Response) => {
+  
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -91,23 +92,26 @@ export const registerUser = async (req: Request, res: Response) => {
 
     //2. check if user exist (if user exist then throw error)
     const user = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-
+    console.log('6')
     if (user.rows.length !== 0) {
       return res.status(401).send('User already exist');
     }
+    console.log('1')
 
     //3. Bcrypt the user password
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(password, salt);
 
     //4. enter the new user inside our db
+   
     const newUser = await pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *', [
       name,
       email,
       bcryptPassword,
     ]);
+    console.log('2')
     newUser.rows[0].token = jwtGenerator(newUser.rows[0].id);
-
+console.log('newUser',newUser)
     res.json(newUser.rows[0]);
   } catch (err) {
     console.error(err.message);
