@@ -11,7 +11,7 @@ export const RegisterPage = () => {
   const { addToast } = useToasts();
   const status = useSelector((state: RootState) => state.user.status);
 
-  const onSubmitLoginForm = (values) => {
+  const onSubmit = (values) => {
     dispatch(signupUser(values));
   };
 
@@ -32,7 +32,7 @@ export const RegisterPage = () => {
 
   return (
     <div>
-      <RegistrationForm onSubmit={onSubmitLoginForm} />
+      <RegistrationForm onSubmit={onSubmit} />
     </div>
   );
 };
