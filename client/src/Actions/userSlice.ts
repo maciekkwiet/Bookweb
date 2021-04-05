@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export type User = {
+export type UserType = {
   id: number;
   email: string;
   password: string;
@@ -11,7 +11,7 @@ export type User = {
 };
 
 type UserState = {
-  user: User | null;
+  user: UserType | null;
   status: string | null;
 };
 
@@ -48,7 +48,7 @@ const userReducer = createSlice({
     [signupUser?.pending.toString()]: (state) => {
       state.status = 'loading';
     },
-    [signupUser?.fulfilled.toString()]: (state, action: PayloadAction<User>) => {
+    [signupUser?.fulfilled.toString()]: (state, action: PayloadAction<UserType>) => {
       const {
         payload: { id, email, password, name, surname, avatar },
       } = action;
