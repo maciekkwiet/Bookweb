@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 
 import { theme } from '../../Theme';
-import { Input } from './StarStyles';
+import { Wrapper, Input } from './StarStyles';
 
 const StarRating = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   return (
-    <div>
+    <Wrapper>
       {[...Array(5)].map((star, i) => {
         const ratingValue = i + 1;
         return (
@@ -24,7 +24,7 @@ const StarRating = () => {
           </label>
         );
       })}
-    </div>
+    </Wrapper>
   );
 };
 
