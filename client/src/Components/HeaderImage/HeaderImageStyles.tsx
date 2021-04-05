@@ -15,12 +15,12 @@ export const HeaderImageComponent = styled.div`
 `;
 
 export const FirstTitle = styled.h1`
-  color: white;
+  color: ${(props) => props.theme.colors.secondary};
   align-self: flex-start;
   margin: 2%;
   font-size: 64px;
   font-style: normal;
-  font-family: Clicker Script;
+  font-family: ${(props) => props.theme.fonts.sentence};
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
     font-size: 40px;
   }
@@ -29,13 +29,13 @@ export const FirstTitle = styled.h1`
   } ;
 `;
 export const SecondTitle = styled.h1`
-  color: white;
+  color: ${(props) => props.theme.colors.secondary};
   align-self: flex-end;
   margin: 2%;
   font-size: 45px;
   font-weight: normal;
-  font-family: Montserrat;
-  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+  font-family: ${(props) => props.theme.fonts.default} @media only screen and
+    (max-width: ${(props) => props.theme.size.sm}) {
     font-size: 35px;
   }
   @media only screen and (max-width: ${(props) => props.theme.size.xs}) {
