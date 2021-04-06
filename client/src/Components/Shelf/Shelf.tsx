@@ -1,8 +1,8 @@
 
 import { ShelfComponent, ShelfTitle, ShelfImage } from './ShelfStyles';
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Box, BoxComponentProps } from '../Box/Box';
-import { useState, useEffect } from 'react';
+
 
 export type ShelfComponentProps = {
   title: string;
