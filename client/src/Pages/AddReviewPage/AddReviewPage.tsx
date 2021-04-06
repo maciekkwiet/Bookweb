@@ -1,5 +1,9 @@
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+import axios from 'axios';
 import { BigLabel } from '../../Components/BigLabel/BigLabel';
 import { BookDescription } from '../../Components/BookDescription/BookDescription';
+import StarRating from '../../Components/Star/StarRating';
 import { Button } from '../../Components/Button/Button';
 import {
   Flex,
@@ -11,7 +15,6 @@ import {
   ReviewInput,
   AddReview,
 } from '../AddReviewPage/AddReviewStyles';
-import StarRating from '../../Components/Star/StarRating';
 
 const BookDescriptionProps = {
   image: 'https://i.pinimg.com/originals/b8/97/bb/b897bb0a2205457970b91ce831b04756.jpg',
@@ -22,15 +25,39 @@ const BookDescriptionProps = {
   averageRating: '7.5',
 };
 
-const basePropsData = {
-  placeholder: 'Napisz co myślisz o tej książce....',
-};
+export const AddReviewPage = ({ id = '12' }) => {
+  //stan dla danych na bcend useState({})
+  //<Array<smth>>
+  const [bookData, setBookData] = useState([]);
 
-export const AddReviewPage = ({ title = 'trza plugnac to pod bekend' }) => {
+  const [content, setContent] = useState('');
+  // const history = useHistory();
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const userReview = { content };
+
+  //   fetch('http://localhost:8080/reviews/review', {
+  //     method: 'POST',
+  //     headers: {"Content-Type": "application/json"},
+  //     body: JSON.stringify(userReview),
+  //   }).then(() => {
+  //     history.push('/')
+  //   })
+  // }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios('http://localhost:8080/api/books/' + id);
+      setBookData(result.data);
+    };
+    fetchData();
+  }, []);
+
   return (
     <Flex>
       <Title>
-        <BigLabel title={title}></BigLabel>
+        <BigLabel title={'a'}></BigLabel>
       </Title>
       <Description>
         <BookDescription {...BookDescriptionProps} />
@@ -40,19 +67,14 @@ export const AddReviewPage = ({ title = 'trza plugnac to pod bekend' }) => {
         <StarRating />
       </Rating>
       <Review>
-        <ReviewInput {...basePropsData}></ReviewInput>
+        <ReviewInput placeholder="Napisz recenzje..." onChange={(e) => setContent(e.target.value)}></ReviewInput>
       </Review>
       <AddReview>
-        <Button
-          children="Opublikuj"
-          onClick={() => {
-            alert('Buuuu! Nic tu nie ma!');
-          }}
-        ></Button>
+        <Button children="Opublikuj" onClick={() => console.log({ bookData })}></Button>
       </AddReview>
     </Flex>
   );
 };
 
-// Jak zmienic tlo oraz jak zmienic szerokosc w description
+// Zmienic tlo i zmienic szerokosc w description
 // Posprawdzac czy nazwy column w tabelach zgadzaja sie z tymi w plikach
