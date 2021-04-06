@@ -1,12 +1,15 @@
+import { BigLabel } from '../../Components/BigLabel/BigLabel';
+import { BookDescription } from '../../Components/BookDescription/BookDescription';
+import { Button } from '../../Components/Button/Button';
 import {
-  Grid,
-  BookTitle,
-  BookInfo,
-  YourRating,
+  Flex,
+  Title,
+  Description,
+  Rating,
   Text,
-  BookReview,
-  ReviewButton,
-  Cheat,
+  Review,
+  ReviewInput,
+  AddReview,
 } from '../AddReviewPage/AddReviewStyles';
 import StarRating from '../../Components/Star/StarRating';
 
@@ -20,28 +23,33 @@ const BookDescriptionProps = {
 };
 
 const basePropsData = {
-  type: 'text',
   placeholder: 'Napisz co myślisz o tej książce....',
 };
 
 export const AddReviewPage = ({ title = 'trza plugnac to pod bekend' }) => {
   return (
-    <Grid>
-      <BookTitle title={title}></BookTitle>
-      <Cheat>
-        <BookInfo {...BookDescriptionProps} />
-      </Cheat>
-      <YourRating>
-        <Text>Twoja ocena</Text>
+    <Flex>
+      <Title>
+        <BigLabel title={title}></BigLabel>
+      </Title>
+      <Description>
+        <BookDescription {...BookDescriptionProps} />
+      </Description>
+      <Rating>
+        <Text>Twoja ocena:</Text>
         <StarRating />
-      </YourRating>
-      <BookReview {...basePropsData}></BookReview>
-      <ReviewButton
-        children="Opublikuj"
-        onClick={() => {
-          alert('Buuuu! Nic tu nie ma!');
-        }}
-      ></ReviewButton>
-    </Grid>
+      </Rating>
+      <Review>
+        <ReviewInput {...basePropsData}></ReviewInput>
+      </Review>
+      <AddReview>
+        <Button
+          children="Opublikuj"
+          onClick={() => {
+            alert('Buuuu! Nic tu nie ma!');
+          }}
+        ></Button>
+      </AddReview>
+    </Flex>
   );
 };
