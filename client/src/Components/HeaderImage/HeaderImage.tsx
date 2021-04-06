@@ -1,12 +1,10 @@
-import { HeaderImageComponent, FirstTitle, SecondTitle } from './HeaderImageStyles';
-// import { AnonymousDiv } from './AnonymousDiv';
-// import { LoggedDiv } from './LoggedDiv';
+import { HeaderImageComponent, Title, Subtitle } from './HeaderImageStyles';
 
 export const HeaderImage = () => {
   return (
     <HeaderImageComponent>
-      <FirstTitle>“Nieważne ile masz książek, ale jakie...”</FirstTitle>
-      <SecondTitle>U nas znajdziesz swoje ulubione!</SecondTitle>
+      <Title>“Nieważne ile masz książek, ale jakie...”</Title>
+      <Subtitle>U nas znajdziesz swoje ulubione!</Subtitle>
     </HeaderImageComponent>
   );
 };

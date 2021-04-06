@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import image from './bookBackground.png';
 
 export const HeaderImageComponent = styled.div`
@@ -14,7 +15,7 @@ export const HeaderImageComponent = styled.div`
   }
 `;
 
-export const FirstTitle = styled.h1`
+export const Title = styled.h1`
   color: ${(props) => props.theme.colors.secondary};
   align-self: flex-start;
   margin: 2%;
@@ -28,7 +29,7 @@ export const FirstTitle = styled.h1`
     font-size: 25px;
   } ;
 `;
-export const SecondTitle = styled.h1`
+export const Subtitle = styled.h1`
   color: ${(props) => props.theme.colors.secondary};
   align-self: flex-end;
   margin: 2%;
