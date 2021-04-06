@@ -53,3 +53,6 @@ export const AddReviewPage = ({ title = 'trza plugnac to pod bekend' }) => {
     </Flex>
   );
 };
+
+// Jak zmienic tlo oraz jak zmienic szerokosc w description
+// Posprawdzac czy nazwy column w tabelach zgadzaja sie z tymi w plikach
