@@ -9,4 +9,4 @@ export default {
   decorators: [(Story: any) => <Story />],
 };
 
-export const PrimarySearchingBar: Story = () => <SearchingBar />;
+export const PrimarySearchingBar: Story = () => <SearchingBar onSubmit={() => console.log('onSubmit')} />;
