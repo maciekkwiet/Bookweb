@@ -31,7 +31,7 @@ export const RegisterPage = () => {
     }
   }, [status]);
 
-  const handleChange = (value): number => {
+  const handleChange = (value) => {
     console.log(value);
   };
 
