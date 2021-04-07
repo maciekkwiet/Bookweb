@@ -4,16 +4,25 @@ import { FaStar } from 'react-icons/fa';
 import { theme } from '../../Theme';
 import { Input } from './StarStyles';
 
-const StarRating = () => {
+const StarRating = ({ getNumberOfStars }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+
   return (
     <div>
       {[...Array(5)].map((star, i) => {
         const ratingValue = i + 1;
         return (
           <label key={i}>
-            <Input type="radio" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)} />
+            <Input
+              type="radio"
+              name="rating"
+              value={ratingValue}
+              onClick={() => {
+                setRating(ratingValue);
+                getNumberOfStars(ratingValue);
+              }}
+            />
             <FaStar
               className="star"
               color={ratingValue <= (hover || rating) ? theme.colors.checkkedStars : theme.colors.uncheckedStars}

@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useToasts } from 'react-toast-notifications';
 
+import StarRating from '../Components/Star/StarRating';
 import { RegistrationForm } from '../Components/RegistrationForm/RegistrationForm';
 import { signupUser } from '../Actions/userSlice';
 import { RootState } from '../app/store';
@@ -30,9 +31,14 @@ export const RegisterPage = () => {
     }
   }, [status]);
 
+  const handleChange = (value): number => {
+    console.log(value);
+  };
+
   return (
     <div>
-      <RegistrationForm onSubmit={onSubmit} />
+      <StarRating getNumberOfStars={handleChange} />
+      {/* <RegistrationForm onSubmit={onSubmit} /> */}
     </div>
   );
 };

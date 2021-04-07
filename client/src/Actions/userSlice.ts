@@ -11,8 +11,8 @@ export type UserType = {
 };
 
 type UserState = {
-  user: UserType | null;
-  status: string | null;
+  user?: UserType;
+  status?: string;
 };
 
 type SignupUserType = { name: string; email: string; password: string };
@@ -38,7 +38,7 @@ export const signupUser = createAsyncThunk(
   },
 );
 
-const initialState = { user: null, status: null } as UserState;
+const initialState = {} as UserState;
 
 const userReducer = createSlice({
   name: 'user',
@@ -56,7 +56,6 @@ const userReducer = createSlice({
       state.status = 'success';
     },
     [signupUser?.rejected.toString()]: (state) => {
-      state.user = null;
       state.status = 'failed';
     },
   },

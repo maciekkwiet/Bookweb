@@ -1,10 +1,11 @@
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ToastProvider } from 'react-toast-notifications';
+
 import { Theme } from './Theme';
 import { AppRoutes } from './routing/AppRoutes';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ToastProvider } from 'react-toast-notifications';
 
 function App() {
   const queryClient = new QueryClient();
