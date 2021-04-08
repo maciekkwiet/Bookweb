@@ -14,28 +14,29 @@ export const BoxComponent = styled.div`
   justify-content: space-between;
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
     font-size: 12px;
+    flex-direction: column;
   } ;
 `;
 
 export const ImgContainer = styled.div`
   box-sizing: border-box;
-  flex-basis: 40%;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
+  flex-basis: 50%;
+  height: auto;
   media only screen and (max-width: ${(props) => props.theme.size.sm}) {
     font-size: 12px;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
 export const BookImage = styled.img`
   width: 100%;
-  height: 100%;
 `;
 
 export const ContentContainer = styled.div`
   box-sizing: border-box;
   padding: 1%;
-  flex-basis: 75%;
+  flex-basis: 100%;
   display: flex;
   flex-direction: column;
 `;
