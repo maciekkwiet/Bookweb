@@ -24,7 +24,13 @@ export const UserActivityBox: FC<UserActivityBoxProps> = ({ title, author, rate,
         <ActivityTitle> {username} ocenił ksiązkę </ActivityTitle>
         <StarRating />
       </RatingDiv>
-      <Box title="title" author="author" rate={5} review="review" image="image"></Box>
+      <Box
+        title="Securing DevOps"
+        author="Julien Vehent"
+        rate={5}
+        review="An application running in the cloud can benefit from incredible efficiencies "
+        image="https://i.pinimg.com/originals/b8/97/bb/b897bb0a2205457970b91ce831b04756.jpg"
+      ></Box>
     </ActivityBox>
   );
 };
