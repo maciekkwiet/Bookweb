@@ -6,6 +6,7 @@ export const ActivityBox = styled(TextCardComponent)`
   display: flex;
   flex-direction: column;
   width: 32%;
+  height: 100%;
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
     width: 35%;
     height: auto;
