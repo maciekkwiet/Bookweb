@@ -8,17 +8,23 @@ export const BoxComponent = styled.div`
   font-size: 16px;
   background-color: ${(props) => props.theme.backgrounds.lightTransparent};
   border-radius: 10px;
-  width: 40vw;
-  min-height: 20vh;
+  width: 31vw;
+  height: 100%;
   display: flex;
   justify-content: space-between;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    font-size: 12px;
+  } ;
 `;
 
 export const ImgContainer = styled.div`
   box-sizing: border-box;
-  flex-basis: 20%;
+  flex-basis: 40%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   overflow: hidden;
+  media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    font-size: 12px;
+  }
 `;
 
 export const BookImage = styled.img`
@@ -42,11 +48,17 @@ export const BookTitleParagraph = styled.p`
   text-align: left;
   font-weight: bold;
   font-size: 18px;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    font-size: 14px;
+  } ;
 `;
 export const BoxBookReview = styled.p`
   margin: 5px 0 0 0;
   text-align: justify;
   font-size: 13px;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    font-size: 12px;
+  } ;
 `;
 export const BoxReadMore = styled.a`
   display: inline-block;
@@ -55,4 +67,7 @@ export const BoxReadMore = styled.a`
   font-size: 14px;
   max-width: 90%;
   cursor: pointer;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    font-size: 11px;
+  } ;
 `;
