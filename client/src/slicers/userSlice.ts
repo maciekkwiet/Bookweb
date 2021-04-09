@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { Axios } from '../helpers/axios';
+// import axios from 'axios';
 
 export type UserType = {
   id: number;
@@ -21,7 +22,7 @@ export const signupUser = createAsyncThunk(
   'user/signupUser',
   async ({ name, email, password }: SignupUserType, thunkAPI) => {
     try {
-      const { data, status } = await axios.post('http://localhost:8080/api/users/register', {
+      const { data, status } = await Axios.post('/api/users/register', {
         email,
         name,
         password,

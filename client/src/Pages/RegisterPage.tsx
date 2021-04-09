@@ -4,7 +4,7 @@ import { useToasts } from 'react-toast-notifications';
 
 import StarRating from '../Components/Star/StarRating';
 import { RegistrationForm } from '../Components/RegistrationForm/RegistrationForm';
-import { signupUser } from '../Actions/userSlice';
+import { signupUser } from '../slicers/userSlice';
 import { RootState } from '../app/store';
 
 export const RegisterPage = () => {
@@ -37,8 +37,8 @@ export const RegisterPage = () => {
 
   return (
     <div>
-      <StarRating getNumberOfStars={handleChange} />
-      {/* <RegistrationForm onSubmit={onSubmit} /> */}
+      {/* <StarRating getNumberOfStars={handleChange} /> */}
+      <RegistrationForm onSubmit={onSubmit} />
     </div>
   );
 };
