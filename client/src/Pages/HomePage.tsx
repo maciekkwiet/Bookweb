@@ -1,3 +1,9 @@
+import ChooseGenre from '../Components/ChooseGenre/ChooseGenre';
+
 export const HomePage = () => {
-  return <div>Home Page</div>;
+  return (
+    <div>
+      <ChooseGenre />
+    </div>
+  );
 };
