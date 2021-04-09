@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { theme } from '../../Theme';
 
 export const TextCardComponent = styled.div`
   width: 755px;
@@ -11,17 +10,16 @@ export const TextCardComponent = styled.div`
   text-align: justify;
   padding: 20px;
   color: ${(props) => props.theme.colors.secondary};
+  font-family: ${(props) => props.theme.fonts.default};
 `;
 
 export const AuthorName = styled.h1`
-  font-family: ${(props) => props.theme.fonts.default};
   font-size: 15px;
   line-height: 16px;
   text-transform: uppercase;
 `;
 
 export const Description = styled.p`
-  font-family: ${(props) => props.theme.fonts.default};
   font-size: 14px;
   line-height: 17px;
 `;

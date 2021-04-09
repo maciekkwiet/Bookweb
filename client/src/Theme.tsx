@@ -22,6 +22,9 @@ export const theme = {
     default: `Montserrat`,
     logo: `Esteban`,
     sentence: `Clicker Script`,
+    lightGray: '#505050',
+    headerTitleFont: 'Esteban',
+    headerTitleColor: '#3D5A80',
   },
   h2: {
     fontSize: `3vh`,
@@ -29,6 +32,11 @@ export const theme = {
   },
   shadows: {
     inset: `inset 0px 4px 4px rgba(0, 0, 0, 0.25)`,
+  },
+  size: {
+    xs: `400px`,
+    sm: `800px`,
+    lg: `1200px`,
   },
 };
 

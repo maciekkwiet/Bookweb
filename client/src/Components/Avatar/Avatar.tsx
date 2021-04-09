@@ -6,7 +6,7 @@ import { RootState } from '../../app/store';
 
 export const defaultAvatarImage = 'https://data.whicdn.com/images/346235402/original.jpg';
 
-const Avatar: FC = () => {
+export const Avatar: FC = () => {
   const [avatarImage, setAvatarImage] = useState(defaultAvatarImage);
   const user = useSelector((state: RootState) => state.user.user);
 
