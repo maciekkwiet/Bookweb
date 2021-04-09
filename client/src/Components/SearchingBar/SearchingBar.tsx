@@ -13,12 +13,12 @@ type SearchingBarType = {
 
 export const SearchingBar = ({ onSubmit }: SearchingBarType) => {
 
-  const [inputValue, SetInputValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
 
 
   const handleChange = (e) => {
-    SetInputValue(e.target.value);
+    setInputValue(e.target.value);
 
   }
   const handleSubmit = () => { }
