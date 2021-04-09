@@ -1,15 +1,15 @@
 import React from 'react';
-import { login } from './Features/User/UserSlice';
+// import { login } from './Features/User/UserSlice';
 import { useDispatch } from 'react-redux';
 
 export default function LoginButton() {
   const dispatch = useDispatch();
-
+  // function as a prop
   const handleClick = () => {
-    fetch(`http://localhost:8080/api/users/39`)
-      .then((res) => res.json())
-      .then((user) => dispatch(login(user)))
-      .catch((err) => console.log(err));
+    // fetch(`http://localhost:8080/api/users/39`)
+    //   .then((res) => res.json())
+    //   .then((user) => dispatch(login(user)))
+    //   .catch((err) => console.log(err));
   };
 
   return (

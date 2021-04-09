@@ -10,10 +10,10 @@ export default {
   decorators: [(Story: any) => <Story />],
 };
 
-const Template: Story = (args) => <StarRating {...args} />;
+// const Template: Story = (args) => <StarRating {...args} getNumberOfStars={(value)=>console.log(value)}/>;
 
-export const Star = Template.bind({});
-Star.args = {
-  children: 'Star',
-  onClick: action('onClick'),
-};
+// export const Star = Template.bind({});
+// Star.args = {
+//   children: 'Star',
+//   onClick: action('onClick'),
+// };
