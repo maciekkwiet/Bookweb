@@ -12,6 +12,7 @@ export const BoxComponent = styled.div`
   min-height: 20vh;
   display: flex;
   justify-content: space-between;
+  margin: 2%;
 `;
 
 export const ImgContainer = styled.div`
