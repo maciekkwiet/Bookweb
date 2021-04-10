@@ -14,7 +14,7 @@ const BookDescriptionProps: BookProps = {
   releaseDate: '12.02.1020',
   numberOfPages: 250,
   isbn: 46546546321,
-  averageRating: '7.5',
+  averageRating: 7.5,
 };
 
 export const BookDescriptionComponent: Story<BookProps> = () => <BookDescription {...BookDescriptionProps} />;

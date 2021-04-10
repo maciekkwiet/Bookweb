@@ -28,6 +28,7 @@ type Book = {
   author_id?: number;
   name?: string;
   surname?: string;
+  average?: number;
 };
 
 export const AddReviewPage = () => {
@@ -52,11 +53,17 @@ export const AddReviewPage = () => {
       history.push('/');
     });
   };
-
+  //token & inter...
   useEffect(() => {
     const fetchData = async () => {
-      const result: any = await axios('http://localhost:8080/api/books/details/' + id);
-      setBookData(result.data[0]);
+      const bookResult: any = await axios('http://localhost:8080/api/books/details/' + id);
+      const rateResult: any = await axios('http://localhost:8080/api/books/average/' + id);
+      if (rateResult.data.length > 0) {
+        const average = parseInt(rateResult.data[0].rating);
+        setBookData({ ...bookResult.data[0], average });
+      } else {
+        setBookData(bookResult.data[0]);
+      }
     };
     fetchData();
   }, [id]);
@@ -64,19 +71,20 @@ export const AddReviewPage = () => {
   return (
     <Flex>
       <Title>
-        <BigLabel title={bookData?.title}></BigLabel>
+        <BigLabel title={bookData?.title ?? 'Loading...'}></BigLabel>
       </Title>
-      {bookData && (
-        <Description>
-          <BookDescription
-            author={`${bookData.name} ${bookData.surname}`}
-            isbn={bookData.isbn}
-            releaseDate={format(bookData.release_date, 'YYYY-MM-DD')}
-            numberOfPages={bookData.num_pages}
-            image={bookData?.cover}
-          />
-        </Description>
-      )}
+      <Description>
+        <BookDescription
+          author={`${bookData?.name ?? ''} ${bookData?.surname ?? ''}`}
+          isbn={bookData?.isbn ?? 0}
+          releaseDate={format(bookData?.release_date ?? new Date(), 'YYYY-MM-DD')}
+          numberOfPages={bookData?.num_pages ?? 0}
+          image={
+            bookData?.cover ?? 'https://res.cloudinary.com/bookwebproject/image/upload/v1618084797/null_y0y0lg.png'
+          }
+          averageRating={bookData?.average ?? 0}
+        />
+      </Description>
       <Rating>
         <Text>Twoja ocena:</Text>
         <StarRating getNumberOfStars={setUserStars} />

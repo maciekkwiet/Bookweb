@@ -7,7 +7,7 @@ export type BookProps = {
   releaseDate?: string;
   numberOfPages?: number;
   isbn?: number;
-  averageRating?: string;
+  averageRating?: number;
 };
 
 export const BookDescription = ({
