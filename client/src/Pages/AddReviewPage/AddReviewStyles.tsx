@@ -16,14 +16,16 @@ export const Title = styled.div`
 
 export const Description = styled.div`
   display: flex;
-  justify-content: stretch;
-  padding: 2rem 4rem 0 4rem;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 15% 0 15%;
   height: 30%;
 `;
 
 export const Rating = styled.div`
-  padding: 2rem 4rem 0 4rem;
+  padding: 2rem 15% 0 15%;
   display: flex;
+  align-items: center;
 `;
 
 export const Text = styled.p`
@@ -31,18 +33,19 @@ export const Text = styled.p`
 `;
 
 export const Review = styled.div`
-  padding: 2rem 4rem 0 4rem;
+  padding: 2rem 15% 0 15%;
   height: 30%;
 `;
 
 export const ReviewInput = styled.textarea`
+  box-sizing: border-box;
   width: 100%;
-  height: 85%;
+  height: 100%;
   padding: 1rem;
   border: solid 1.5px ${theme.colors.lightGray};
   border-radius: 5px;
 `;
 
 export const AddReview = styled.div`
-  padding: 2rem 4rem 0 4rem;
+  padding: 2rem 15% 0 15%;
 `;

@@ -8,5 +8,5 @@ export enum AppRoute {
   BooksCatalog = '/bookscatalog',
   ProvidersCatalog = '/providerscatalog',
   AddNewBook = '/addnewbook',
-  AddReview = '/addreview',
+  AddReview = '/addreview/:id',
 }

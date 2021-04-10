@@ -24,11 +24,11 @@ export const getReviewById = (request: Request, response: Response) => {
 
 export const createReview = (request: UserInfoRequest, response: Response) => {
   // const userId: number = request.userId;
-  const { header, content, score, added_at, book_id, userId } = request.body;
+  const { header, content, score, added_at, book_id, user_id } = request.body;
 
   pool.query(
     'INSERT INTO reviews (header, content, score, added_at, user_id, book_id) VALUES ($1, $2, $3, $4, $5, $6)',
-    [header, content, score, added_at, userId, book_id],
+    [header, content, score, added_at, user_id, book_id],
     (error, results) => {
       if (error) {
         throw error;

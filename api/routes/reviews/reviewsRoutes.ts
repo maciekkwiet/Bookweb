@@ -1,10 +1,10 @@
 const router = require('express').Router();
 import { getReviews, getReviewById, createReview, updateReview, deleteReview } from './reviews';
 
-router.get('/reviews/', getReviews);
-router.get('/reviews/:id/', getReviewById);
-router.post('/review', createReview);
-router.put('/review/:id', updateReview);
-router.delete('/review/:isd', deleteReview);
+router.get('/', getReviews);
+router.get('/:id', getReviewById);
+router.post('/', createReview);
+router.put('/:id', updateReview);
+router.delete('/:id', deleteReview);
 
 module.exports = router;
