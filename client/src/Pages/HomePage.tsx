@@ -1,7 +1,9 @@
 import { useSelector } from 'react-redux';
+
 import { BoxBooks } from '../Components/BoxBooks/BoxBooks';
 import ChooseGenre from '../Components/ChooseGenre/ChooseGenre';
 import { Header } from '../Components/Header/Header';
+import { Footer } from '../Components/Footer/Footer';
 import { HeaderImage } from '../Components/HeaderImage/HeaderImage';
 import { RegistrationForm } from '../Components/RegistrationForm/RegistrationForm';
 import { selectUser } from '../Features/User/UserSlice';
@@ -31,6 +33,7 @@ export const HomePage = () => {
         <h1>Najlepiej oceniane</h1>
         <ChooseGenre />
       </div>
+      <Footer></Footer>
     </>
   );
 };
