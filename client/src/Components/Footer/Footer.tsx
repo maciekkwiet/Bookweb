@@ -1,4 +1,5 @@
 import { FooterComponent, FooterTitle } from './FooterStyles';
+
 export const Footer = () => {
   return (
     <FooterComponent>
