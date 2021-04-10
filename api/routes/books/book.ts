@@ -1,5 +1,5 @@
 import pool from '../../configDB/config';
-import { Request, Response } from 'express';
+import { request, Request, Response } from 'express';
 import { uploadImage } from '../../utils/imageTools';
 
 export const getBooks = async (request: Request, response: Response) => {
@@ -80,6 +80,20 @@ export const getBooksWithAuthor = async (request: Request, response: Response) =
   );
 };
 
+export const getScoreByBookId = async (request: Request, response: Response) => {
+  const id = parseInt(request.params.id);
+  pool.query(
+    'SELECT b.id, r.rating FROM books AS b RIGHT JOIN (SELECT book_id, AVG(score) as rating FROM reviews GROUP BY book_id) AS r ON r.book_id = b.id WHERE b.id = $1',
+    [id],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
+    }
+  );
+};
+
 module.exports = {
   getBooks,
   getBookById,
@@ -87,4 +101,5 @@ module.exports = {
   updateBook,
   deleteBook,
   getBooksWithAuthor,
+  getScoreByBookId,
 };
