@@ -16,8 +16,6 @@ export type UserActivityBoxProps = {
 };
 
 export const UserActivityBox: FC<UserActivityBoxProps> = ({ title, author, rate, review, image, username }) => {
-  const readMoreHandler = () => {};
-
   return (
     <ActivityBox>
       <RatingDiv>
