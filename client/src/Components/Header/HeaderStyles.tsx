@@ -6,7 +6,7 @@ export const HeaderComponent = styled.div`
   width: auto;
   height: auto;
   display: flex;
-  background-color: grey;
+  background: ${(props) => props.theme.backgrounds.headerAndFooter};
   justify-content: space-between;
   padding: 2%;
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
