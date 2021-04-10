@@ -61,7 +61,7 @@ export const HomePage = () => {
         <TopBooksTitle>Najlepiej oceniane</TopBooksTitle>
         <ChooseGenre />
         <TopBooksBox topBooks={sampleBooks}> </TopBooksBox>
-        <ChooseGenre />
+        {/* <ChooseGenre /> */}
         <TopBooksBox topBooks={sampleBooks}> </TopBooksBox>
       </TopBooksDiv>
       <Footer></Footer>
