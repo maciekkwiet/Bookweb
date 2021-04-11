@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { signupUser } from '../slicers/userSlice';
 
 import { BoxBooks } from '../Components/BoxBooks/BoxBooks';
 // import ChooseGenre from '../Components/ChooseGenre/ChooseGenre';
@@ -8,13 +9,13 @@ import { TopBooksBox } from '../Components/TopBooks/TopBooksComponent';
 import { TopBooksDiv, TopBooksTitle } from '../Components/TopBooks/TopBookComponentStyles';
 import { HeaderImage } from '../Components/HeaderImage/HeaderImage';
 import { RegistrationForm } from '../Components/RegistrationForm/RegistrationForm';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { BookDetails as BookDetailsType } from '../Components/TopBooks/TopBooksComponent';
 import { Axios } from '../helpers/axios';
 import { TitleDiv } from '../Components/TopBooks/TopBookComponentStyles';
-// import { selectUser } from '../Features/User/UserSlice';
 
 export const HomePage = () => {
+  const dispatch = useDispatch();
   // const user = useSelector(selectUser);
   const [topBooks, setTopBooks] = useState<BookDetailsType[]>([]);
 
@@ -22,11 +23,23 @@ export const HomePage = () => {
     const fetch = async () => {
       const { data } = await Axios.get('/api/books/top');
 
+      for (let book of data) {
+        const { data: authors } = await Axios.get(`/api/books/${book.id}/authors`);
+        const { data: reviews } = await Axios.get(`/api/books/${book.id}/reviews`);
+
+        book.author = authors.map((author) => `${author.name} ${author.surname}`).join(', ');
+        book.review = reviews[0].content.substring(0, 50);
+      }
+
       setTopBooks(data);
     };
 
     fetch();
-  });
+  }, []);
+
+  const onSubmit = (values) => {
+    dispatch(signupUser(values));
+  };
 
   return (
     <>
@@ -46,7 +59,7 @@ export const HomePage = () => {
         }}
       >
         <BoxBooks />
-        <RegistrationForm onSubmit={() => {}} />
+        <RegistrationForm onSubmit={onSubmit} />
       </div>
       <TopBooksDiv>
         <TitleDiv>
