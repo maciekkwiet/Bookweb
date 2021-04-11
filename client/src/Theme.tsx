@@ -34,7 +34,7 @@ export const theme = {
     inset: `inset 0px 4px 4px rgba(0, 0, 0, 0.25)`,
   },
   size: {
-    xs: `320px`,
+    xs: `400px`,
     sm: `800px`,
     lg: `1200px`,
   },

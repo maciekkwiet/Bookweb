@@ -76,13 +76,13 @@ export const AddReviewPage = () => {
       <Description>
         <BookDescription
           author={`${bookData?.name ?? ''} ${bookData?.surname ?? ''}`}
-          isbn={bookData?.isbn ?? 0}
+          isbn={bookData?.isbn}
           releaseDate={format(bookData?.release_date ?? new Date(), 'YYYY-MM-DD')}
-          numberOfPages={bookData?.num_pages ?? 0}
+          numberOfPages={bookData?.num_pages}
           image={
             bookData?.cover ?? 'https://res.cloudinary.com/bookwebproject/image/upload/v1618084797/null_y0y0lg.png'
           }
-          averageRating={bookData?.average ?? 0}
+          averageRating={bookData?.average}
         />
       </Description>
       <Rating>

@@ -7,6 +7,7 @@ import {
   deleteBook,
   getBooksWithAuthor,
   getScoreByBookId,
+  getTopBooks,
 } from './book';
 
 const router = new Router();
@@ -17,5 +18,6 @@ router.get('/average/:id', getScoreByBookId);
 router.post('/', createBook);
 router.put('/:id', updateBook);
 router.delete('/:id', deleteBook);
+router.get('/top', getTopBooks);
 
 module.exports = router;

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const BoxComponent = styled.div`
   box-sizing: border-box;
+  margin: 20px 0;
   padding: 1% 2%;
   font-family: ${(props) => props.theme.fonts.default};
   color: ${(props) => props.theme.colors.primary};

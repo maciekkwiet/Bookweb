@@ -1,16 +1,17 @@
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 import { ThemeProvider } from 'styled-components';
+
 import { theme } from '../../../Theme';
+import { Shelf } from '../Shelf';
 
-import StarRating from '../StarRating';
-
-describe('Stars', () => {
+describe('Shelf', () => {
   it('render without crash', () => {
-    const myMock = jest.fn();
+    const mockCallback = jest.fn();
+
     render(
       <ThemeProvider theme={theme}>
-        <StarRating getNumberOfStars={myMock} />
+        <Shelf title="Chcę przeczytać" apiUrl=""></Shelf>
       </ThemeProvider>,
     );
   });
