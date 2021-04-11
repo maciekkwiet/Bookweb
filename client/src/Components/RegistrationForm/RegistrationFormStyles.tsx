@@ -11,8 +11,8 @@ export const RegistrationFormContainer = styled.div`
   color: ${(props) => props.theme.colors.secondary};
   background: ${(props) => props.theme.backgrounds.darkTransparent};
   box-shadow: ${(props) => props.theme.shadows.inset};
-  width: 27vw;
-  height: 30vw;
+  width: 35%;
+  height: auto;
   border-radius: 25px;
   padding: 50px;
 `;

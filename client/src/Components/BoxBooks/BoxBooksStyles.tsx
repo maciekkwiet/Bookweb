@@ -6,7 +6,7 @@ export const BoxBooksComponent = styled.div`
   color: ${(props) => props.theme.colors.secondary};
   background: ${(props) => props.theme.backgrounds.darkTransparent};
   box-shadow: ${(props) => props.theme.shadows.inset};
-  width: 40vw;
+  width: 45vw;
   height: 30vw;
   border-radius: 25px;
   padding: 30px 50px;
@@ -27,10 +27,10 @@ export const BoxBooksParagraph = styled.p`
 `;
 export const BoxBooksImage = styled.img`
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 8%;
   z-index: 1;
   margin: 30px 0 0 0;
   padding: 0;
-  width: 75%;
+  width: 65%;
 `;
