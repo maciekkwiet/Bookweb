@@ -8,38 +8,28 @@ import { TopBooksBox } from '../Components/TopBooks/TopBooksComponent';
 import { TopBooksDiv, TopBooksTitle } from '../Components/TopBooks/TopBookComponentStyles';
 import { HeaderImage } from '../Components/HeaderImage/HeaderImage';
 import { RegistrationForm } from '../Components/RegistrationForm/RegistrationForm';
-import { selectUser } from '../Features/User/UserSlice';
+import { useEffect, useState } from 'react';
+import { BookDetails as BookDetailsType } from '../Components/TopBooks/TopBooksComponent';
+import { Axios } from '../helpers/axios';
+// import { selectUser } from '../Features/User/UserSlice';
 
 export const HomePage = () => {
-  const user = useSelector(selectUser);
+  // const user = useSelector(selectUser);
+  const [topBooks, setTopBooks] = useState<BookDetailsType[]>([]);
 
-  const sampleBooks = [
-    {
-      title: 'Securing DevOps',
-      author: 'Julien Vehent',
-      rate: 5,
-      review: 'An application running in the cloud can benefit from incredible efficiencies ',
-      image: 'https://i.pinimg.com/originals/b8/97/bb/b897bb0a2205457970b91ce831b04756.jpg',
-    },
-    {
-      title: 'Securing DevOps',
-      author: 'Julien Vehent',
-      rate: 5,
-      review: 'An application running in the cloud can benefit from incredible efficiencies ',
-      image: 'https://i.pinimg.com/originals/b8/97/bb/b897bb0a2205457970b91ce831b04756.jpg',
-    },
-    {
-      title: 'Securing DevOps',
-      author: 'Julien Vehent',
-      rate: 5,
-      review: 'An application running in the cloud can benefit from incredible efficiencies ',
-      image: 'https://i.pinimg.com/originals/b8/97/bb/b897bb0a2205457970b91ce831b04756.jpg',
-    },
-  ];
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await Axios.get('/api/books/top');
+
+      setTopBooks(data);
+    };
+
+    fetch();
+  });
 
   return (
     <>
-      <Header isLogged={user?.user} />
+      <Header isLogged={false} />
       <HeaderImage />
       {/* <h1>Search BAR</h1> */}
       <div
@@ -60,9 +50,9 @@ export const HomePage = () => {
       <TopBooksDiv>
         <TopBooksTitle>Najlepiej oceniane</TopBooksTitle>
         <ChooseGenre />
-        <TopBooksBox topBooks={sampleBooks}> </TopBooksBox>
+        <TopBooksBox topBooks={topBooks}> </TopBooksBox>
         {/* <ChooseGenre /> */}
-        <TopBooksBox topBooks={sampleBooks}> </TopBooksBox>
+        {/* <TopBooksBox topBooks={sampleBooks}> </TopBooksBox> */}
       </TopBooksDiv>
       <Footer></Footer>
     </>
