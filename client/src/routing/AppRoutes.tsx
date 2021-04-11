@@ -24,6 +24,7 @@ export const AppRoutes = () => {
         <Route path={AppRoute.BooksCatalog} component={BooksCatalogPage} />
         <Route path={AppRoute.AddNewBook} component={AddNewBookPage} />
         <Route path={AppRoute.ProvidersCatalog} component={ProvidersCatalogPage} />
+        <Route path={AppRoute.Home} component={HomePage} />
         <Redirect to={AppRoute.Home} />
       </Switch>
     </BrowserRouter>

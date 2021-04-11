@@ -3,12 +3,13 @@ import { FC } from 'react';
 import { Box } from '../Box/Box';
 import { TopBooksComponent } from './TopBookComponentStyles';
 
-type BookDetails = {
+export type BookDetails = {
+  id: number;
   title: string;
-  author: string;
-  rate: number;
-  review: string;
-  image: string;
+  // author: string;
+  rating: number;
+  // review: string;
+  cover: string;
 };
 
 export type TopBooksProps = {
@@ -16,8 +17,27 @@ export type TopBooksProps = {
 };
 
 export const TopBooksBox: FC<TopBooksProps> = ({ topBooks }) => {
+  // const [topBooks, setTopBooks] = useState<BookDetailsType[]>([])
+
+  // useEffect(() => {
+  //     const fetch = async () => {
+  //       const { data } = await Axios.get('/api/books/top');
+
+  //       setTopBooks(data);
+  //     };
+
+  //     fetch();
+  // });
+
   const booksList = topBooks.map((e) => (
-    <Box title={e.title} author={e.author} rate={e.rate} review={e.review} image={e.image}></Box>
+    <Box
+      title={e.title}
+      author={'wczytywanie...'}
+      rate={e.rating}
+      review={'wczytywanie...'}
+      image={e.cover}
+      key={e.id}
+    ></Box>
   ));
   return <TopBooksComponent>{booksList}</TopBooksComponent>;
 };
