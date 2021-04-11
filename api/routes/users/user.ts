@@ -10,10 +10,10 @@ const getById = async (table: string, id: number) => {
   let rows: object[] = [];
   await pool
     .query(`SELECT * FROM ${table} WHERE ID = $1`, [id])
-    .then(results => {
+    .then((results) => {
       rows = results.rows;
     })
-    .catch(error => {
+    .catch((error) => {
       throw new Error(error);
     });
 
@@ -26,8 +26,8 @@ const getById = async (table: string, id: number) => {
 export const getAllUsers = async (req: Request, res: Response) => {
   await pool
     .query('SELECT * FROM users ORDER BY id ASC')
-    .then(results => res.status(200).json(results.rows))
-    .catch(error => res.status(500).json(error.message));
+    .then((results) => res.status(200).json(results.rows))
+    .catch((error) => res.status(500).json(error.message));
 };
 
 export const getUser = async (req: Request, res: Response) => {
@@ -88,7 +88,7 @@ export const registerUser = async (req: Request, res: Response) => {
     }
     //1. destructure the req.body (name, email, password)
     const { name, email, password } = req.body;
-    console.log(req.body);
+
     //2. check if user exist (if user exist then throw error)
     const user = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
     if (user.rows.length !== 0) {
@@ -100,16 +100,16 @@ export const registerUser = async (req: Request, res: Response) => {
     const bcryptPassword = await bcrypt.hash(password, salt);
 
     //4. enter the new user inside our db
+
     const newUser = await pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *', [
       name,
       email,
       bcryptPassword,
     ]);
-    res.json(newUser.rows[0]);
 
-    //5. generating our jwt token
-    const token = jwtGenerator(newUser.rows[0].id);
-    res.json({ token });
+    newUser.rows[0].token = jwtGenerator(newUser.rows[0].id);
+
+    res.json(newUser.rows[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

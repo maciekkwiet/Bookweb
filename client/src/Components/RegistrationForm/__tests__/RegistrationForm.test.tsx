@@ -2,11 +2,16 @@ import { ThemeProvider } from 'styled-components';
 import { screen, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import 'whatwg-fetch';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
+import axios from 'axios';
+import { store } from '../../../app/store';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 
 import { theme } from '../../../Theme';
 import { RegistrationForm } from '../RegistrationForm';
+
+const middlewares = [thunk];
+export const mockStore = configureMockStore(middlewares);
 
 describe('RegistrationForm', () => {
   it('render without crash', async () => {
@@ -40,5 +45,7 @@ describe('RegistrationForm', () => {
         confirmPassword: 'test1test1',
       }),
     );
+
+    //przetestować wywołanie zapytania z redux toolkit
   });
 });

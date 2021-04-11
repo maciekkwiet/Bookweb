@@ -1,8 +1,8 @@
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 
+import { RegisterPage } from '../Pages/RegisterPage';
 import { AppRoute } from './AppRoute.enum';
 import { HomePage } from '../Pages/HomePage';
-import { LoginPage } from '../Pages/LoginPage';
 import { MyBooksPage } from '../Pages/MyBooksPage';
 import { RankingPage } from '../Pages/RankingPage';
 import { AuthorPage } from '../Pages/AuthorPage';
@@ -15,8 +15,8 @@ export const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path={AppRoute.Home} exact component={HomePage} />
-        <Route path={AppRoute.Login} component={LoginPage} />
+        {/* <Route path={AppRoute.Home} exact component={HomePage} /> */}
+        <Route path={AppRoute.Register} component={RegisterPage} />
         <Route path={AppRoute.MyBooks} component={MyBooksPage} />
         <Route path={AppRoute.Ranking} component={RankingPage} />
         <Route path={AppRoute.Author} component={AuthorPage} />
@@ -24,6 +24,7 @@ export const AppRoutes = () => {
         <Route path={AppRoute.BooksCatalog} component={BooksCatalogPage} />
         <Route path={AppRoute.AddNewBook} component={AddNewBookPage} />
         <Route path={AppRoute.ProvidersCatalog} component={ProvidersCatalogPage} />
+        <Redirect to={AppRoute.Home} />
       </Switch>
     </BrowserRouter>
   );

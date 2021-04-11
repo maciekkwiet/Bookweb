@@ -11,6 +11,22 @@ export const getBooks = async (request: Request, response: Response) => {
   });
 };
 
+export const getTopBooks = async (request: Request, response: Response) => {
+  pool.query(
+    `
+  SELECT b.id, b.title, r.rating, b.cover FROM books AS b RIGHT JOIN (
+    SELECT book_id, AVG(score) as rating FROM reviews GROUP BY book_id ORDER BY rating DESC LIMIT 3
+  ) AS r ON r.book_id = b.id ORDER BY r.rating DESC;
+`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
+    },
+  );
+};
+
 export const getBookById = async (request: Request, response: Response) => {
   const bookId = parseInt(request.params.id);
 
@@ -34,7 +50,7 @@ export const createBook = async (request: Request, response: Response) => {
         throw error;
       }
       response.status(201).send(`Book added`);
-    }
+    },
   );
 };
 
@@ -51,7 +67,7 @@ export const updateBook = async (request: Request, response: Response) => {
         throw error;
       }
       response.status(200).send(`Book modified`);
-    }
+    },
   );
 };
 
@@ -68,6 +84,7 @@ export const deleteBook = async (request: Request, response: Response) => {
 
 module.exports = {
   getBooks,
+  getTopBooks,
   getBookById,
   createBook,
   updateBook,
