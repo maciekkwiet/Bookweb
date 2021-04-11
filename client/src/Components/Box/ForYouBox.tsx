@@ -8,7 +8,7 @@ import {
   BoxBookReview,
   BoxReadMore,
   BookImage,
-} from './BoxStyles';
+} from './ForYouBoxStyles';
 
 export type BoxComponentProps = {
   title: string;
@@ -18,7 +18,7 @@ export type BoxComponentProps = {
   image: string;
 };
 
-export const Box: FC<BoxComponentProps> = ({ title, author, rate, review, image }) => {
+export const ForYouBox: FC<BoxComponentProps> = ({ title, author, rate, review, image }) => {
   const readMoreHandler = () => { };
 
   return (

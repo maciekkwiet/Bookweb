@@ -6,6 +6,7 @@ import { Theme } from './Theme';
 import { AppRoutes } from './routing/AppRoutes';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
+import { LoggedHomePage } from '../src/Pages/LoggedHomePage'
 
 function App() {
   const queryClient = new QueryClient();
@@ -14,6 +15,7 @@ function App() {
       <Provider store={store}>
         <ToastProvider>
           <Theme>
+            <LoggedHomePage />
             <AppRoutes />
           </Theme>
           <ReactQueryDevtools initialIsOpen={false} />
