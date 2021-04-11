@@ -16,7 +16,7 @@ export const getTopBooks = async (request: Request, response: Response) => {
     `
   SELECT b.id, b.title, r.rating, b.cover FROM books AS b RIGHT JOIN (
     SELECT book_id, AVG(score) as rating FROM reviews GROUP BY book_id ORDER BY rating DESC LIMIT 3
-  ) AS r ON r.book_id = b.id;
+  ) AS r ON r.book_id = b.id ORDER BY r.rating DESC;
 `,
     (error, results) => {
       if (error) {
