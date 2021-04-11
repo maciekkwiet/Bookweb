@@ -7,7 +7,7 @@ export type BookDetails = {
   id: number;
   title: string;
   // author: string;
-  rating: number;
+  rating: string;
   // review: string;
   cover: string;
 };
@@ -29,12 +29,14 @@ export const TopBooksBox: FC<TopBooksProps> = ({ topBooks }) => {
   //     fetch();
   // });
 
+  console.log(topBooks);
+
   const booksList = topBooks.map((e) => (
     <Box
       title={e.title}
       author={'wczytywanie...'}
-      rate={e.rating}
       review={'wczytywanie...'}
+      rate={parseFloat(e.rating)}
       image={e.cover}
       key={e.id}
     ></Box>
