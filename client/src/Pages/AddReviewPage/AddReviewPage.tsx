@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import axios from 'axios';
+import { Axios } from '../../helpers/axios';
 import { BigLabel } from '../../Components/BigLabel/BigLabel';
 import { BookDescription } from '../../Components/BookDescription/BookDescription';
 import StarRating from '../../Components/Star/StarRating';
@@ -16,6 +16,7 @@ import {
   AddReview,
 } from '../AddReviewPage/AddReviewStyles';
 import { format } from 'date-fns';
+import { useToasts } from 'react-toast-notifications';
 
 type Book = {
   id: number;
@@ -36,6 +37,7 @@ export const AddReviewPage = () => {
   const [bookData, setBookData] = useState<Book>();
   const [userReview, setUserReview] = useState<string>('');
   const [userStars, setUserStars] = useState<number>(0);
+  const { addToast } = useToasts();
   const history = useHistory();
 
   const handleClick = () => {
@@ -49,15 +51,19 @@ export const AddReviewPage = () => {
       book_id: id,
     };
 
-    axios.post('http://localhost:8080/api/reviews/', reviewInfo).then(() => {
+    Axios.post('http://localhost:8080/api/reviews/', reviewInfo).then(() => {
       history.push('/');
+      addToast(`Review added for ${bookData?.title}`, {
+        appearance: 'success',
+        autoDismiss: true,
+      });
     });
   };
   //token & inter...
   useEffect(() => {
     const fetchData = async () => {
-      const bookResult: any = await axios('http://localhost:8080/api/books/details/' + id);
-      const rateResult: any = await axios('http://localhost:8080/api/books/average/' + id);
+      const bookResult: any = await Axios('http://localhost:8080/api/books/details/' + id);
+      const rateResult: any = await Axios('http://localhost:8080/api/books/average/' + id);
       if (rateResult.data.length > 0) {
         const average = parseInt(rateResult.data[0].rating);
         setBookData({ ...bookResult.data[0], average });
