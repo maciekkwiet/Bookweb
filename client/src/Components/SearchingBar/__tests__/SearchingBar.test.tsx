@@ -26,7 +26,6 @@ describe('RegistrationForm', () => {
     await waitFor(() =>
       expect(handleSubmit).toHaveBeenCalledWith({
         phrase: 'test1',
-
       }),
     );
   });

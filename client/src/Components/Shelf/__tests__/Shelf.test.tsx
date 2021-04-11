@@ -11,10 +11,7 @@ describe('Shelf', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <Shelf
-          title='Chcę przeczytać'
-          apiUrl=''
-        ></Shelf>
+        <Shelf title="Chcę przeczytać" apiUrl=""></Shelf>
       </ThemeProvider>,
     );
   });

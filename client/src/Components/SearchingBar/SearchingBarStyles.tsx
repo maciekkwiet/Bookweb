@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-
+import styled from 'styled-components';
 
 export const SearchingBarComponent = styled.div`
   width: 100%;
@@ -7,13 +6,13 @@ export const SearchingBarComponent = styled.div`
   font-size: 2vh;
   background-color: ${(props) => props.theme.backgrounds.bright};
   font-family: ${(props) => props.theme.fonts.default};
-`
+`;
 export const SearchingBarForm = styled.form`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 100%
-`
+  height: 100%;
+`;
 
 export const SearchingBarInput = styled.input`
   box-sizing: border-box;
@@ -23,7 +22,7 @@ export const SearchingBarInput = styled.input`
   margin: 0 0 0 60px;
   outline: none;
   border-radius: 5px;
-`
+`;
 
 export const SearchingBarButton = styled.button`
   box-sizing: border-box;
@@ -37,14 +36,13 @@ export const SearchingBarButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
 
-    &:hover {
+  &:hover {
     box-shadow: 0px 0px 2px #eaeaea;
     color: #333333;
     background: #f7f7f7;
-    }
+  }
 
-    &:active {
+  &:active {
     box-shadow: inset 1px 1px 1px #dfdfdf;
-    }
-`
-
+  }
+`;

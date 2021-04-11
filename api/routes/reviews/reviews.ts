@@ -23,12 +23,12 @@ export const getReviewById = (request: Request, response: Response) => {
 };
 
 export const createReview = (request: UserInfoRequest, response: Response) => {
-  const userId: number = request.userId;
-  const { header, content, score, created_at, book_id } = request.body;
+  // const userId: number = request.userId;
+  const { header, content, score, added_at, book_id, user_id } = request.body;
 
   pool.query(
-    'INSERT INTO reviews (header, content, score, created_at, user_id, book_id) VALUES ($1, $2, $3, $4, $5, $6)',
-    [header, content, score, created_at, userId, book_id],
+    'INSERT INTO reviews (header, content, score, added_at, user_id, book_id) VALUES ($1, $2, $3, $4, $5, $6)',
+    [header, content, score, added_at, user_id, book_id],
     (error, results) => {
       if (error) {
         throw error;
@@ -40,10 +40,10 @@ export const createReview = (request: UserInfoRequest, response: Response) => {
 
 export const updateReview = (request: UserInfoRequest, response: Response) => {
   const id = parseInt(request.params.id);
-  const { header, content, score, created_at } = request.body;
+  const { header, content, score, added_at } = request.body;
   pool.query(
     'UPDATE review SET header = $1, content= $2, score = $3 created_at = $4',
-    [header, content, score, created_at],
+    [header, content, score, added_at],
     (error, results) => {
       if (error) {
         throw error;

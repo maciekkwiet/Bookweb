@@ -9,7 +9,6 @@ export const BoxComponent = styled.div`
   font-size: 16px;
   background-color: ${(props) => props.theme.backgrounds.lightTransparent};
   border-radius: 10px;
-  width: 40vw;
   min-height: 20vh;
   display: flex;
   justify-content: space-between;
