@@ -22,7 +22,7 @@ export const TopBooksBox: FC<TopBooksProps> = ({ topBooks }) => {
       title={e.title}
       author={e.author}
       review={e.review}
-      rate={parseFloat(e.rating)}
+      rate={parseFloat(parseFloat(e.rating).toFixed(2))}
       image={e.cover}
       key={e.id}
     ></Box>
