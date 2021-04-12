@@ -9,5 +9,4 @@ export enum AppRoute {
   BooksCatalog = '/bookscatalog',
   AddNewBook = '/addnewbook',
   ProvidersCatalog = '/providerscatalog',
-  RegisterHome = '/anonymous',
 }
