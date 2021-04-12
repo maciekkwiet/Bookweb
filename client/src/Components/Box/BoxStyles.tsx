@@ -14,6 +14,9 @@ export const BoxComponent = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 2%;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    width: 100%;
+  }
 `;
 
 export const ImgContainer = styled.div`
@@ -38,17 +41,26 @@ export const ContentContainer = styled.div`
 export const BookParagraph = styled.p`
   margin: 5px 0 0 0;
   text-align: left;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    font-size: 12px;
+  }
 `;
 export const BookTitleParagraph = styled.p`
   margin: 5px 0 0 0;
   text-align: left;
   font-weight: bold;
   font-size: 18px;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    font-size: 14px;
+  }
 `;
 export const BoxBookReview = styled.p`
   margin: 5px 0 0 0;
   text-align: justify;
   font-size: 13px;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    font-size: 12px;
+  }
 `;
 export const BoxReadMore = styled.a`
   display: inline-block;
@@ -57,4 +69,7 @@ export const BoxReadMore = styled.a`
   font-size: 14px;
   max-width: 90%;
   cursor: pointer;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    font-size: 11px;
+  }
 `;

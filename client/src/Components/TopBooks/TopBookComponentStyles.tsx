@@ -28,6 +28,9 @@ export const TopBooksComponent = styled(TextCardComponent)`
 export const TopBooksTitle = styled.h1`
   font-family: ${(props) => props.theme.fonts.default};
   margin: 2% 7%;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    font-size: 25px;
+  }
 `;
 
 export const TitleDiv = styled.div`
