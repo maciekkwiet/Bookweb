@@ -10,6 +10,7 @@ import { BookPage } from '../Pages/BookPage';
 import { BooksCatalogPage } from '../Pages/BooksCatalogPage';
 import { AddNewBookPage } from '../Pages/AddNewBookPage';
 import { ProvidersCatalogPage } from '../Pages/ProvidersCatalogPage';
+import { RegisterHomePage } from '../Pages/RegisterHomePage';
 
 export const AppRoutes = () => {
   return (
@@ -25,6 +26,7 @@ export const AppRoutes = () => {
         <Route path={AppRoute.AddNewBook} component={AddNewBookPage} />
         <Route path={AppRoute.ProvidersCatalog} component={ProvidersCatalogPage} />
         <Route path={AppRoute.Home} component={HomePage} />
+        <Route path={AppRoute.RegisterHome} component={RegisterHomePage} />
         <Redirect to={AppRoute.Home} />
       </Switch>
     </BrowserRouter>
