@@ -6,7 +6,6 @@ import { format } from 'date-fns';
 import { BigLabel } from '../../Components/BigLabel/BigLabel';
 import StarRating from '../../Components/Star/StarRating';
 import { Button } from '../../Components/Button/Button';
-// import { Avatar } from '../../Components/Avatar/Avatar';
 import {
   Flex,
   Title,
@@ -93,23 +92,11 @@ export const BookPage = () => {
           </Cover>
           <Info>
             <InfoLine>{`${bookData?.name ?? ''} ${bookData?.surname ?? ''}`}</InfoLine>
-            {/* Wydawnictwa brak na ten moment */}
-            {/* <InfoLine>Wydawnictwo: {'getWydawnictwoByBookId'}</InfoLine> */}
             <InfoLine>Data wydania: {format(bookData?.release_date ?? new Date(), 'YYYY-MM-DD')}</InfoLine>
             <InfoLine>Liczba stron: {bookData?.num_pages}</InfoLine>
             <InfoLine>ISBN: {bookData?.isbn}</InfoLine>
             <InfoLine>Srednia ocen: {bookData?.average ?? 0}</InfoLine>
-            <Stars>
-              {bookData && (
-                <StarRating
-                  disabled
-                  rate={bookData?.average}
-                  getNumberOfStars={(e) => {
-                    return;
-                  }}
-                ></StarRating>
-              )}
-            </Stars>
+            <Stars>{bookData && <StarRating disabled rate={bookData?.average} getNumberOfStars></StarRating>}</Stars>
           </Info>
           <Buttons>
             <Button onClick={() => console.log('dodaj na polke')} children={'Dodaj na polke'}></Button>
@@ -128,8 +115,6 @@ export const BookPage = () => {
             <Review key={review.review_id}>
               <UserInfoBox>
                 <AvatarBox>
-                  {/* Zmienilem avatar component na zwylky ostylownany img */}
-                  {/* <Avatar /> */}
                   <Avatar src={review.avatar} />
                 </AvatarBox>
                 <UserName>{`${review.name} ${review.surname}`}</UserName>

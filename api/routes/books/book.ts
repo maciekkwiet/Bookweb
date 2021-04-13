@@ -11,8 +11,8 @@ export const getBooks = async (request: Request, response: Response) => {
   });
 };
 
-export const getBookById = async (request: Request, response: Response) => {
-  const bookId = parseInt(request.params.id);
+export const getBookById = async (request: Request, response: Response, id: number) => {
+  const bookId = id ?? parseInt(request.params.id);
 
   pool.query('SELECT * FROM books WHERE id = $1', [bookId], (error, results) => {
     if (error) {
@@ -75,7 +75,24 @@ export const getBooksWithAuthor = async (request: Request, response: Response) =
       if (error) {
         throw error;
       }
-      response.status(200).json(results.rows);
+      if (results.rows.length) {
+        response.status(200).json(results.rows);
+      } else {
+        getBookById(request, response, id);
+      }
+    },
+  );
+};
+
+export const getBooksWithoutAuthor = async (id: any) => {
+  pool.query(
+    'SELECT b.id book_id, b.isbn, b.title, b.release_date, b.num_pages, b.cover, b.description, a.id author_id, a.name, a.surname FROM books b INNER JOIN authors_books c ON b.id = c.book_id WHERE book_id = $1',
+    [id],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      return results;
     },
   );
 };
