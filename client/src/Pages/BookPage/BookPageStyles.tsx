@@ -137,6 +137,12 @@ export const AvatarBox = styled.div`
   padding-left: 50px;
 `;
 
+export const Avatar = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+`;
+
 export const UserName = styled.p`
   margin: 0;
   padding: 0 15px 0 50px;

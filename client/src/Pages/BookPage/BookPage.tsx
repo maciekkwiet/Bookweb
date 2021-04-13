@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import { BigLabel } from '../../Components/BigLabel/BigLabel';
 import StarRating from '../../Components/Star/StarRating';
 import { Button } from '../../Components/Button/Button';
-import { Avatar } from '../../Components/Avatar/Avatar';
+// import { Avatar } from '../../Components/Avatar/Avatar';
 import {
   Flex,
   Title,
@@ -24,6 +24,7 @@ import {
   Review,
   UserInfoBox,
   AvatarBox,
+  Avatar,
   UserName,
   WhenAdded,
   ReviewText,
@@ -67,7 +68,6 @@ export const BookPage = () => {
     const fetchData = async () => {
       const bookResult: any = await axios('http://localhost:8080/api/books/details/' + id);
       const rateResult: any = await axios('http://localhost:8080/api/books/average/' + id);
-      //musze pobrac dane z review i dane uzytkownika
       const reviewResult: any = await axios('http://localhost:8080/api/reviews/all/' + id);
       if (rateResult.data.length > 0) {
         const average = parseInt(rateResult.data[0].rating);
@@ -81,7 +81,6 @@ export const BookPage = () => {
     fetchData();
   }, [id]);
 
-  console.log(bookData);
   return (
     <Flex>
       <Title>
@@ -94,7 +93,8 @@ export const BookPage = () => {
           </Cover>
           <Info>
             <InfoLine>{`${bookData?.name ?? ''} ${bookData?.surname ?? ''}`}</InfoLine>
-            <InfoLine>Wydawnictwo: {'getWydawnictwoByBookId'}</InfoLine>
+            {/* Wydawnictwa brak na ten moment */}
+            {/* <InfoLine>Wydawnictwo: {'getWydawnictwoByBookId'}</InfoLine> */}
             <InfoLine>Data wydania: {format(bookData?.release_date ?? new Date(), 'YYYY-MM-DD')}</InfoLine>
             <InfoLine>Liczba stron: {bookData?.num_pages}</InfoLine>
             <InfoLine>ISBN: {bookData?.isbn}</InfoLine>
@@ -128,7 +128,9 @@ export const BookPage = () => {
             <Review key={review.review_id}>
               <UserInfoBox>
                 <AvatarBox>
-                  <Avatar />
+                  {/* Zmienilem avatar component na zwylky ostylownany img */}
+                  {/* <Avatar /> */}
+                  <Avatar src={review.avatar} />
                 </AvatarBox>
                 <UserName>{`${review.name} ${review.surname}`}</UserName>
                 <WhenAdded>{format(review.added_at, 'YYYY-MM-DD')}</WhenAdded>
