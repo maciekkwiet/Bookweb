@@ -11,14 +11,27 @@ import {
 } from './BoxStyles';
 
 export type BoxComponentProps = {
+  // title: string;
+  // author: string;
+  // rate: number;
+  // description: string;
+  // cover: string;
+  book_id?: number;
   title: string;
-  author: string;
-  rate: number;
-  description: string;
   cover: string;
+  description?: string;
+  author_id?: number;
+  name?: string;
+  surname?: string;
+  book_groups?: string;
+  score: number;
+  user_id?: number;
+  email?: string;
+  author?: string;
+
 };
 
-export const Box: FC<BoxComponentProps> = ({ title, author, rate, description, cover }) => {
+export const Box: FC<BoxComponentProps> = ({ title, name, surname, score, description, cover }) => {
   const readMoreHandler = () => { };
 
   return (
@@ -28,10 +41,10 @@ export const Box: FC<BoxComponentProps> = ({ title, author, rate, description, c
       </ImgContainer>
       <ContentContainer>
         <BookTitleParagraph>{title}</BookTitleParagraph>
-        <BookParagraph>{author}</BookParagraph>
-        <BookParagraph>Średnia ocena: {rate}</BookParagraph>
+        <BookParagraph>{name} {surname}</BookParagraph>
+        <BookParagraph>Średnia ocena: {score}</BookParagraph>
         <BoxBookReview>
-          {description.slice(0, 200)}
+          {description?.slice(0, 200)}
           <BoxReadMore onClick={readMoreHandler} data-testid="BoxReadMoreId">
             czytaj więcej
           </BoxReadMore>

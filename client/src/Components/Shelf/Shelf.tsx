@@ -2,6 +2,8 @@
 import { ShelfComponent, ShelfTitle, ShelfImage } from './ShelfStyles';
 import { FC, useState, useEffect } from 'react';
 import { Box, BoxComponentProps } from '../Box/Box';
+import { Axios } from '../../helpers/axios';
+import { BookDetails as BookDetailsType } from '../../Components/TopBooks/TopBooksComponent';
 
 
 export type ShelfComponentProps = {
@@ -21,32 +23,42 @@ export const Shelf: FC<ShelfComponentProps> = ({ title, apiUrl }) => {
   const loadBooks = async () => {
     const response = await fetch(apiUrl);
     const data = await response.json();
+    console.log(data);
+
     setBooks(data);
   }
+
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const { data } = await Axios.get(apiUrl);
+
+  //     for (let book of data) {
+  //       const { data: authors } = await Axios.get(`/api/books/${book.id}/authors`);
+  //       const { data: reviews } = await Axios.get(`/api/books/${book.id}/reviews`);
+
+  //       book.author = authors.map((author) => `${author.name} ${author.surname}`).join(', ');
+  //       book.review = reviews[0].content.substring(0, 50);
+  //     }
+
+  //     setBooks(data);
+
+  //   };
+
+  //   fetch();
+  // }, []);
 
 
   return (
     <ShelfComponent>
       <ShelfTitle>{title}</ShelfTitle>
       <ShelfImage src={process.env.PUBLIC_URL + '/shelf.png'}></ShelfImage>
-      <Box
-        title='Securing DevOps'
-        author='Julien Vehent'
-        rate={5}
-        description='An application running in the cloud can benefit from incredible efficiencies, but they come with unique security threats too. A DevOps teams highest priority is understanding those risks  ...'
-        cover='https://i.pinimg.com/originals/b8/97/bb/b897bb0a2205457970b91ce831b04756.jpg' />
-      <Box
-        title='Securing DevOps'
-        author='Julien Vehent'
-        rate={5}
-        description='An application running in the cloud can benefit from incredible efficiencies, but they come with unique security threats too. A DevOps teams highest priority is understanding those risks  ...'
-        cover='https://i.pinimg.com/originals/b8/97/bb/b897bb0a2205457970b91ce831b04756.jpg' />
       {books.map(book => (
         <Box
-          key={book.title}
+          key={book.book_id}
           title={book.title}
-          author={book.author}
-          rate={book.rate}
+          name={book.name}
+          surname={book.surname}
+          score={book.score}
           description={book.description}
           cover={book.cover}
         />

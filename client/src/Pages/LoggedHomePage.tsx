@@ -6,6 +6,8 @@ import { Shelf } from '../Components/Shelf/Shelf';
 import { ShelfImage } from '../Components/Shelf/ShelfStyles'
 import { ForYouBox } from '../Components/Box/ForYouBox'
 import { BoxComponentProps } from '../Components/Box/Box'
+import { useSelector } from 'react-redux';
+import { RootState } from '../app/store';
 
 import {
   LoggedHomePageWrapper,
@@ -19,6 +21,11 @@ import {
 } from './LoggedHomePageStyles'
 
 export const LoggedHomePage = () => {
+
+  const email = useSelector((state: RootState) => state.user.user?.email);
+  const urlComplete = `http://localhost:8080/api/book-groups/${email}/przeczytane/bookShelves`;
+  const urlInProgress = `http://localhost:8080/api/book-groups/${email}/czytam/bookShelves`;
+  const urlWantToRead = `http://localhost:8080/api/book-groups/${email}/chcę%20przeczytać/bookShelves`
 
   const handleSubmit = () => { };
 
@@ -43,43 +50,26 @@ export const LoggedHomePage = () => {
       <ContentWrapper>
         <MyBooksWrapper>
           <MyBooksBigLabel title='Moje książki' />
-          <Shelf title='Chcę przeczytać' apiUrl='' />
-          <Shelf title='Właśnie czytam' apiUrl='' />
-          <Shelf title='Przeczytane' apiUrl='' />
+          <Shelf title='Chcę przeczytać' apiUrl={urlWantToRead} />
+          <Shelf title='Właśnie czytam' apiUrl={urlInProgress} />
+          <Shelf title='Przeczytane' apiUrl={urlComplete} />
         </MyBooksWrapper>
         <AsideWrapper>
           <ShelfImage src={process.env.PUBLIC_URL + '/shelf.png'} />
           <AsideBigLabel title='Polecane dla Ciebie' />
           <ForYouContainer >
-            <ForYouBox
-              title='Securing DevOps'
-              author='Julien Vehent'
-              rate={5}
-              review='An application running in the cloud can benefit from incredible efficiencies, but they come with unique security threats too. A DevOps teams highest priority is understanding those risks  ...'
-              image='https://i.pinimg.com/originals/b8/97/bb/b897bb0a2205457970b91ce831b04756.jpg' />
-            <ForYouBox
-              title='Securing DevOps'
-              author='Julien Vehent'
-              rate={5}
-              review='An application running in the cloud can benefit from incredible efficiencies, but they come with unique security threats too. A DevOps teams highest priority is understanding those risks  ...'
-              image='https://i.pinimg.com/originals/b8/97/bb/b897bb0a2205457970b91ce831b04756.jpg' />
-            <ForYouBox
-              title='Securing DevOps'
-              author='Julien Vehent'
-              rate={5}
-              review='An application running in the cloud can benefit from incredible efficiencies, but they come with unique security threats too. A DevOps teams highest priority is understanding those risks  ...'
-              image='https://i.pinimg.com/originals/b8/97/bb/b897bb0a2205457970b91ce831b04756.jpg' />
-            {forYouBooks.map(book => (
+
+            {/* {forYouBooks.map(book => (
               <ForYouBox
                 key={book.title}
                 title={book.title}
                 author={book.author}
-                rate={book.rate}
+                rate={book.score}
                 review={book.description}
                 image={book.cover}
               />
 
-            ))}
+            ))} */}
           </ForYouContainer>
           <AsideBigLabel title='Aktywność znajomych' />
         </AsideWrapper>

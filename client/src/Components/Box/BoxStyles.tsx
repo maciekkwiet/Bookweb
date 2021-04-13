@@ -56,4 +56,5 @@ export const BoxReadMore = styled.a`
   font-size: 14px;
   max-width: 90%;
   cursor: pointer;
+  margin-left:20px;
 `;
