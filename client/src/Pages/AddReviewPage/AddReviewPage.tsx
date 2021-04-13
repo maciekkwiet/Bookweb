@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
+import { useSelector } from 'react-redux';
+import { useToasts } from 'react-toast-notifications';
+import { RootState } from '../../app/store';
 import { Axios } from '../../helpers/axios';
+import { format } from 'date-fns';
 import { BigLabel } from '../../Components/BigLabel/BigLabel';
 import { BookDescription } from '../../Components/BookDescription/BookDescription';
 import StarRating from '../../Components/Star/StarRating';
@@ -15,8 +19,6 @@ import {
   ReviewInput,
   AddReview,
 } from '../AddReviewPage/AddReviewStyles';
-import { format } from 'date-fns';
-import { useToasts } from 'react-toast-notifications';
 
 type Book = {
   id: number;
@@ -39,6 +41,8 @@ export const AddReviewPage = () => {
   const [userStars, setUserStars] = useState<number>(0);
   const { addToast } = useToasts();
   const history = useHistory();
+  // Czy to tak sie uzywa useSelector by pobrac id ze store?
+  const userId = useSelector((state: RootState) => state.user.user?.id);
 
   const handleClick = () => {
     const date = format(new Date(), 'YYYY-MM-DD HH:mm:ss');
@@ -47,7 +51,7 @@ export const AddReviewPage = () => {
       header: 'test',
       score: userStars,
       added_at: date,
-      user_id: 38,
+      user_id: userId,
       book_id: id,
     };
 
@@ -59,7 +63,7 @@ export const AddReviewPage = () => {
       });
     });
   };
-  //token & inter...
+
   useEffect(() => {
     const fetchData = async () => {
       const bookResult: any = await Axios('http://localhost:8080/api/books/details/' + id);
@@ -93,7 +97,7 @@ export const AddReviewPage = () => {
       </Description>
       <Rating>
         <Text>Twoja ocena:</Text>
-        <StarRating getNumberOfStars={setUserStars} />
+        <StarRating rate={0} getNumberOfStars={setUserStars} />
       </Rating>
       <Review>
         <ReviewInput

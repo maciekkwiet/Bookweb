@@ -2,7 +2,7 @@ export enum AppRoute {
   Home = '/',
   Register = '/register',
   Login = '/login',
-  MyBooks = '/mybbooks',
+  MyBooks = '/mybooks',
   Ranking = '/ranking',
   Author = '/author',
   Book = '/book/:id',

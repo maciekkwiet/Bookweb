@@ -1,25 +1,33 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useParams, useHistory } from 'react-router-dom';
+import { format } from 'date-fns';
 
 import { BigLabel } from '../../Components/BigLabel/BigLabel';
 import StarRating from '../../Components/Star/StarRating';
 import { Button } from '../../Components/Button/Button';
+import { Avatar } from '../../Components/Avatar/Avatar';
 import {
   Flex,
   Title,
   BookInformation,
   Information,
   Cover,
+  BookImage,
   Info,
   InfoLine,
   Stars,
   Buttons,
   Description,
-  ReviewTitle,
+  ReviewsTitle,
   Reviews,
   Review,
+  UserInfoBox,
+  AvatarBox,
+  UserName,
+  WhenAdded,
+  ReviewText,
 } from './BookPageStyles';
-import { useParams } from 'react-router-dom';
 
 type Book = {
   id: number;
@@ -33,74 +41,104 @@ type Book = {
   name?: string;
   surname?: string;
   average?: number;
+  reviews?: Array<{
+    review_id: number;
+    content: string;
+    score: number;
+    added_at: Date;
+    user_id: number;
+    avatar: string;
+    name: string;
+    surname: string;
+  }>;
 };
 
 export const BookPage = () => {
   const { id } = useParams<{ id: string }>();
   const [bookData, setBookData] = useState<Book>();
+  const history = useHistory();
+
+  const handleRouteChange = () => {
+    let path = `/addreview/${id}`;
+    history.push(path);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       const bookResult: any = await axios('http://localhost:8080/api/books/details/' + id);
       const rateResult: any = await axios('http://localhost:8080/api/books/average/' + id);
+      //musze pobrac dane z review i dane uzytkownika
+      const reviewResult: any = await axios('http://localhost:8080/api/reviews/all/' + id);
       if (rateResult.data.length > 0) {
         const average = parseInt(rateResult.data[0].rating);
-        setBookData({ ...bookResult.data[0], average });
+        const { data } = reviewResult;
+        setBookData({ ...bookResult.data[0], average, reviews: data });
       } else {
-        setBookData(bookResult.data[0]);
+        const { data } = reviewResult;
+        setBookData({ ...bookResult.data[0], reviews: data });
       }
     };
     fetchData();
   }, [id]);
 
+  console.log(bookData);
   return (
     <Flex>
       <Title>
-        <BigLabel title={'placeholder'} />
+        <BigLabel title={bookData?.title} />
       </Title>
       <BookInformation>
         <Information>
           <Cover>
-            <img src="https://res.cloudinary.com/bookwebproject/image/upload/v1618084797/null_y0y0lg.png" alt="bla" />
+            <BookImage src={bookData?.cover} />
           </Cover>
           <Info>
-            <InfoLine>{`${bookData?.name} ${bookData?.surname}`}</InfoLine>
-            <InfoLine>{'wydaw'}</InfoLine>
-            <InfoLine>{'data'}</InfoLine>
-            <InfoLine>{'stron'}</InfoLine>
-            <InfoLine>{'isbn'}</InfoLine>
-            <InfoLine>{'srednia'}</InfoLine>
+            <InfoLine>{`${bookData?.name ?? ''} ${bookData?.surname ?? ''}`}</InfoLine>
+            <InfoLine>Wydawnictwo: {'getWydawnictwoByBookId'}</InfoLine>
+            <InfoLine>Data wydania: {format(bookData?.release_date ?? new Date(), 'YYYY-MM-DD')}</InfoLine>
+            <InfoLine>Liczba stron: {bookData?.num_pages}</InfoLine>
+            <InfoLine>ISBN: {bookData?.isbn}</InfoLine>
+            <InfoLine>Srednia ocen: {bookData?.average ?? 0}</InfoLine>
             <Stars>
-              <StarRating getNumberOfStars={(e) => console.log(e)}></StarRating>
+              {bookData && (
+                <StarRating
+                  disabled
+                  rate={bookData?.average}
+                  getNumberOfStars={(e) => {
+                    return;
+                  }}
+                ></StarRating>
+              )}
             </Stars>
           </Info>
           <Buttons>
             <Button onClick={() => console.log('dodaj na polke')} children={'Dodaj na polke'}></Button>
-            <Button onClick={() => console.log('ocen ksiazke')} children={'Ocen ksiazke'}></Button>
+            <Button disabled onClick={() => console.log('soonTM')} children={'Sprawdz gdzie zdobyc'}></Button>
+            <Button onClick={handleRouteChange} children={'Ocen ksiazke'}></Button>
           </Buttons>
         </Information>
         <Description>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque, corrupti impedit. Dicta enim id pariatur
-            perferendis tenetur nobis culpa et iste quo, perspiciatis repudiandae placeat vel magnam, quia tempore
-            corrupti? Ex cumque repellat impedit! Voluptates, expedita placeat tempore quasi ad dolorum voluptate
-            reiciendis ratione quia possimus eum sed at in aliquam accusantium commodi, eos accusamus cupiditate eveniet
-            inventore dolores reprehenderit? Labore molestias quod, explicabo consectetur animi repudiandae corrupti
-            placeat hic dicta recusandae ratione eligendi dolorem doloremque eius sunt excepturi voluptatibus facilis
-            earum fugit, aperiam eveniet ab porro, modi nisi? Officia. Animi tempora iste eius ipsa ut molestiae
-            consectetur, molestias, natus inventore veritatis nam sequi ex placeat pariatur sapiente deserunt. Adipisci
-            aliquid ipsa perferendis eos recusandae velit laudantium magnam facere tempora! Dignissimos facere nisi
-            modi, ut tenetur quas earum nihil quidem non quia illo aspernatur praesentium assumenda. Repellat laboriosam
-            tempore ipsa voluptates, quaerat, odio explicabo repellendus quasi eveniet praesentium maxime doloribus?
-          </p>
+          <p>{bookData?.description}</p>
         </Description>
       </BookInformation>
-      <Reviews>
-        <ReviewTitle>Opinie czytelnikow:</ReviewTitle>
-        <Review></Review>
-        <Review></Review>
-        <Review></Review>
-      </Reviews>
+      {bookData?.reviews && (
+        <Reviews>
+          <ReviewsTitle>Opinie czytelnikow:</ReviewsTitle>
+          {bookData.reviews.map((review) => (
+            <Review key={review.review_id}>
+              <UserInfoBox>
+                <AvatarBox>
+                  <Avatar />
+                </AvatarBox>
+                <UserName>{`${review.name} ${review.surname}`}</UserName>
+                <WhenAdded>{format(review.added_at, 'YYYY-MM-DD')}</WhenAdded>
+                <StarRating disabled getNumberOfStars rate={review.score}></StarRating>
+              </UserInfoBox>
+              <ReviewText>{review.content}</ReviewText>
+            </Review>
+          ))}
+        </Reviews>
+      )}
     </Flex>
   );
 };
