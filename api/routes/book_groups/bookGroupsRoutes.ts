@@ -37,6 +37,7 @@ import {
   getBooksFromBookGroup,
   addBooktoBookGroup,
   deleteBookfromBookGroup,
+  getBookShelf,
 } from './bookGroups';
 import getId from '../../middleware/getId';
 import hasReadAccessToBookGroup from '../../middleware/hasReadAccessToBookGroup';
@@ -53,5 +54,6 @@ router.delete('/:id', hasWriteAccessToBookGroup, deleteBookGroup);
 router.get('/:id/books', hasReadAccessToBookGroup, getBooksFromBookGroup);
 router.post('/:id/books', hasWriteAccessToBookGroup, addBooktoBookGroup);
 router.delete('/:id/books/:book_id', hasWriteAccessToBookGroup, deleteBookfromBookGroup);
+router.get('/:email/:book_groups/bookShelves', getBookShelf)
 
 module.exports = router;
