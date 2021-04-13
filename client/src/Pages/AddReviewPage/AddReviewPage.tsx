@@ -41,7 +41,6 @@ export const AddReviewPage = () => {
   const [userStars, setUserStars] = useState<number>(0);
   const { addToast } = useToasts();
   const history = useHistory();
-  // Czy to tak sie uzywa useSelector by pobrac id ze store?
   const userId = useSelector((state: RootState) => state.user.user?.id);
 
   const handleClick = () => {
@@ -81,7 +80,7 @@ export const AddReviewPage = () => {
   return (
     <Flex>
       <Title>
-        <BigLabel title={bookData?.title ?? 'Loading...'}></BigLabel>
+        <BigLabel title={bookData?.title ?? ' '}></BigLabel>
       </Title>
       <Description>
         <BookDescription
