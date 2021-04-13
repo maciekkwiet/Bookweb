@@ -6,6 +6,7 @@ import { Shelf } from '../Components/Shelf/Shelf';
 import { ShelfImage } from '../Components/Shelf/ShelfStyles'
 import { ForYouBox } from '../Components/Box/ForYouBox'
 import { BoxComponentProps } from '../Components/Box/Box'
+
 import {
   LoggedHomePageWrapper,
   MyBooksWrapper,
@@ -32,6 +33,7 @@ export const LoggedHomePage = () => {
     const data = await response.json();
     setForYouBooks(data);
   }
+
 
   return (
     <LoggedHomePageWrapper>
@@ -73,8 +75,8 @@ export const LoggedHomePage = () => {
                 title={book.title}
                 author={book.author}
                 rate={book.rate}
-                review={book.review}
-                image={book.image}
+                review={book.description}
+                image={book.cover}
               />
 
             ))}

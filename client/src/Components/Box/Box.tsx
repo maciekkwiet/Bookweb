@@ -14,24 +14,24 @@ export type BoxComponentProps = {
   title: string;
   author: string;
   rate: number;
-  review: string;
-  image: string;
+  description: string;
+  cover: string;
 };
 
-export const Box: FC<BoxComponentProps> = ({ title, author, rate, review, image }) => {
+export const Box: FC<BoxComponentProps> = ({ title, author, rate, description, cover }) => {
   const readMoreHandler = () => { };
 
   return (
     <BoxComponent data-testid="BoxId">
       <ImgContainer>
-        <BookImage src={image}></BookImage>
+        <BookImage src={cover}></BookImage>
       </ImgContainer>
       <ContentContainer>
         <BookTitleParagraph>{title}</BookTitleParagraph>
         <BookParagraph>{author}</BookParagraph>
         <BookParagraph>Średnia ocena: {rate}</BookParagraph>
         <BoxBookReview>
-          {review.slice(0, 200)}
+          {description.slice(0, 200)}
           <BoxReadMore onClick={readMoreHandler} data-testid="BoxReadMoreId">
             czytaj więcej
           </BoxReadMore>

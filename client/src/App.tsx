@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { LoggedHomePage } from '../src/Pages/LoggedHomePage'
 
+
 function App() {
   const queryClient = new QueryClient();
   return (
