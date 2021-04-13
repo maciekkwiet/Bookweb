@@ -76,7 +76,6 @@ export const InfoLine = styled.p`
 `;
 
 export const Rating = styled.div`
-  /* padding: 2rem 0; */
   display: flex;
   align-items: center;
 
@@ -91,7 +90,7 @@ export const Text = styled.p`
 
 export const Review = styled.div`
   padding: 2rem 15% 0 15%;
-  height: 30%;
+  height: 200px;
 `;
 
 export const ReviewInput = styled.textarea`
