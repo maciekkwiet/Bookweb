@@ -11,11 +11,6 @@ import {
 } from './BoxStyles';
 
 export type BoxComponentProps = {
-  // title: string;
-  // author: string;
-  // rate: number;
-  // description: string;
-  // cover: string;
   book_id?: number;
   title: string;
   cover: string;

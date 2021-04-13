@@ -5,10 +5,10 @@ import { SearchingBar } from '../Components/SearchingBar/SearchingBar';
 import { Shelf } from '../Components/Shelf/Shelf';
 import { ShelfImage } from '../Components/Shelf/ShelfStyles'
 import { ForYouBox } from '../Components/Box/ForYouBox'
-import { BoxComponentProps } from '../Components/Box/Box'
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store';
-
+import { Axios } from '../helpers/axios';
+import { BookDetails as BookDetailsType } from '../Components/TopBooks/TopBooksComponent';
 import {
   LoggedHomePageWrapper,
   MyBooksWrapper,
@@ -29,18 +29,26 @@ export const LoggedHomePage = () => {
 
   const handleSubmit = () => { };
 
-  const [forYouBooks, setForYouBooks] = useState<BoxComponentProps[]>([]);
+  const [topBooks, setTopBooks] = useState<BookDetailsType[]>([]);
 
   useEffect(() => {
-    loadForYouBooks()
+    const fetch = async () => {
+      const { data } = await Axios.get('/api/books/top');
+
+      for (let book of data) {
+        const { data: authors } = await Axios.get(`/api/books/${book.id}/authors`);
+        const { data: reviews } = await Axios.get(`/api/books/${book.id}/reviews`);
+
+        book.author = authors.map((author) => `${author.name} ${author.surname}`).join(', ');
+        book.review = reviews[0].content.substring(0, 50);
+      }
+
+      setTopBooks(data);
+      console.log(topBooks);
+    };
+
+    fetch();
   }, []);
-
-  const loadForYouBooks = async () => {
-    const response = await fetch('');
-    const data = await response.json();
-    setForYouBooks(data);
-  }
-
 
   return (
     <LoggedHomePageWrapper>
@@ -58,18 +66,14 @@ export const LoggedHomePage = () => {
           <ShelfImage src={process.env.PUBLIC_URL + '/shelf.png'} />
           <AsideBigLabel title='Polecane dla Ciebie' />
           <ForYouContainer >
-
-            {/* {forYouBooks.map(book => (
-              <ForYouBox
-                key={book.title}
-                title={book.title}
-                author={book.author}
-                rate={book.score}
-                review={book.description}
-                image={book.cover}
-              />
-
-            ))} */}
+            {topBooks.map(book => <ForYouBox
+              id={book.id}
+              title={book.title}
+              author={book.author}
+              review=''
+              rating={String(parseFloat(parseFloat(book.rating).toFixed(2)))}
+              cover={book.cover}
+            />)}
           </ForYouContainer>
           <AsideBigLabel title='Aktywność znajomych' />
         </AsideWrapper>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyledComponent } from 'styled-components';
 import { BigLabelComponent } from './BigLabelStyles';
 
 export type BigLabelComponentProps = {
