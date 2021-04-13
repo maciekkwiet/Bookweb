@@ -5,7 +5,7 @@ export const Flex = styled.div`
   background: ${theme.backgrounds.bigCardGradient};
   box-sizing: border-box;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 `;
