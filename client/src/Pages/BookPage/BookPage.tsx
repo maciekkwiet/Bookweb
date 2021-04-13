@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { Axios } from '../../helpers/axios';
 import { useParams, useHistory } from 'react-router-dom';
 import { format } from 'date-fns';
 
@@ -66,9 +66,9 @@ export const BookPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const bookResult: any = await axios('http://localhost:8080/api/books/details/' + id);
-      const rateResult: any = await axios('http://localhost:8080/api/books/average/' + id);
-      const reviewResult: any = await axios('http://localhost:8080/api/reviews/all/' + id);
+      const bookResult: any = await Axios('http://localhost:8080/api/books/details/' + id);
+      const rateResult: any = await Axios('http://localhost:8080/api/books/average/' + id);
+      const reviewResult: any = await Axios('http://localhost:8080/api/reviews/all/' + id);
       if (rateResult.data.length > 0) {
         const average = parseInt(rateResult.data[0].rating);
         const { data } = reviewResult;

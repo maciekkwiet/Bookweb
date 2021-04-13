@@ -4,8 +4,8 @@ import { theme } from '../../Theme';
 export const Flex = styled.div`
   background: ${theme.backgrounds.bigCardGradient};
   box-sizing: border-box;
-  width: 100%;
-  height: 100%;
+  min-width: 100%;
+  min-height: 100vmax;
   display: flex;
   flex-direction: column;
   padding-bottom: 2rem;
@@ -27,7 +27,6 @@ export const BookInformation = styled.div`
 
 export const Information = styled.div`
   display: flex;
-  height: 50%;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -43,7 +42,7 @@ export const Cover = styled.div`
   padding: 2rem 0;
 
   @media screen and (max-width: 768px) {
-    width: 70%;
+    width: 50%;
     padding: 0.5rem;
   }
 `;
@@ -111,6 +110,11 @@ export const Reviews = styled.div`
   flex-direction: column;
   gap: 2rem;
   padding: 2rem 10% 0 10%;
+
+  @media screen and (max-width: 768px) {
+    padding: 0;
+    gap: 1rem;
+  }
 `;
 
 export const ReviewsTitle = styled.p`
@@ -135,6 +139,12 @@ export const AvatarBox = styled.div`
   height: 80%;
   width: 50px;
   padding-left: 50px;
+
+  @media screen and (max-width: 768px) {
+    padding-left: 5%;
+    height: 50px;
+    width: 50px;
+  }
 `;
 
 export const Avatar = styled.img`
@@ -147,12 +157,21 @@ export const UserName = styled.p`
   margin: 0;
   padding: 0 15px 0 50px;
   width: 150px;
+
+  @media screen and (max-width: 768px) {
+    padding: 0 5% 0;
+    width: 70px;
+  }
 `;
 
 export const WhenAdded = styled.p`
   margin: 0;
   padding: 0 65px 0 50px;
   width: 15%;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const ReviewText = styled.p`
