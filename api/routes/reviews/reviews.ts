@@ -34,7 +34,7 @@ export const createReview = (request: UserInfoRequest, response: Response) => {
         throw error;
       }
       response.status(201).send(`Reviev added`);
-    }
+    },
   );
 };
 
@@ -49,7 +49,7 @@ export const updateReview = (request: UserInfoRequest, response: Response) => {
         throw error;
       }
       response.status(200).send(`Review modified`);
-    }
+    },
   );
 };
 
@@ -64,10 +64,27 @@ export const deleteReview = (request: Request, response: Response) => {
   });
 };
 
+export const getAllReviewsByBookId = (request: Request, response: Response) => {
+  const id = parseInt(request.params.id);
+
+  pool.query(
+    'SELECT r.id review_id, r.content, r.score, r.added_at, r.user_id, r.book_id, u.id user_id, u.name, u.surname, u.avatar FROM reviews r INNER JOIN users u ON r.user_id = u.id WHERE book_id = $1',
+    [id],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
+    },
+  );
+};
+
+// 'SELECT b.id book_id, b.isbn, b.title, b.release_date, b.num_pages, b.cover, b.description, a.id author_id, a.name, a.surname FROM books b INNER JOIN authors_books c ON b.id = c.book_id INNER JOIN authors a ON a.id=c.author_id WHERE book_id = $1',
 module.exports = {
   getReviews,
   getReviewById,
   createReview,
   updateReview,
   deleteReview,
+  getAllReviewsByBookId,
 };
