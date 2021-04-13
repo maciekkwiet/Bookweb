@@ -6,13 +6,17 @@ import { RootState } from '../../app/store';
 import { Axios } from '../../helpers/axios';
 import { format } from 'date-fns';
 import { BigLabel } from '../../Components/BigLabel/BigLabel';
-import { BookDescription } from '../../Components/BookDescription/BookDescription';
 import StarRating from '../../Components/Star/StarRating';
 import { Button } from '../../Components/Button/Button';
 import {
   Flex,
   Title,
   Description,
+  Information,
+  Cover,
+  BookImage,
+  Info,
+  InfoLine,
   Rating,
   Text,
   Review,
@@ -84,21 +88,23 @@ export const AddReviewPage = () => {
         <BigLabel title={bookData?.title ?? 'Loading...'}></BigLabel>
       </Title>
       <Description>
-        <BookDescription
-          author={`${bookData?.name ?? ''} ${bookData?.surname ?? ''}`}
-          isbn={bookData?.isbn}
-          releaseDate={format(bookData?.release_date ?? new Date(), 'YYYY-MM-DD')}
-          numberOfPages={bookData?.num_pages}
-          image={
-            bookData?.cover ?? 'https://res.cloudinary.com/bookwebproject/image/upload/v1618084797/null_y0y0lg.png'
-          }
-          averageRating={bookData?.average}
-        />
+        <Information>
+          <Cover>
+            <BookImage src={bookData?.cover} />
+          </Cover>
+          <Info>
+            <InfoLine>{`${bookData?.name ?? ''} ${bookData?.surname ?? ''}`}</InfoLine>
+            <InfoLine>Data wydania: {format(bookData?.release_date ?? new Date(), 'YYYY-MM-DD')}</InfoLine>
+            <InfoLine>Liczba stron: {bookData?.num_pages}</InfoLine>
+            <InfoLine>ISBN: {bookData?.isbn}</InfoLine>
+            <InfoLine>Srednia ocen: {bookData?.average ?? 0}</InfoLine>
+          </Info>
+        </Information>
+        <Rating>
+          <Text>Twoja ocena:</Text>
+          <StarRating rate={0} getNumberOfStars={setUserStars} />
+        </Rating>
       </Description>
-      <Rating>
-        <Text>Twoja ocena:</Text>
-        <StarRating rate={0} getNumberOfStars={setUserStars} />
-      </Rating>
       <Review>
         <ReviewInput
           placeholder="Napisz co myślisz o tej książce...."
