@@ -34,7 +34,7 @@ type Book = {
   isbn: number;
   title: string;
   description?: string;
-  release_date: string;
+  release_date: Date;
   num_pages?: number;
   cover?: string;
   author_id?: number;

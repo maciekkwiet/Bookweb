@@ -29,7 +29,7 @@ type Book = {
   isbn: number;
   title: string;
   description?: string;
-  release_date: string;
+  release_date: Date;
   num_pages?: number;
   cover?: string;
   author_id?: number;
@@ -48,26 +48,28 @@ export const AddReviewPage = () => {
   const userId = useSelector((state: RootState) => state.user.user?.id);
 
   const handleClick = async () => {
-    try {
-      const date = format(new Date(), 'YYYY-MM-DD HH:mm:ss');
-      const reviewInfo = {
-        content: userReview,
-        header: '',
-        score: userStars,
-        added_at: date,
-        user_id: userId,
-        book_id: id,
-      };
+    const date = format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+    const reviewInfo = {
+      content: userReview,
+      header: '',
+      score: userStars,
+      added_at: date,
+      user_id: userId,
+      book_id: id,
+    };
 
-      await Axios.post('http://localhost:8080/api/reviews/', reviewInfo).then(() => {
-        history.push('/');
-        addToast(`Review added for ${bookData?.title}`, {
-          appearance: 'success',
-          autoDismiss: true,
-        });
+    try {
+      await Axios.post('http://localhost:8080/api/reviews/', reviewInfo);
+      history.push('/');
+      addToast(`Dodano recenzje dla ${bookData?.title}`, {
+        appearance: 'success',
+        autoDismiss: true,
       });
     } catch (err) {
-      console.error(err.message, err.name);
+      addToast(`Nie udało się dodać recenzji dla ${bookData?.title}`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
     }
   };
 
