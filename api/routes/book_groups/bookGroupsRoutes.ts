@@ -15,13 +15,13 @@ import hasWriteAccessToBookGroup from '../../middleware/hasWriteAccessToBookGrou
 const Router = require('express-promise-router');
 
 const router = new Router();
-router.get('/', getId, getBookGroups);
-router.post('/', getId, createBookGroup);
-router.get('/:id', getId, hasReadAccessToBookGroup, getBookGroup);
-router.patch('/:id', getId, hasWriteAccessToBookGroup, modifyBookGroup);
-router.delete('/:id', getId, hasWriteAccessToBookGroup, deleteBookGroup);
-router.get('/:id/books', getId, hasReadAccessToBookGroup, getBooksFromBookGroup);
-router.post('/:id/books', getId, hasWriteAccessToBookGroup, addBooktoBookGroup);
-router.delete('/:id/books/:book_id', getId, hasWriteAccessToBookGroup, deleteBookfromBookGroup);
+router.get('/', getBookGroups);
+router.post('/', createBookGroup);
+router.get('/:id', hasReadAccessToBookGroup, getBookGroup);
+router.patch('/:id', hasWriteAccessToBookGroup, modifyBookGroup);
+router.delete('/:id', hasWriteAccessToBookGroup, deleteBookGroup);
+router.get('/:id/books', hasReadAccessToBookGroup, getBooksFromBookGroup);
+router.post('/:id/books', hasWriteAccessToBookGroup, addBooktoBookGroup);
+router.delete('/:id/books/:book_id', hasWriteAccessToBookGroup, deleteBookfromBookGroup);
 
 module.exports = router;
