@@ -20,7 +20,7 @@ export const UserActivityBox: FC<UserActivityBoxProps> = ({ title, author, rate,
     <ActivityBox>
       <RatingDiv>
         <ActivityTitle> {username} ocenił ksiązkę </ActivityTitle>
-        <StarRating />
+        <StarRating getNumberOfStars/>
       </RatingDiv>
       <Box
         title="Securing DevOps"
