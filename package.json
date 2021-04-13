@@ -12,6 +12,7 @@
   "author": "THE BEST",
   "license": "ISC",
   "dependencies": {
+    "@types/date-fns": "^2.6.0",
     "bcrypt": "^5.0.1",
     "date-fns": "^2.20.1",
     "husky": "^4.2.5",
