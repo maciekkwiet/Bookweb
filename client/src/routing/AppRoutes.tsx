@@ -6,7 +6,7 @@ import { HomePage } from '../Pages/HomePage';
 import { MyBooksPage } from '../Pages/MyBooksPage';
 import { RankingPage } from '../Pages/RankingPage';
 import { AuthorPage } from '../Pages/AuthorPage';
-import { BookPage } from '../Pages/BookPage';
+import { BookPage } from '../Pages/BookPage/BookPage';
 import { BooksCatalogPage } from '../Pages/BooksCatalogPage';
 import { ProvidersCatalogPage } from '../Pages/ProvidersCatalogPage';
 import { AddNewBookPage } from '../Pages/AddNewBookPage';

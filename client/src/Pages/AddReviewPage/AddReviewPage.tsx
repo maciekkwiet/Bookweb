@@ -88,7 +88,7 @@ export const AddReviewPage = () => {
   return (
     <Flex>
       <Title>
-        <BigLabel title={bookData?.title ?? 'Loading...'}></BigLabel>
+        <BigLabel title={bookData?.title ?? ' '}></BigLabel>
       </Title>
       <Description>
         <Information>

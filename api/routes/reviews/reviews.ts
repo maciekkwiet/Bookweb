@@ -63,10 +63,26 @@ export const deleteReview = (request: Request, response: Response) => {
   });
 };
 
+export const getAllReviewsByBookId = (request: Request, response: Response) => {
+  const id = parseInt(request.params.id);
+
+  pool.query(
+    'SELECT r.id review_id, r.content, r.score, r.added_at, r.user_id, r.book_id, u.id user_id, u.name, u.surname, u.avatar FROM reviews r INNER JOIN users u ON r.user_id = u.id WHERE book_id = $1',
+    [id],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
+    },
+  );
+};
+
 module.exports = {
   getReviews,
   getReviewById,
   createReview,
   updateReview,
   deleteReview,
+  getAllReviewsByBookId,
 };
