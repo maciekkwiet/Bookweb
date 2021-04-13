@@ -15,11 +15,6 @@ import { Axios } from '../helpers/axios';
 import { TitleDiv } from '../Components/TopBooks/TopBookComponentStyles';
 import { RegistrationDiv } from '../Components/RegistrationForm/RegistrationFormStyles';
 
-const SignupSchema = Yup.object().shape({
-  email: Yup.string().email('Niewłaściwy adres email').required('Email jest wymagany!'),
-  password: Yup.string().min(8, 'Hasło musi mieś conajmniej 8 znaków!').required('Hasło jest wymagane!'),
-});
-
 export const RegisterHomePage = () => {
   const dispatch = useDispatch();
   const [topBooks, setTopBooks] = useState<BookDetailsType[]>([]);
