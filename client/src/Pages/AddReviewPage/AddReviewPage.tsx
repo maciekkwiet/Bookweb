@@ -45,27 +45,30 @@ export const AddReviewPage = () => {
   const [userStars, setUserStars] = useState<number>(0);
   const { addToast } = useToasts();
   const history = useHistory();
-  // Czy to tak sie uzywa useSelector by pobrac id ze store?
   const userId = useSelector((state: RootState) => state.user.user?.id);
 
-  const handleClick = () => {
-    const date = format(new Date(), 'YYYY-MM-DD HH:mm:ss');
-    const reviewInfo = {
-      content: userReview,
-      header: 'test',
-      score: userStars,
-      added_at: date,
-      user_id: userId,
-      book_id: id,
-    };
+  const handleClick = async () => {
+    try {
+      const date = format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+      const reviewInfo = {
+        content: userReview,
+        header: '',
+        score: userStars,
+        added_at: date,
+        user_id: userId,
+        book_id: id,
+      };
 
-    Axios.post('http://localhost:8080/api/reviews/', reviewInfo).then(() => {
-      history.push('/');
-      addToast(`Review added for ${bookData?.title}`, {
-        appearance: 'success',
-        autoDismiss: true,
+      await Axios.post('http://localhost:8080/api/reviews/', reviewInfo).then(() => {
+        history.push('/');
+        addToast(`Review added for ${bookData?.title}`, {
+          appearance: 'success',
+          autoDismiss: true,
+        });
       });
-    });
+    } catch (err) {
+      console.error(err.message, err.name);
+    }
   };
 
   useEffect(() => {

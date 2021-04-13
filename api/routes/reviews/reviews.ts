@@ -23,7 +23,6 @@ export const getReviewById = (request: Request, response: Response) => {
 };
 
 export const createReview = (request: UserInfoRequest, response: Response) => {
-  // const userId: number = request.userId;
   const { header, content, score, added_at, book_id, user_id } = request.body;
 
   pool.query(
@@ -34,7 +33,7 @@ export const createReview = (request: UserInfoRequest, response: Response) => {
         throw error;
       }
       response.status(201).send(`Reviev added`);
-    }
+    },
   );
 };
 
@@ -49,7 +48,7 @@ export const updateReview = (request: UserInfoRequest, response: Response) => {
         throw error;
       }
       response.status(200).send(`Review modified`);
-    }
+    },
   );
 };
 
