@@ -2,7 +2,7 @@ import React from 'react';
 import { BigLabelComponent } from './BigLabelStyles';
 
 export type BigLabelComponentProps = {
-  title: string;
+  title?: string;
 };
 
 export const BigLabel = ({ title, ...otherProps }: BigLabelComponentProps) => {

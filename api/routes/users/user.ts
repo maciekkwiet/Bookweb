@@ -4,16 +4,17 @@ const bcrypt = require('bcrypt');
 const jwtGenerator = require('../../utils/jwtGenerator');
 const { validationResult } = require('express-validator');
 import { uploadImage } from '../../utils/imageTools';
+import { initialShelves } from '../../utils/constants';
 
 //Funkcja którą można by wynieść i używać do wyszukiwania po ID - nie wiem jak z obsługą błędów - może za pomocą try/catch
 const getById = async (table: string, id: number) => {
   let rows: object[] = [];
   await pool
     .query(`SELECT * FROM ${table} WHERE ID = $1`, [id])
-    .then(results => {
+    .then((results) => {
       rows = results.rows;
     })
-    .catch(error => {
+    .catch((error) => {
       throw new Error(error);
     });
 
@@ -26,8 +27,8 @@ const getById = async (table: string, id: number) => {
 export const getAllUsers = async (req: Request, res: Response) => {
   await pool
     .query('SELECT * FROM users ORDER BY id ASC')
-    .then(results => res.status(200).json(results.rows))
-    .catch(error => res.status(500).json(error.message));
+    .then((results) => res.status(200).json(results.rows))
+    .catch((error) => res.status(500).json(error.message));
 };
 
 export const getUser = async (req: Request, res: Response) => {
@@ -80,7 +81,6 @@ export const updateUser = async (req: Request, res: Response) => {
 };
 
 export const registerUser = async (req: Request, res: Response) => {
-  
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -96,19 +96,22 @@ export const registerUser = async (req: Request, res: Response) => {
       return res.status(401).send('User already exist');
     }
 
-
     //3. Bcrypt the user password
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(password, salt);
 
     //4. enter the new user inside our db
-   
+
     const newUser = await pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *', [
       name,
       email,
       bcryptPassword,
     ]);
- 
+
+    initialShelves.map(async (s: string) => {
+      await pool.query('INSERT INTO book_groups (name, user_id) VALUES ($1, $2)', [s, newUser.rows[0].id]);
+    });
+
     newUser.rows[0].token = jwtGenerator(newUser.rows[0].id);
 
     res.json(newUser.rows[0]);
