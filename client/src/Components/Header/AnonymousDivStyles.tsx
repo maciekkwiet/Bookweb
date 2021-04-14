@@ -44,8 +44,8 @@ export const ErrorMessageEmail = styled.span`
   font-size: 11px;
   margin-top: 5px;
   position: absolute;
-  top: 6%;
-  right: 17%;
+  top: 9%;
+  right: 26%;
 `;
 
 export const ErrorMessagePassword = styled.span`
@@ -53,6 +53,6 @@ export const ErrorMessagePassword = styled.span`
   font-size: 11px;
   margin-top: 5px;
   position: absolute;
-  top: 6%;
-  right: 4%;
+  top: 9%;
+  right: 6%;
 `;
