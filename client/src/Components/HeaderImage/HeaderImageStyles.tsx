@@ -11,7 +11,7 @@ export const HeaderImageComponent = styled.div`
   flex-direction: column;
   padding: 1%;
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
-    height: 30vh;
+    height: 35vh;
   }
 `;
 
@@ -37,7 +37,7 @@ export const Subtitle = styled.h1`
   font-weight: normal;
   font-family: ${(props) => props.theme.fonts.default};
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
-    font-size: 35px;
+    font-size: 25px;
   }
   @media only screen and (max-width: ${(props) => props.theme.size.xs}) {
     font-size: 18px;

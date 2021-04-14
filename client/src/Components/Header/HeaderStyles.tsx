@@ -6,9 +6,10 @@ export const HeaderComponent = styled.div`
   width: auto;
   height: auto;
   display: flex;
-  background-color: ${(props) => props.theme.backgrounds.bright};
+
+  background: ${(props) => props.theme.backgrounds.headerAndFooter};
   justify-content: space-between;
-  padding: 2%;
+  padding: 1%;
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
     align-items: center;
   }

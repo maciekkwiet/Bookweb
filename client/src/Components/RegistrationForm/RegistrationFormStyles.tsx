@@ -11,16 +11,24 @@ export const RegistrationFormContainer = styled.div`
   color: ${(props) => props.theme.colors.secondary};
   background: ${(props) => props.theme.backgrounds.darkTransparent};
   box-shadow: ${(props) => props.theme.shadows.inset};
-  width: 27vw;
-  height: 30vw;
+  width: 35%;
+  height: auto;
   border-radius: 25px;
   padding: 50px;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    width: 90%;
+    margin-top: 2%;
+    padding: 10px;
+  }
 `;
 
 export const RegistrationFormTitle = styled.h2`
   margin: 0 0 20px 0;
   font-size: 24px;
   text-align: center;
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    font-size: 20px;
+  }
 `;
 
 export const RegistrationInput = styled.input`
@@ -53,4 +61,18 @@ export const RegistrationErrorMessage = styled.div`
   height:2em;
   width:20vw;
   margin 5px 0 0 0;
+`;
+
+export const RegistrationDiv = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5em 0em;
+  flex-wrap: wrap;
+  background: ${(props) => props.theme.backgrounds.mainGradient};
+  width: '100%';
+  @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
+    flex-direction: column;
+    padding: 2em 0em;
+  }
 `;

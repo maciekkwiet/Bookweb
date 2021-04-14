@@ -108,6 +108,7 @@ export const registerUser = async (req: Request, res: Response) => {
       bcryptPassword,
     ]);
 
+
     initialShelves.map(async (s: string) => {
       await pool.query('INSERT INTO book_groups (name, user_id) VALUES ($1, $2)', [s, newUser.rows[0].id]);
     });

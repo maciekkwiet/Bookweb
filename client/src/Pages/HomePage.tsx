@@ -1,3 +1,9 @@
+import { RegisterHomePage } from './RegisterHomePage';
+
 export const HomePage = () => {
-  return <div>Home Page</div>;
+  return (
+    <div>
+      <RegisterHomePage></RegisterHomePage>
+    </div>
+  );
 };

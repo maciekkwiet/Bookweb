@@ -17,7 +17,6 @@ export const LogDiv = styled.div`
 export const LogInput = styled(InputComponent)`
   width: 30%;
   height: 20%;
-  margin-top: 5%;
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
     margin-bottom: 0;
     margin-top: 0;
@@ -31,7 +30,6 @@ export const LogInput = styled(InputComponent)`
 `;
 export const LogButton = styled(ButtonComponent)`
   z-index: 1;
-  margin: 3% 0 0 0;
   padding-top: 7px;
   padding-bottom: 7px;
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
@@ -39,4 +37,22 @@ export const LogButton = styled(ButtonComponent)`
     height: 100%;
     margin-left: 30%;
   }
+`;
+
+export const ErrorMessageEmail = styled.span`
+  color: red;
+  font-size: 11px;
+  margin-top: 5px;
+  position: absolute;
+  top: 6%;
+  right: 17%;
+`;
+
+export const ErrorMessagePassword = styled.span`
+  color: red;
+  font-size: 11px;
+  margin-top: 5px;
+  position: absolute;
+  top: 6%;
+  right: 4%;
 `;

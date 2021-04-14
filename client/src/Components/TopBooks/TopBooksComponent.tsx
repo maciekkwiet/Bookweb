@@ -30,3 +30,4 @@ export const TopBooksBox: FC<TopBooksProps> = ({ topBooks }) => {
 
   return <TopBooksComponent>{booksList}</TopBooksComponent>;
 };
+

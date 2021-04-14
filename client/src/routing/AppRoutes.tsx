@@ -9,8 +9,10 @@ import { AuthorPage } from '../Pages/AuthorPage';
 import { BookPage } from '../Pages/BookPage/BookPage';
 import { BooksCatalogPage } from '../Pages/BooksCatalogPage';
 import { ProvidersCatalogPage } from '../Pages/ProvidersCatalogPage';
+import { RegisterHomePage } from '../Pages/RegisterHomePage';
 import { AddNewBookPage } from '../Pages/AddNewBookPage';
 import { AddReviewPage } from '../Pages/AddReviewPage/AddReviewPage';
+
 
 export const AppRoutes = () => {
   return (
@@ -24,6 +26,7 @@ export const AppRoutes = () => {
         <Route path={AppRoute.Book} component={BookPage} />
         <Route path={AppRoute.BooksCatalog} component={BooksCatalogPage} />
         <Route path={AppRoute.ProvidersCatalog} component={ProvidersCatalogPage} />
+        <Route path={AppRoute.Home} component={HomePage} />
         <Route path={AppRoute.AddNewBook} component={AddNewBookPage} />
         <Route path={AppRoute.AddReview} component={AddReviewPage} />
         <Redirect to={AppRoute.Home} />
