@@ -57,7 +57,7 @@ export const RegistrationButton = styled.button`
 
 export const RegistrationErrorMessage = styled.div`
   color: red;
-  font-size:14px;
+  font-size:12px;
   height:2em;
   width:20vw;
   margin 5px 0 0 0;
