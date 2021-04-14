@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwtGenerator = require('../../utils/jwtGenerator');
 const { validationResult } = require('express-validator');
 import { uploadImage } from '../../utils/imageTools';
+import { initialShelves } from '../../utils/constants';
 
 //Funkcja którą można by wynieść i używać do wyszukiwania po ID - nie wiem jak z obsługą błędów - może za pomocą try/catch
 const getById = async (table: string, id: number) => {
@@ -106,6 +107,11 @@ export const registerUser = async (req: Request, res: Response) => {
       email,
       bcryptPassword,
     ]);
+
+
+    initialShelves.map(async (s: string) => {
+      await pool.query('INSERT INTO book_groups (name, user_id) VALUES ($1, $2)', [s, newUser.rows[0].id]);
+    });
 
     newUser.rows[0].token = jwtGenerator(newUser.rows[0].id);
 

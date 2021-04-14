@@ -50,10 +50,10 @@
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.13.8.tgz"
   integrity sha512-EaI33z19T4qN3xLXsGf48M2cDqa6ei9tPZlfLdb2HC+e/cFtREiRd8hdSqDbwdLB0/+gLwqJmCYASH0z2bUdog==
 
-"@babel/compat-data@^7.13.12":
-  version "7.13.15"
-  resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.13.15.tgz#7e8eea42d0b64fda2b375b22d06c605222e848f4"
-  integrity sha512-ltnibHKR1VnrU4ymHyQ/CXtNXI6yZC0oJThyW78Hft8XndANwi+9H+UIklBDraIjFEJzw8wmcM427oDd9KS5wA==
+"@babel/core@7.12.3":
+  version "7.12.3"
+  resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.12.3.tgz"
+  integrity sha512-0qXcZYKZp3/6N2jKYVxZv0aNCsxTSVCiK72DTiTYZAu7sjg73W0/aynWjMbiGd87EQL4WyA8reiJVh92AVla9g==
 
   dependencies:
     "@babel/code-frame" "^7.10.4"
@@ -353,20 +353,10 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.13.9.tgz"
   integrity sha512-nEUfRiARCcaVo3ny3ZQjURjHQZUo/JkEw7rLlSZy/psWGnvwXFtPcr6jb7Yb41DVW5LTe6KRq9LGleRNsg1Frw==
 
-"@babel/parser@^7.13.10":
-
+"@babel/parser@^7.13.4":
   version "7.13.15"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.13.15.tgz#8e66775fb523599acb6a289e12929fa5ab0954d8"
   integrity sha512-b9COtcAlVEQljy/9fbcMHpG+UIW9ReF+gpaxDHTlZd0c6/UU9ng8zdySAW9sRTzpvcdCHn6bUcbuYUgGzLAWVQ==
-
-"@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining@^7.13.12":
-  version "7.13.12"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining/-/plugin-bugfix-v8-spread-parameters-in-optional-chaining-7.13.12.tgz#a3484d84d0b549f3fc916b99ee4783f26fabad2a"
-  integrity sha512-d0u3zWKcoZf379fOeJdr1a5WPDny4aOFZ6hlfKivgK0LY7ZxNfoaHL2fWwdGtHyVvra38FC+HVYkO+byfSA8AQ==
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.13.0"
-    "@babel/helper-skip-transparent-expression-wrappers" "^7.12.1"
-    "@babel/plugin-proposal-optional-chaining" "^7.13.12"
 
 
 "@babel/plugin-proposal-async-generator-functions@^7.12.1", "@babel/plugin-proposal-async-generator-functions@^7.13.8":

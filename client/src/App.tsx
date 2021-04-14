@@ -7,6 +7,8 @@ import { AppRoutes } from './routing/AppRoutes';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 
+
+
 function App() {
   const queryClient = new QueryClient();
   return (

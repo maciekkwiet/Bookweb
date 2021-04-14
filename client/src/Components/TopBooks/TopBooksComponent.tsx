@@ -21,12 +21,13 @@ export const TopBooksBox: FC<TopBooksProps> = ({ topBooks }) => {
     <Box
       title={e.title}
       author={e.author}
-      review={e.review}
-      rate={parseFloat(parseFloat(e.rating).toFixed(2))}
-      image={e.cover}
+      description={e.review}
+      score={parseFloat(parseFloat(e.rating).toFixed(2))}
+      cover={e.cover}
       key={e.id}
     ></Box>
   ));
 
   return <TopBooksComponent>{booksList}</TopBooksComponent>;
 };
+

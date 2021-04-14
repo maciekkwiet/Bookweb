@@ -6,6 +6,7 @@ export const HeaderComponent = styled.div`
   width: auto;
   height: auto;
   display: flex;
+
   background: ${(props) => props.theme.backgrounds.headerAndFooter};
   justify-content: space-between;
   padding: 1%;

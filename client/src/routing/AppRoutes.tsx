@@ -6,11 +6,13 @@ import { HomePage } from '../Pages/HomePage';
 import { MyBooksPage } from '../Pages/MyBooksPage';
 import { RankingPage } from '../Pages/RankingPage';
 import { AuthorPage } from '../Pages/AuthorPage';
-import { BookPage } from '../Pages/BookPage';
+import { BookPage } from '../Pages/BookPage/BookPage';
 import { BooksCatalogPage } from '../Pages/BooksCatalogPage';
-import { AddNewBookPage } from '../Pages/AddNewBookPage';
 import { ProvidersCatalogPage } from '../Pages/ProvidersCatalogPage';
 import { RegisterHomePage } from '../Pages/RegisterHomePage';
+import { AddNewBookPage } from '../Pages/AddNewBookPage';
+import { AddReviewPage } from '../Pages/AddReviewPage/AddReviewPage';
+
 
 export const AppRoutes = () => {
   return (
@@ -23,9 +25,10 @@ export const AppRoutes = () => {
         <Route path={AppRoute.Author} component={AuthorPage} />
         <Route path={AppRoute.Book} component={BookPage} />
         <Route path={AppRoute.BooksCatalog} component={BooksCatalogPage} />
-        <Route path={AppRoute.AddNewBook} component={AddNewBookPage} />
         <Route path={AppRoute.ProvidersCatalog} component={ProvidersCatalogPage} />
         <Route path={AppRoute.Home} component={HomePage} />
+        <Route path={AppRoute.AddNewBook} component={AddNewBookPage} />
+        <Route path={AppRoute.AddReview} component={AddReviewPage} />
         <Redirect to={AppRoute.Home} />
       </Switch>
     </BrowserRouter>

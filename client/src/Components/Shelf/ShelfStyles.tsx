@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { BoxBooksComponent } from '../BoxBooks/BoxBooksStyles';
 
 export const ShelfComponent = styled(BoxBooksComponent)`
-  display: flex;
-  flex-wrap: wrap;
-  height: auto;
-  padding: 30px;
+display:flex;
+flex-wrap:wrap;
+ height:auto;
+ padding: 30px;
 `;
 
 export const ShelfTitle = styled.h3`
