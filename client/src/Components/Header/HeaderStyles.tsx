@@ -9,7 +9,7 @@ export const HeaderComponent = styled.div`
 
   background: ${(props) => props.theme.backgrounds.headerAndFooter};
   justify-content: space-between;
-  padding: 1%;
+  padding: 2%;
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
     align-items: center;
   }
