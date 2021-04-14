@@ -8,6 +8,11 @@ export const Flex = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-size: 1.5rem;
+
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 export const Title = styled.div`
@@ -29,6 +34,7 @@ export const Description = styled.div`
 
 export const Information = styled.div`
   display: flex;
+  justify-content: stretch;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -56,8 +62,8 @@ export const BookImage = styled.img`
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  width: 45%;
+  gap: 5%;
+  width: 60%;
   padding: 2rem 0 2rem 2rem;
   @media screen and (max-width: 768px) {
     width: 90%;
