@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { UserInfoRequest } from '../../types/requests';
 import pool from '../../configDB/config';
 
@@ -17,6 +17,35 @@ export const getBookGroups = async (request: UserInfoRequest, response: Response
     response.status(500).json(err);
   }
 };
+
+export const getBookShelf = async (request: Request, response: Response) => {
+  console.log(request.params);
+  const { email, book_groups } = request.params;
+
+  pool.query(
+    `SELECT b.id book_id,
+    b.title,
+    b.cover,
+    b.description,
+    a.id author_id,
+    a.name,
+    a.surname,
+    e.name book_groups,
+    f.score,
+    e.user_id,
+    u.email 
+    FROM books b INNER JOIN authors_books c ON b.id=c.book_id INNER JOIN authors a ON a.id=c.author_id INNER JOIN book_groups_books d ON b.id=d.book_id INNER JOIN book_groups e ON e.id=d.book_group_id INNER JOIN reviews f ON b.id=f.book_id INNER JOIN users u ON u.id=f.user_id  WHERE email=$1 AND e.name=$2`,
+    [email, book_groups],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
+    }
+  );
+
+}
+
 
 export const getBookGroup = async (request: UserInfoRequest, response: Response) => {
   try {

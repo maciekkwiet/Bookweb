@@ -11,8 +11,58 @@ export const getBooks = async (request: Request, response: Response) => {
   });
 };
 
-export const getBookById = async (request: Request, response: Response, id: number) => {
-  const bookId = id ?? parseInt(request.params.id);
+export const getBookAuthors = async (request: Request, response: Response) => {
+  const bookId = parseInt(request.params.id);
+
+  pool.query(
+    `
+    SELECT a.id, a.name, a.surname FROM authors AS a 
+    LEFT JOIN authors_books AS ab ON ab.author_id = a.id 
+    WHERE ab.book_id = $1;`,
+    [bookId],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
+    },
+  );
+};
+
+export const getBookReviews = async (request: Request, response: Response) => {
+  const bookId = parseInt(request.params.id);
+
+  pool.query(
+    `
+    SELECT * FROM reviews WHERE book_id = $1;`,
+    [bookId],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
+    },
+  );
+};
+
+export const getTopBooks = async (request: Request, response: Response) => {
+  pool.query(
+    `
+  SELECT b.id, b.title, r.rating, b.cover FROM books AS b RIGHT JOIN (
+    SELECT book_id, AVG(score) as rating FROM reviews GROUP BY book_id ORDER BY rating DESC LIMIT 6
+  ) AS r ON r.book_id = b.id ORDER BY r.rating DESC;
+`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
+    },
+  );
+};
+
+export const getBookById = async (request: Request, response: Response) => {
+  const bookId = parseInt(request.params.id);
 
   pool.query('SELECT * FROM books WHERE id = $1', [bookId], (error, results) => {
     if (error) {
@@ -111,29 +161,15 @@ export const getScoreByBookId = async (request: Request, response: Response) => 
   );
 };
 
-export const getTopBooks = async (request: Request, response: Response) => {
-  pool.query(
-    `
-  SELECT b.id, b.title, r.rating, b.cover FROM books AS b RIGHT JOIN (
-    SELECT book_id, AVG(score) as rating FROM reviews GROUP BY book_id ORDER BY rating DESC LIMIT 3
-  ) AS r ON r.book_id = b.id ORDER BY r.rating DESC;
-`,
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(200).json(results.rows);
-    },
-  );
-};
-
 module.exports = {
   getBooks,
+  getTopBooks,
   getBookById,
   createBook,
   updateBook,
   deleteBook,
+  getBookAuthors,
+  getBookReviews,
   getBooksWithAuthor,
   getScoreByBookId,
-  getTopBooks,
 };

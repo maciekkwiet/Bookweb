@@ -8,7 +8,8 @@ import {
   BoxBookReview,
   BoxReadMore,
   BookImage,
-} from './BoxStyles';
+} from './ForYouBoxStyles';
+import { BookDetails } from '../TopBooks/TopBooksComponent';
 
 export type BoxComponentProps = {
   book_id?: number;
@@ -26,7 +27,7 @@ export type BoxComponentProps = {
 
 };
 
-export const Box: FC<BoxComponentProps> = ({ title, name, surname, score, description, cover }) => {
+export const ForYouBox: FC<BookDetails> = ({ title, id, rating, author, review, cover }) => {
   const readMoreHandler = () => { };
 
   return (
@@ -36,10 +37,10 @@ export const Box: FC<BoxComponentProps> = ({ title, name, surname, score, descri
       </ImgContainer>
       <ContentContainer>
         <BookTitleParagraph>{title}</BookTitleParagraph>
-        <BookParagraph>{name} {surname}</BookParagraph>
-        <BookParagraph>Średnia ocena: {score}</BookParagraph>
+        <BookParagraph>{author}</BookParagraph>
+        <BookParagraph>Średnia ocena: {rating}</BookParagraph>
         <BoxBookReview>
-          {description?.slice(0, 200)}
+          {review.slice(0, 200)}
           <BoxReadMore onClick={readMoreHandler} data-testid="BoxReadMoreId">
             czytaj więcej
           </BoxReadMore>
