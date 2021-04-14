@@ -2,12 +2,12 @@ import { BookImage, BoxComponent, ContentContainer, ImgContainer } from '../Box/
 import { Description } from './BookDescriptionStyles';
 
 export type BookProps = {
-  image: string;
-  author: string;
-  releaseDate: string;
-  numberOfPages: string;
-  isbn: string;
-  averageRating: string;
+  image?: string;
+  author?: string;
+  releaseDate?: string;
+  numberOfPages?: number;
+  isbn?: number;
+  averageRating?: number;
 };
 
 export const BookDescription = ({

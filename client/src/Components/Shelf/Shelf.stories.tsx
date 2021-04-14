@@ -9,6 +9,6 @@ export default {
 };
 const PrimaryShelfProps = {
   title: 'Chcę przeczytać',
-  apiUrl: ''
+  apiUrl: '',
 };
 export const PrimaryBox: Story<ShelfComponentProps> = () => <Shelf {...PrimaryShelfProps} />;

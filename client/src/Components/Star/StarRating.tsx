@@ -4,8 +4,8 @@ import { FaStar } from 'react-icons/fa';
 import { theme } from '../../Theme';
 import { Input } from './StarStyles';
 
-const StarRating = ({ getNumberOfStars }) => {
-  const [rating, setRating] = useState(0);
+const StarRating = ({ getNumberOfStars, rate = 0, disabled = false }) => {
+  const [rating, setRating] = useState(rate);
   const [hover, setHover] = useState(0);
 
   return (
@@ -18,6 +18,7 @@ const StarRating = ({ getNumberOfStars }) => {
               type="radio"
               name="rating"
               value={ratingValue}
+              disabled={disabled}
               onClick={() => {
                 setRating(ratingValue);
                 getNumberOfStars(ratingValue);
@@ -25,7 +26,11 @@ const StarRating = ({ getNumberOfStars }) => {
             />
             <FaStar
               className="star"
-              color={ratingValue <= (hover || rating) ? theme.colors.checkkedStars : theme.colors.uncheckedStars}
+              color={
+                ratingValue <= ((!disabled && hover) || rating)
+                  ? theme.colors.checkkedStars
+                  : theme.colors.uncheckedStars
+              }
               size={25}
               onMouseEnter={() => setHover(ratingValue)}
               onMouseLeave={() => setHover(0)}
