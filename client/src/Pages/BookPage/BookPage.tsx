@@ -92,7 +92,7 @@ export const BookPage = () => {
           </Cover>
           <Info>
             <InfoLine>{`${bookData?.name ?? ''} ${bookData?.surname ?? ''}`}</InfoLine>
-            <InfoLine>Data wydania: {format(bookData?.release_date ?? new Date(), 'YYYY-MM-DD')}</InfoLine>
+            <InfoLine>Data wydania: {format(bookData?.release_date ?? new Date(), 'yyyy-MM-dd')}</InfoLine>
             <InfoLine>Liczba stron: {bookData?.num_pages}</InfoLine>
             <InfoLine>ISBN: {bookData?.isbn}</InfoLine>
             <InfoLine>Srednia ocen: {bookData?.average ?? 0}</InfoLine>
