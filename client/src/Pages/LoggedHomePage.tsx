@@ -24,7 +24,7 @@ export const LoggedHomePage = () => {
 
   const email = useSelector((state: RootState) => state.user.user?.email);
   const urlComplete = `http://localhost:8080/api/book-groups/${email}/przeczytane/bookShelves`;
-  const urlInProgress = `http://localhost:8080/api/book-groups/${email}/czytam/bookShelves`;
+  const urlInProgress = `http://localhost:8080/api/book-groups/${email}/do%20przeczytania/bookShelves`;
   const urlWantToRead = `http://localhost:8080/api/book-groups/${email}/chcę%20przeczytać/bookShelves`
 
   const handleSubmit = () => { };
