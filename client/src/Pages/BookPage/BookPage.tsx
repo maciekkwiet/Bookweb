@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Axios } from '../../helpers/axios';
 import { useParams, useHistory } from 'react-router-dom';
-import { format } from 'date-fns';
 
 import { BigLabel } from '../../Components/BigLabel/BigLabel';
 import StarRating from '../../Components/Star/StarRating';
@@ -92,7 +91,9 @@ export const BookPage = () => {
           </Cover>
           <Info>
             <InfoLine>{`${bookData?.name ?? ''} ${bookData?.surname ?? ''}`}</InfoLine>
-            <InfoLine>Data wydania: {format(bookData?.release_date ?? new Date(), 'yyyy-MM-dd')}</InfoLine>
+            <InfoLine>
+              Data wydania: {bookData?.release_date.toString().slice(0, 10) ?? new Date().toISOString().slice(0, 10)}
+            </InfoLine>
             <InfoLine>Liczba stron: {bookData?.num_pages}</InfoLine>
             <InfoLine>ISBN: {bookData?.isbn}</InfoLine>
             <InfoLine>Srednia ocen: {bookData?.average ?? 0}</InfoLine>
@@ -118,7 +119,7 @@ export const BookPage = () => {
                   <Avatar src={review.avatar} />
                 </AvatarBox>
                 <UserName>{`${review.name} ${review.surname}`}</UserName>
-                <WhenAdded>{format(review.added_at, 'YYYY-MM-DD')}</WhenAdded>
+                <WhenAdded>{review.added_at.toString().slice(0, 10)}</WhenAdded>
                 <StarRating disabled getNumberOfStars rate={review.score}></StarRating>
               </UserInfoBox>
               <ReviewText>{review.content}</ReviewText>
