@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { Header } from '../Components/Header/Header';
 import { Navbar } from '../Components/Navbar/Navbar';
 import { SearchingBar } from '../Components/SearchingBar/SearchingBar';
 import { Shelf } from '../Components/Shelf/Shelf';
-import { ShelfImage } from '../Components/Shelf/ShelfStyles'
-import { ForYouBox } from '../Components/Box/ForYouBox'
+import { ShelfImage } from '../Components/Shelf/ShelfStyles';
+import { ForYouBox } from '../Components/Box/ForYouBox';
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store';
 import { Axios } from '../helpers/axios';
@@ -18,16 +18,15 @@ import {
   AsideWrapper,
   ForYouContainer,
   Footer,
-} from './LoggedHomePageStyles'
+} from './LoggedHomePageStyles';
 
 export const LoggedHomePage = () => {
-
   const email = useSelector((state: RootState) => state.user.user?.email);
-  const urlComplete = `http://localhost:8080/api/book-groups/${email}/przeczytane/bookShelves`;
-  const urlInProgress = `http://localhost:8080/api/book-groups/${email}/czytam/bookShelves`;
-  const urlWantToRead = `http://localhost:8080/api/book-groups/${email}/chcę%20przeczytać/bookShelves`
+  const urlComplete = `/api/book-groups/${email}/przeczytane/bookShelves`;
+  const urlInProgress = `/api/book-groups/${email}/czytam/bookShelves`;
+  const urlWantToRead = `/api/book-groups/${email}/chcę%20przeczytać/bookShelves`;
 
-  const handleSubmit = () => { };
+  const handleSubmit = () => {};
 
   const [topBooks, setTopBooks] = useState<BookDetailsType[]>([]);
 
@@ -44,7 +43,6 @@ export const LoggedHomePage = () => {
       }
 
       setTopBooks(data);
-      console.log(topBooks);
     };
 
     fetch();
@@ -57,25 +55,27 @@ export const LoggedHomePage = () => {
       <SearchingBar onSubmit={handleSubmit} />
       <ContentWrapper>
         <MyBooksWrapper>
-          <MyBooksBigLabel title='Moje książki' />
-          <Shelf title='Chcę przeczytać' apiUrl={urlWantToRead} />
-          <Shelf title='Właśnie czytam' apiUrl={urlInProgress} />
-          <Shelf title='Przeczytane' apiUrl={urlComplete} />
+          <MyBooksBigLabel title="Moje książki" />
+          <Shelf title="Chcę przeczytać" apiUrl={urlWantToRead} />
+          <Shelf title="Właśnie czytam" apiUrl={urlInProgress} />
+          <Shelf title="Przeczytane" apiUrl={urlComplete} />
         </MyBooksWrapper>
         <AsideWrapper>
           <ShelfImage src={process.env.PUBLIC_URL + '/shelf.png'} />
-          <AsideBigLabel title='Polecane dla Ciebie' />
-          <ForYouContainer >
-            {topBooks.map(book => <ForYouBox
-              id={book.id}
-              title={book.title}
-              author={book.author}
-              review=''
-              rating={String(parseFloat(parseFloat(book.rating).toFixed(2)))}
-              cover={book.cover}
-            />)}
+          <AsideBigLabel title="Polecane dla Ciebie" />
+          <ForYouContainer>
+            {topBooks.map((book) => (
+              <ForYouBox
+                id={book.id}
+                title={book.title}
+                author={book.author}
+                review=""
+                rating={String(parseFloat(parseFloat(book.rating).toFixed(2)))}
+                cover={book.cover}
+              />
+            ))}
           </ForYouContainer>
-          <AsideBigLabel title='Aktywność znajomych' />
+          <AsideBigLabel title="Aktywność znajomych" />
         </AsideWrapper>
       </ContentWrapper>
       <Footer>&copy; CodersCamp VI BookWeb</Footer>

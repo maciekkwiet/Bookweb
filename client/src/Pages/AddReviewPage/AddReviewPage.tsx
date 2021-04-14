@@ -59,7 +59,7 @@ export const AddReviewPage = () => {
     };
 
     try {
-      await Axios.post('http://localhost:8080/api/reviews/', reviewInfo);
+      await Axios.post('/api/reviews/', reviewInfo);
       history.push('/');
       addToast(`Dodano recenzje dla ${bookData?.title}`, {
         appearance: 'success',
@@ -75,8 +75,8 @@ export const AddReviewPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const bookResult: any = await Axios('http://localhost:8080/api/books/details/' + id);
-      const rateResult: any = await Axios('http://localhost:8080/api/books/average/' + id);
+      const bookResult: any = await Axios('/api/books/details/' + id);
+      const rateResult: any = await Axios('/api/books/average/' + id);
       if (rateResult.data.length > 0) {
         const average = parseInt(rateResult.data[0].rating);
         setBookData({ ...bookResult.data[0], average });

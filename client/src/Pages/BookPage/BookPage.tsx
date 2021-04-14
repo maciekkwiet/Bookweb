@@ -65,9 +65,9 @@ export const BookPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const bookResult: any = await Axios('http://localhost:8080/api/books/details/' + id);
-      const rateResult: any = await Axios('http://localhost:8080/api/books/average/' + id);
-      const reviewResult: any = await Axios('http://localhost:8080/api/reviews/all/' + id);
+      const bookResult: any = await Axios('/api/books/details/' + id);
+      const rateResult: any = await Axios('/api/books/average/' + id);
+      const reviewResult: any = await Axios('/api/reviews/all/' + id);
       if (rateResult.data.length > 0) {
         const average = parseInt(rateResult.data[0].rating);
         const { data } = reviewResult;

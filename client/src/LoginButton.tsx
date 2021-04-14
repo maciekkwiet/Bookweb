@@ -4,13 +4,8 @@ import { useDispatch } from 'react-redux';
 
 export default function LoginButton() {
   const dispatch = useDispatch();
-  // function as a prop
-  const handleClick = () => {
-    // fetch(`http://localhost:8080/api/users/39`)
-    //   .then((res) => res.json())
-    //   .then((user) => dispatch(login(user)))
-    //   .catch((err) => console.log(err));
-  };
+
+  const handleClick = () => {};
 
   return (
     <div>

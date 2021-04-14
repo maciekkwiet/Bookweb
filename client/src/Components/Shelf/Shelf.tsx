@@ -1,6 +1,7 @@
 import { ShelfComponent, ShelfTitle, ShelfImage } from './ShelfStyles';
 import { FC, useState, useEffect } from 'react';
 import { Box, BoxComponentProps } from '../Box/Box';
+import { Axios } from '../../helpers/axios';
 
 export type ShelfComponentProps = {
   title: string;
@@ -15,8 +16,7 @@ export const Shelf: FC<ShelfComponentProps> = ({ title, apiUrl }) => {
   }, []);
 
   const loadBooks = async () => {
-    const response = await fetch(apiUrl);
-    const data = await response.json();
+    const { data } = await Axios.get(apiUrl);
     setBooks(data);
   };
 

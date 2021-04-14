@@ -1,7 +1,6 @@
 import axios from 'axios';
-//change name to token not authorization
-// const baseURL = process.env.REACT_APP_BACKEND_URL;
-const baseURL = 'http://localhost:8080';
+
+const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'https://cc-imagify.herokuapp.com';
 type headerType = { authorization?: string };
 
 let headers: headerType = {};
