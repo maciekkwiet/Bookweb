@@ -34,9 +34,9 @@ export const UserActivityBox: FC<UserActivityBoxProps> = ({
       <Box
         title="Securing DevOps"
         author="Julien Vehent"
-        rate={rate}
-        review="An application running in the cloud can benefit from incredible efficiencies "
-        image="https://i.pinimg.com/originals/b8/97/bb/b897bb0a2205457970b91ce831b04756.jpg"
+        score={rate}
+        description="An application running in the cloud can benefit from incredible efficiencies "
+        cover="https://i.pinimg.com/originals/b8/97/bb/b897bb0a2205457970b91ce831b04756.jpg"
       ></Box>
     </ActivityBox>
   );
