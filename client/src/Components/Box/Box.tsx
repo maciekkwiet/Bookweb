@@ -9,6 +9,7 @@ import {
   BoxReadMore,
   BookImage,
 } from './BoxStyles';
+import { useHistory } from 'react-router-dom';
 
 export type BoxComponentProps = {
   book_id?: number;
@@ -23,11 +24,14 @@ export type BoxComponentProps = {
   user_id?: number;
   email?: string;
   author?: string;
-
 };
 
-export const Box: FC<BoxComponentProps> = ({ title, name, surname, score, description, cover }) => {
-  const readMoreHandler = () => { };
+export const Box: FC<BoxComponentProps> = ({ title, name, surname, score, description, cover, book_id: id }) => {
+  const history = useHistory();
+  const readMoreHandler = () => {
+    let path = `/book/${id}`;
+    history.push(path);
+  };
 
   return (
     <BoxComponent data-testid="BoxId">
@@ -36,7 +40,9 @@ export const Box: FC<BoxComponentProps> = ({ title, name, surname, score, descri
       </ImgContainer>
       <ContentContainer>
         <BookTitleParagraph>{title}</BookTitleParagraph>
-        <BookParagraph>{name} {surname}</BookParagraph>
+        <BookParagraph>
+          {name} {surname}
+        </BookParagraph>
         <BookParagraph>Średnia ocena: {score}</BookParagraph>
         <BoxBookReview>
           {description?.slice(0, 200)}
