@@ -56,7 +56,7 @@ export const BookImage = styled.img`
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  gap: 7%;
   width: 45%;
   padding: 2rem 0 2rem 2rem;
   @media screen and (max-width: 768px) {
