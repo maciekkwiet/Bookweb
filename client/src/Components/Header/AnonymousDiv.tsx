@@ -12,7 +12,10 @@ interface Values {
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email('Niewłaściwy adres email').required('Email jest wymagany!'),
-  password: Yup.string().min(8, 'Hasło musi zawierać conajmniej 8 znaków!').required('Hasło jest wymagane!'),
+  password: Yup.string()
+    .min(8, 'Hasło musi zawierać conajmniej 8 znaków!')
+    .matches(/\d/, 'Hasło musi zawierać conajmniej 1 cyfrę!')
+    .required('Hasło jest wymagane!'),
 });
 
 export const AnonymousDiv = () => {
