@@ -61,8 +61,8 @@ export const getTopBooks = async (request: Request, response: Response) => {
   );
 };
 
-export const getBookById = async (request: Request, response: Response) => {
-  const bookId = parseInt(request.params.id);
+export const getBookById = async (request: Request, response: Response, id: number) => {
+  const bookId = id ?? parseInt(request.params.id);
 
   pool.query('SELECT * FROM books WHERE id = $1', [bookId], (error, results) => {
     if (error) {
