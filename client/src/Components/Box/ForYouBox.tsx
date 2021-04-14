@@ -10,6 +10,7 @@ import {
   BookImage,
 } from './ForYouBoxStyles';
 import { BookDetails } from '../TopBooks/TopBooksComponent';
+import { useHistory } from 'react-router-dom';
 
 export type BoxComponentProps = {
   book_id?: number;
@@ -24,11 +25,14 @@ export type BoxComponentProps = {
   user_id?: number;
   email?: string;
   author?: string;
-
 };
 
 export const ForYouBox: FC<BookDetails> = ({ title, id, rating, author, review, cover }) => {
-  const readMoreHandler = () => { };
+  const history = useHistory();
+  const readMoreHandler = () => {
+    let path = `/book/${id}`;
+    history.push(path);
+  };
 
   return (
     <BoxComponent data-testid="BoxId">

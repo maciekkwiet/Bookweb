@@ -19,6 +19,7 @@ export type TopBooksProps = {
 export const TopBooksBox: FC<TopBooksProps> = ({ topBooks }) => {
   const booksList = topBooks.map((e) => (
     <Box
+      book_id={e.id}
       title={e.title}
       author={e.author}
       description={e.review}
@@ -30,4 +31,3 @@ export const TopBooksBox: FC<TopBooksProps> = ({ topBooks }) => {
 
   return <TopBooksComponent>{booksList}</TopBooksComponent>;
 };
-

@@ -1,19 +1,15 @@
 import { FC } from 'react';
-import {
-  BoxComponent,
-  ImgContainer,
-  BookParagraph,
-  BookTitleParagraph,
-  BoxReadMore,
-  BookImage,
-} from './BigBoxStyles';
+import { BoxComponent, ImgContainer, BookParagraph, BookTitleParagraph, BoxReadMore, BookImage } from './BigBoxStyles';
 
 import { BookDetails } from '../TopBooks/TopBooksComponent';
-
-
+import { useHistory } from 'react-router-dom';
 
 export const RankingBox: FC<BookDetails> = ({ title, id, rating, author, review, cover }) => {
-  const readMoreHandler = () => { };
+  const history = useHistory();
+  const readMoreHandler = () => {
+    let path = `/book/${id}`;
+    history.push(path);
+  };
 
   return (
     <BoxComponent data-testid="BoxId">
@@ -25,7 +21,7 @@ export const RankingBox: FC<BookDetails> = ({ title, id, rating, author, review,
       <BookParagraph>Średnia ocena: {rating}</BookParagraph>
       <BoxReadMore onClick={readMoreHandler} data-testid="BoxReadMoreId">
         czytaj więcej
-       </BoxReadMore>
+      </BoxReadMore>
     </BoxComponent>
   );
 };

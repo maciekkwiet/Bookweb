@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useToasts } from 'react-toast-notifications';
 
-import StarRating from '../Components/Star/StarRating';
 import { RegistrationForm } from '../Components/RegistrationForm/RegistrationForm';
 import { signupUser } from '../slicers/userSlice';
 import { RootState } from '../app/store';
