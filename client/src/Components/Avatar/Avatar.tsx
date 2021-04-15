@@ -12,7 +12,8 @@ export const Avatar: FC = () => {
 
   useEffect(() => {
     if (user) {
-      setAvatarImage(user[0].avatar);
+      setAvatarImage('https://data.whicdn.com/images/346235402/original.jpg');
+      // setAvatarImage(user[0].avatar);
     }
   }, [user]);
 
