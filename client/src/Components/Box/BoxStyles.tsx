@@ -9,11 +9,10 @@ export const BoxComponent = styled.div`
   font-size: 16px;
   background-color: ${(props) => props.theme.backgrounds.lightTransparent};
   border-radius: 10px;
-  height: 50%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   margin: 2%;
-  padding: 2%;
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
     width: 100%;
     font-size: 12px;
@@ -33,7 +32,7 @@ export const ImgContainer = styled.div`
 `;
 
 export const BookImage = styled.img`
-  width: 50%;
+  width: 100%;
 `;
 
 export const ContentContainer = styled.div`
@@ -74,7 +73,7 @@ export const BoxReadMore = styled.a`
   font-size: 14px;
   max-width: 90%;
   cursor: pointer;
-  margin-left: 20px;
+  margin-left:20px;
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
     font-size: 11px;
   } ;
