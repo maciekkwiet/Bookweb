@@ -1,5 +1,8 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { SearchingBarComponent, SearchingBarForm, SearchingBarInput, SearchingBarButton } from './SearchingBarStyles';
+import { Axios } from '../../helpers/axios';
+import { setInputValue } from '../../slicers/inputSlice';
 
 type SearchingBarType = {
   onSubmit: (value: string) => void;
@@ -11,7 +14,14 @@ export const SearchingBar = ({ onSubmit }: SearchingBarType) => {
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
-  const handleSubmit = () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const result: any = await Axios.get('/api/books/name', {
+      params: {
+        name: inputValue,
+      },
+    });
+  };
 
   return (
     <SearchingBarComponent>
@@ -23,7 +33,7 @@ export const SearchingBar = ({ onSubmit }: SearchingBarType) => {
           onChange={handleChange}
           data-testid="inputId"
         />
-        <SearchingBarButton type="submit" data-testid="buttonId">
+        <SearchingBarButton onClick={handleSubmit} data-testid="buttonId">
           Szukaj
         </SearchingBarButton>
       </SearchingBarForm>

@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { Header } from '../Components/Header/Header';
 import { Navbar } from '../Components/Navbar/Navbar';
-import { SearchingBar } from '../Components/SearchingBar/SearchingBar';
-import { ShelfImage, ShelfTitle } from '../Components/Shelf/ShelfStyles'
+import { ShelfImage, ShelfTitle } from '../Components/Shelf/ShelfStyles';
 import { Shelf } from '../Components/Shelf/BigShelf';
 
-import { BoxComponentProps } from '../Components/Box/Box'
+import { BoxComponentProps } from '../Components/Box/Box';
 import {
   MyBooksPageWrapper,
   MyBooksWrapper,
@@ -14,42 +13,36 @@ import {
   MyBooksShelfImage,
   MyBooksBigLabelTittle,
   Footer,
-} from './MyBooksPageStyles'
+} from './MyBooksPageStyles';
 
 export const MyBooksPage = () => {
-
-  const handleSubmit = () => { };
+  const handleSubmit = () => {};
 
   const [forYouBooks, setForYouBooks] = useState<BoxComponentProps[]>([]);
 
   useEffect(() => {
-    loadForYouBooks()
+    loadForYouBooks();
   }, []);
 
   const loadForYouBooks = async () => {
     const response = await fetch('');
     const data = await response.json();
     setForYouBooks(data);
-  }
+  };
 
   return (
     <MyBooksPageWrapper>
       <Header isLogged={true} />
       <Navbar />
-      <SearchingBar onSubmit={handleSubmit} />
       <ContentWrapper>
         <MyBooksBigLabel>
-          <MyBooksBigLabelTittle>
-            Moje książki
-          </MyBooksBigLabelTittle>
+          <MyBooksBigLabelTittle>Moje książki</MyBooksBigLabelTittle>
           <MyBooksShelfImage src={process.env.PUBLIC_URL + '/shelf.png'} />
         </MyBooksBigLabel>
         <MyBooksWrapper>
-          <Shelf title='Chcę przeczytać' apiUrl='' />
-          <Shelf title='Właśnie czytam' apiUrl='' />
-          <Shelf title='Przeczytane' apiUrl='' />
-
-
+          <Shelf title="Chcę przeczytać" apiUrl="" />
+          <Shelf title="Właśnie czytam" apiUrl="" />
+          <Shelf title="Przeczytane" apiUrl="" />
         </MyBooksWrapper>
       </ContentWrapper>
       <Footer>&copy; CodersCamp VI BookWeb</Footer>
