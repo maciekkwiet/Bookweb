@@ -13,8 +13,7 @@ export const TopBooksComponent = styled(TextCardComponent)`
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   padding: 0;
 `;

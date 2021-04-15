@@ -32,7 +32,7 @@ export const ImgContainer = styled.div`
 `;
 
 export const BookImage = styled.img`
-  width: 100%;
+  width: 50%;
 `;
 
 export const ContentContainer = styled.div`
@@ -73,7 +73,7 @@ export const BoxReadMore = styled.a`
   font-size: 14px;
   max-width: 90%;
   cursor: pointer;
-  margin-left:20px;
+  margin-left: 20px;
   @media only screen and (max-width: ${(props) => props.theme.size.sm}) {
     font-size: 11px;
   } ;
