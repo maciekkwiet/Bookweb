@@ -20,9 +20,9 @@ export const ImgContainer = styled.div`
   box-sizing: border-box;
   margin: 0 1vw;
   flex-basis: 15%;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   overflow: hidden;
-  padding: 2%;
+  // padding: 2%;
 `;
 
 export const BookImage = styled.img`
