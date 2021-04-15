@@ -22,10 +22,10 @@ import {
 export const LoggedHomePage = () => {
   const email = useSelector((state: RootState) => state.user.user?.email);
   const urlComplete = `/api/book-groups/${email}/przeczytane/bookShelves`;
-  const urlInProgress = `/api/book-groups/${email}/czytam/bookShelves`;
+  const urlInProgress = `/api/book-groups/${email}/do%20przeczytania/bookShelves`;
   const urlWantToRead = `/api/book-groups/${email}/chcę%20przeczytać/bookShelves`;
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => { };
 
   const [topBooks, setTopBooks] = useState<BookDetailsType[]>([]);
 

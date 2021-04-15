@@ -3,8 +3,10 @@ import { Header } from '../Components/Header/Header';
 import { Navbar } from '../Components/Navbar/Navbar';
 import { ShelfImage, ShelfTitle } from '../Components/Shelf/ShelfStyles';
 import { Shelf } from '../Components/Shelf/BigShelf';
+import { useSelector } from 'react-redux';
+import { RootState } from '../app/store';
+import { BoxComponentProps } from '../Components/Box/Box'
 
-import { BoxComponentProps } from '../Components/Box/Box';
 import {
   MyBooksPageWrapper,
   MyBooksWrapper,
@@ -16,7 +18,13 @@ import {
 } from './MyBooksPageStyles';
 
 export const MyBooksPage = () => {
-  const handleSubmit = () => {};
+
+  const email = useSelector((state: RootState) => state.user.user?.email);
+  const urlComplete = `/api/book-groups/${email}/przeczytane/bookShelves`;
+  const urlInProgress = `/api/book-groups/${email}/do%20przeczytania/bookShelves`;
+  const urlWantToRead = `/api/book-groups/${email}/chcę%20przeczytać/bookShelves`;
+
+  const handleSubmit = () => { };
 
   const [forYouBooks, setForYouBooks] = useState<BoxComponentProps[]>([]);
 
@@ -40,9 +48,9 @@ export const MyBooksPage = () => {
           <MyBooksShelfImage src={process.env.PUBLIC_URL + '/shelf.png'} />
         </MyBooksBigLabel>
         <MyBooksWrapper>
-          <Shelf title="Chcę przeczytać" apiUrl="" />
-          <Shelf title="Właśnie czytam" apiUrl="" />
-          <Shelf title="Przeczytane" apiUrl="" />
+          <Shelf title='Chcę przeczytać' apiUrl={urlWantToRead} />
+          <Shelf title='Właśnie czytam' apiUrl={urlInProgress} />
+          <Shelf title='Przeczytane' apiUrl={urlComplete} />
         </MyBooksWrapper>
       </ContentWrapper>
       <Footer>&copy; CodersCamp VI BookWeb</Footer>
