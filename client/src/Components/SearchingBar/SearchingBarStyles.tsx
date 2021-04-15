@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const SearchingBarComponent = styled.div`
+  display: flex;
+  justify-content: center;
   width: 100%;
   height: 7vh;
   font-size: 2vh;
@@ -8,6 +10,7 @@ export const SearchingBarComponent = styled.div`
   font-family: ${(props) => props.theme.fonts.default};
 `;
 export const SearchingBarForm = styled.form`
+  margin-left: 25%;
   display: flex;
   align-items: center;
   width: 100%;

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Header } from '../Components/Header/Header';
 import { Navbar } from '../Components/Navbar/Navbar';
-import { SearchingBar } from '../Components/SearchingBar/SearchingBar';
 import { MyBooksPageWrapper, ContentWrapper, MyBooksBigLabel, MyBooksShelfImage, Footer } from './MyBooksPageStyles';
 import { RankingBigLabelTittle, RankingWrapper } from './RankingPageStyles';
 import { BookDetails as BookDetailsType } from '../Components/TopBooks/TopBooksComponent';
@@ -35,7 +34,6 @@ export const RankingPage = () => {
     <MyBooksPageWrapper>
       <Header isLogged={true} />
       <Navbar />
-      <SearchingBar onSubmit={handleSubmit} />
       <ContentWrapper>
         <MyBooksBigLabel>
           <RankingBigLabelTittle>Ranking najlepszych książek</RankingBigLabelTittle>

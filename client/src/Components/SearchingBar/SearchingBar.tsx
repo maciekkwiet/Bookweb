@@ -1,17 +1,23 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { SearchingBarComponent, SearchingBarForm, SearchingBarInput, SearchingBarButton } from './SearchingBarStyles';
+import { setInputValue } from '../../slicers/inputSlice';
 
 type SearchingBarType = {
   onSubmit: (value: string) => void;
 };
 
 export const SearchingBar = ({ onSubmit }: SearchingBarType) => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setValueForInput] = useState('');
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    setInputValue(e.target.value);
+    setValueForInput(e.target.value);
   };
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(setInputValue(inputValue));
+  };
 
   return (
     <SearchingBarComponent>
@@ -23,7 +29,7 @@ export const SearchingBar = ({ onSubmit }: SearchingBarType) => {
           onChange={handleChange}
           data-testid="inputId"
         />
-        <SearchingBarButton type="submit" data-testid="buttonId">
+        <SearchingBarButton onClick={handleSubmit} data-testid="buttonId">
           Szukaj
         </SearchingBarButton>
       </SearchingBarForm>

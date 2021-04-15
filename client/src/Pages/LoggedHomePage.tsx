@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Header } from '../Components/Header/Header';
 import { Navbar } from '../Components/Navbar/Navbar';
-import { SearchingBar } from '../Components/SearchingBar/SearchingBar';
 import { Shelf } from '../Components/Shelf/Shelf';
 import { ShelfImage } from '../Components/Shelf/ShelfStyles';
 import { ForYouBox } from '../Components/Box/ForYouBox';
@@ -52,7 +51,6 @@ export const LoggedHomePage = () => {
     <LoggedHomePageWrapper>
       <Header isLogged={true} />
       <Navbar />
-      <SearchingBar onSubmit={handleSubmit} />
       <ContentWrapper>
         <MyBooksWrapper>
           <MyBooksBigLabel title="Moje książki" />

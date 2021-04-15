@@ -45,6 +45,22 @@ export const getBookReviews = async (request: Request, response: Response) => {
   );
 };
 
+export const getBookByName = async (request: Request, response: Response) => {
+  const title = request.query?.name;
+
+  pool.query(
+    `
+    SELECT * FROM books WHERE title ILIKE $1;`,
+    ['%' + title + '%'],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
+    },
+  );
+};
+
 export const getTopBooks = async (request: Request, response: Response) => {
   pool.query(
     `
@@ -172,5 +188,5 @@ module.exports = {
   getBookReviews,
   getBooksWithAuthor,
   getScoreByBookId,
-
+  getBookByName,
 };

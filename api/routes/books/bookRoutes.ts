@@ -10,11 +10,12 @@ import {
   getBookReviews,
   getBooksWithAuthor,
   getScoreByBookId,
-
+  getBookByName,
 } from './book';
 
 const router = new Router();
 router.get('/', getBooks);
+router.use('/name', getBookByName);
 router.get('/top', getTopBooks);
 router.get('/:id', getBookById);
 router.get('/:id/authors', getBookAuthors);
