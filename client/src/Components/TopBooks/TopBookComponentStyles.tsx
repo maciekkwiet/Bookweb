@@ -16,7 +16,12 @@ export const TopBooksComponent = styled(TextCardComponent)`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 0;
+  padding: 3%;
+  display: block;
+  width: 70vw;
+  min-height: 80vh;
+  margin: 0px auto;
+  padding: 3%;
 `;
 export const TopBooksTitle = styled.h1`
   font-family: ${(props) => props.theme.fonts.default};
