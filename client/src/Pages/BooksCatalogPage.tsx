@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Header } from '../Components/Header/Header';
 import { Navbar } from '../Components/Navbar/Navbar';
 import { SearchingBar } from '../Components/SearchingBar/SearchingBar';
@@ -7,28 +8,43 @@ import { RankingBigLabelTittle, RankingWrapper } from './RankingPageStyles';
 import { BookDetails as BookDetailsType } from '../Components/TopBooks/TopBooksComponent';
 import { Axios } from '../helpers/axios';
 import { RankingBox } from '../Components/Box/RankingBox';
+import { RootState } from '../app/store';
+import { setInputValue } from '../slicers/inputSlice';
 
 export const BooksCatalogPage = () => {
   const [topBooks, setTopBooks] = useState<BookDetailsType[]>([]);
+  const inputValue = useSelector((state: RootState) => state.searchInput.value);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setInputValue(''));
+  }, []);
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await Axios.get('/api/books');
+      let result;
+      if (inputValue) {
+        result = await Axios.get('/api/books/name', {
+          params: {
+            name: inputValue,
+          },
+        });
+      } else {
+        result = await Axios.get('/api/books');
+      }
 
-      for (let book of data) {
+      for (let book of result?.data) {
         const { data: authors } = await Axios.get(`/api/books/${book.id}/authors`);
         book.author = authors.map((author) => `${author.name} ${author.surname}`).join(', ');
       }
 
-      setTopBooks(data);
+      setTopBooks(result?.data);
     };
 
     fetch();
-  }, []);
+  }, [inputValue]);
 
-  const handleSubmit = () => {
-    console.log('XDD');
-  };
+  const handleSubmit = () => {};
 
   return (
     <MyBooksPageWrapper>

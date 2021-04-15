@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { SearchingBarComponent, SearchingBarForm, SearchingBarInput, SearchingBarButton } from './SearchingBarStyles';
-import { Axios } from '../../helpers/axios';
 import { setInputValue } from '../../slicers/inputSlice';
 
 type SearchingBarType = {
@@ -9,18 +8,15 @@ type SearchingBarType = {
 };
 
 export const SearchingBar = ({ onSubmit }: SearchingBarType) => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setValueForInput] = useState('');
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    setInputValue(e.target.value);
+    setValueForInput(e.target.value);
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const result: any = await Axios.get('/api/books/name', {
-      params: {
-        name: inputValue,
-      },
-    });
+    dispatch(setInputValue(inputValue));
   };
 
   return (
