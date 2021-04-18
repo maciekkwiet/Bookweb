@@ -6,24 +6,18 @@ import {
   updateBook,
   deleteBook,
   getTopBooks,
-  getBookAuthors,
-  getBookReviews,
-  getBooksWithAuthor,
-  getScoreByBookId,
-  getBookByName,
+  getAverageRatingByBookId,
+  getBookByTitle,
 } from './book';
 
 const router = new Router();
 router.get('/', getBooks);
-router.use('/name', getBookByName);
-router.get('/top', getTopBooks);
+router.get('/title', getBookByTitle);
 router.get('/:id', getBookById);
-router.get('/:id/authors', getBookAuthors);
-router.get('/:id/reviews', getBookReviews);
+router.get('/top', getTopBooks);
 router.post('/', createBook);
 router.put('/:id', updateBook);
 router.delete('/:id', deleteBook);
-router.get('/details/:id', getBooksWithAuthor);
-router.get('/average/:id', getScoreByBookId);
+router.get('/average/:id', getAverageRatingByBookId);
 
 module.exports = router;

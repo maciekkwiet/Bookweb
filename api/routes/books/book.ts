@@ -1,64 +1,39 @@
 import pool from '../../configDB/config';
 import { Request, Response } from 'express';
 import { uploadImage } from '../../utils/imageTools';
+import { Book } from '../../models';
+import { ILike } from 'typeorm';
+import validateEntity from '../../helpers/validateEntity';
 
 export const getBooks = async (request: Request, response: Response) => {
-  pool.query('SELECT * FROM books ORDER BY id ASC', (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).json(results.rows);
+  const books = await Book.find({
+    relations: ['authors', 'reviews', 'categories'],
   });
+  return response.json(books);
 };
 
-export const getBookAuthors = async (request: Request, response: Response) => {
-  const bookId = parseInt(request.params.id);
+export const getBookById = async (request: Request, response: Response) => {
+  const id = request.params;
+  const book = await Book.findOneOrFail({
+    relations: ['authors', 'reviews', 'categories'],
+    where: id,
+  });
 
-  pool.query(
-    `
-    SELECT a.id, a.name, a.surname FROM authors AS a 
-    LEFT JOIN authors_books AS ab ON ab.author_id = a.id 
-    WHERE ab.book_id = $1;`,
-    [bookId],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(200).json(results.rows);
-    },
-  );
+  return response.status(200).send(book);
 };
 
-export const getBookReviews = async (request: Request, response: Response) => {
-  const bookId = parseInt(request.params.id);
+export const getBookByTitle = async (request: Request, response: Response) => {
+  const { title } = request.body;
 
-  pool.query(
-    `
-    SELECT * FROM reviews WHERE book_id = $1;`,
-    [bookId],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(200).json(results.rows);
+  const books = await Book.find({
+    where: {
+      title: ILike(title),
     },
-  );
-};
+  });
 
-export const getBookByName = async (request: Request, response: Response) => {
-  const title = request.query?.name;
-
-  pool.query(
-    `
-    SELECT * FROM books WHERE title ILIKE $1;`,
-    ['%' + title + '%'],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(200).json(results.rows);
-    },
-  );
+  return response.status(200).send({
+    books,
+  });
 };
 
 export const getTopBooks = async (request: Request, response: Response) => {
@@ -77,104 +52,76 @@ export const getTopBooks = async (request: Request, response: Response) => {
   );
 };
 
-export const getBookById = async (request: Request, response: Response, id: number) => {
-  const bookId = id ?? parseInt(request.params.id);
-
-  pool.query('SELECT * FROM books WHERE id = $1', [bookId], (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).json(results.rows);
-  });
-};
-
 export const createBook = async (request: Request, response: Response) => {
-  const { isbn, title, description, release_date, num_pages, cover } = request.body;
-  const image = await uploadImage(cover);
+  const { isbn, title, authorId, description, releaseDate, numberOfPages, cover } = request.body;
 
-  pool.query(
-    'INSERT INTO books ( isbn, title, description, release_date, num_pages, cover ) VALUES ($1, $2, $3, $4, $5, $6)',
-    [isbn, title, description, release_date, num_pages, image],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(201).send(`Book added`);
-    },
-  );
+  const book = new Book();
+
+  book.isbn = isbn;
+  book.title = title;
+  book.description = description;
+  book.releaseDate = releaseDate;
+  book.numberOfPages = numberOfPages;
+  book.cover = cover;
+  if (authorId) book.authors.push(authorId);
+
+  validateEntity(book);
+
+  await book.save();
+
+  response.status(201).send({
+    message: 'Book added',
+    book,
+  });
 };
 
 export const updateBook = async (request: Request, response: Response) => {
-  const bookId = parseInt(request.params.id);
-  const { isbn, title, description, release_date, num_pages, cover } = request.body;
-  const image = await uploadImage(cover);
+  const { isbn, title, description, releaseDate, numberOfPages, authorId } = request.body;
+  const id = request.params;
+  let { cover } = request.body;
 
-  pool.query(
-    'UPDATE books SET isbn = $1, title = $2, description = $3, release_date = $4, num_pages = $5, cover = $6 WHERE id = $7',
-    [isbn, title, description, release_date, num_pages, image, bookId],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(200).send(`Book modified`);
-    },
-  );
-};
+  if (cover) {
+    cover = await uploadImage(cover);
+  }
 
-export const deleteBook = async (request: Request, response: Response) => {
-  const bookId = parseInt(request.params.id);
+  const book = await Book.findOneOrFail(id);
 
-  pool.query('DELETE FROM books WHERE id = $1', [bookId], (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).send(`Book deleted`);
+  if (isbn) book.isbn = isbn;
+  if (title) book.title = title;
+  if (description) book.description = description;
+  if (isbn) book.releaseDate = releaseDate;
+  if (isbn) book.numberOfPages = numberOfPages;
+  if (authorId) book.authors.push(authorId);
+
+  validateEntity(book);
+
+  await book.save();
+
+  return response.status(200).send({
+    message: `Book has been updated..`,
+    book,
   });
 };
 
-export const getBooksWithAuthor = async (request: Request, response: Response) => {
-  const id = parseInt(request.params.id);
-  pool.query(
-    'SELECT b.id book_id, b.isbn, b.title, b.release_date, b.num_pages, b.cover, b.description, a.id author_id, a.name, a.surname FROM books b INNER JOIN authors_books c ON b.id = c.book_id INNER JOIN authors a ON a.id=c.author_id WHERE book_id = $1',
-    [id],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      if (results.rows.length) {
-        response.status(200).json(results.rows);
-      } else {
-        getBookById(request, response, id);
-      }
-    },
-  );
+export const deleteBook = async (request: Request, response: Response) => {
+  const id = request.params;
+  const book = await Book.findOneOrFail(id);
+
+  await book.remove();
+
+  return response.status(200).send({
+    message: 'Book has been deleted',
+  });
 };
 
-export const getBooksWithoutAuthor = async (id: any) => {
-  pool.query(
-    'SELECT b.id book_id, b.isbn, b.title, b.release_date, b.num_pages, b.cover, b.description, a.id author_id, a.name, a.surname FROM books b INNER JOIN authors_books c ON b.id = c.book_id WHERE book_id = $1',
-    [id],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      return results;
-    },
-  );
-};
+export const getAverageRatingByBookId = async (request: Request, response: Response) => {
+  const id = request.params;
+  const book = await Book.findOneOrFail(id);
+  const averageRating = book.reviews.reduce((acc, book) => acc + book.rating, 0) / book.reviews.length;
 
-export const getScoreByBookId = async (request: Request, response: Response) => {
-  const id = parseInt(request.params.id);
-  pool.query(
-    'SELECT b.id, r.rating FROM books AS b RIGHT JOIN (SELECT book_id, AVG(score) as rating FROM reviews GROUP BY book_id) AS r ON r.book_id = b.id WHERE b.id = $1',
-    [id],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(200).json(results.rows);
-    },
-  );
+  return response.status(200).send({
+    averageRating,
+  });
 };
 
 module.exports = {
@@ -184,9 +131,6 @@ module.exports = {
   createBook,
   updateBook,
   deleteBook,
-  getBookAuthors,
-  getBookReviews,
-  getBooksWithAuthor,
-  getScoreByBookId,
-  getBookByName,
+  getBookByTitle,
+  getAverageRatingByBookId,
 };
