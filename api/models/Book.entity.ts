@@ -1,3 +1,4 @@
+import { IsNotEmpty, IsString } from 'class-validator';
 import {
   BaseEntity,
   Column,
@@ -16,9 +17,13 @@ export class Book extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
+  @IsString()
+  @IsNotEmpty()
   @Column()
   isbn!: string;
 
+  @IsString()
+  @IsNotEmpty()
   @Column()
   title!: string;
 
@@ -27,9 +32,11 @@ export class Book extends BaseEntity {
   })
   description!: string;
 
+  @IsNotEmpty()
   @Column()
   releaseDate!: string;
 
+  @IsNotEmpty()
   @Column()
   numberOfPages!: number;
 
@@ -39,8 +46,9 @@ export class Book extends BaseEntity {
   @OneToMany(() => Review, (review) => review.book)
   reviews!: Review[];
 
-  @ManyToOne(() => Author, (author) => author.books)
-  author!: Author;
+  @ManyToMany(() => Author, (author) => author.books)
+  @JoinTable()
+  authors!: Author[];
 
   @ManyToMany(() => User, (user) => user.books)
   @JoinTable()

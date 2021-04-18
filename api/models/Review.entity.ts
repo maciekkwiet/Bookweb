@@ -1,5 +1,5 @@
 import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, Max, Min } from 'class-validator';
 
 import { Book, User } from '.';
 
@@ -13,9 +13,11 @@ export class Review extends BaseEntity {
   textContent!: string;
 
   @IsNotEmpty()
-  @IsString()
+  @IsNumber()
+  @Min(0)
+  @Max(5)
   @Column()
-  rating!: string;
+  rating!: number;
 
   @Column({
     default: () => 'CURRENT_TIMESTAMP',

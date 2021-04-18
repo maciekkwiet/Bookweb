@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString } from 'class-validator';
-import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, JoinColumn, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Book } from '.';
 
@@ -24,6 +24,6 @@ export class Author extends BaseEntity {
   })
   description!: string;
 
-  @OneToMany(() => Book, (book) => book.author)
+  @ManyToMany(() => Book, (book) => book.authors)
   books!: Book[];
 }

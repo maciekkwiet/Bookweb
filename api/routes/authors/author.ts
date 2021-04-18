@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import { Author } from '../../models';
 import validateEntity from '../../helpers/validateEntity';
-import { Like } from 'typeorm';
+import { ILike, Like } from 'typeorm';
 
 export const getAuthors = async (request: Request, response: Response) => {
   const authors = await Author.find();
@@ -25,7 +25,7 @@ export async function getAuthorsBySurname(request: Request, response: Response) 
 
   const author = await Author.find({
     where: {
-      surname: surname,
+      surname: ILike(surname),
     },
   });
 
