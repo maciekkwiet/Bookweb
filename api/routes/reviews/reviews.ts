@@ -1,5 +1,5 @@
-import pool from '../../configDB/config';
 import { Request, Response } from 'express';
+
 import { UserInfoRequest } from '../../types/requests';
 import { Book, Review, User } from '../../models';
 import validateEntity from '../../helpers/validateEntity';
@@ -72,13 +72,4 @@ export const deleteReview = async (request: Request, response: Response) => {
   return response.status(204).send({
     message: 'Review has been deleted..',
   });
-};
-
-module.exports = {
-  getReviews,
-  getReviewById,
-  createReview,
-  updateReview,
-  deleteReview,
-  // getAllReviewsByBookId,
 };

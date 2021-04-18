@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
+import { ILike } from 'typeorm';
 
 import { Author } from '../../models';
 import validateEntity from '../../helpers/validateEntity';
-import { ILike, Like } from 'typeorm';
 
 export const getAuthors = async (request: Request, response: Response) => {
   const authors = await Author.find();
@@ -96,5 +96,3 @@ export const deleteAuthor = async (request: Request, response: Response) => {
     message: `Author ${author.name} ${author.surname} has been deleted`,
   });
 };
-
-//module.exports

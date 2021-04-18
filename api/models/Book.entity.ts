@@ -1,14 +1,5 @@
-import { IsNotEmpty, IsString } from 'class-validator';
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { IsISBN, IsNotEmpty, IsString } from 'class-validator';
+import { BaseEntity, Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Author, Category, Review, User } from '.';
 
@@ -17,8 +8,8 @@ export class Book extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
-  @IsString()
   @IsNotEmpty()
+  @IsISBN()
   @Column()
   isbn!: string;
 

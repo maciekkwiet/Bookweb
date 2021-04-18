@@ -13,8 +13,8 @@ import {
 const router = new Router();
 router.get('/', getBooks);
 router.get('/title', getBookByTitle);
-router.get('/:id', getBookById);
 router.get('/top', getTopBooks);
+router.get('/:id', getBookById);
 router.post('/', createBook);
 router.put('/:id', updateBook);
 router.delete('/:id', deleteBook);

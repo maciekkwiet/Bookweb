@@ -1,19 +1,19 @@
-import pool from '../../configDB/config';
 import { Request, Response } from 'express';
-import { uploadImage } from '../../utils/imageTools';
+import { getConnection, ILike } from 'typeorm';
+
 import { Book } from '../../models';
-import { ILike } from 'typeorm';
+import { uploadImage } from '../../utils/imageTools';
 import validateEntity from '../../helpers/validateEntity';
 
 export const getBooks = async (request: Request, response: Response) => {
   const books = await Book.find({
     relations: ['authors', 'reviews', 'categories'],
   });
-  return response.json(books);
+  return response.status(200).send(books);
 };
 
 export const getBookById = async (request: Request, response: Response) => {
-  const id = request.params;
+  const id = request.params.id;
   const book = await Book.findOneOrFail({
     relations: ['authors', 'reviews', 'categories'],
     where: id,
@@ -36,20 +36,9 @@ export const getBookByTitle = async (request: Request, response: Response) => {
   });
 };
 
+//zadanie z gwiazdką
 export const getTopBooks = async (request: Request, response: Response) => {
-  pool.query(
-    `
-  SELECT b.id, b.title, r.rating, b.cover FROM books AS b RIGHT JOIN (
-    SELECT book_id, AVG(score) as rating FROM reviews GROUP BY book_id ORDER BY rating DESC LIMIT 6
-  ) AS r ON r.book_id = b.id ORDER BY r.rating DESC;
-`,
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(200).json(results.rows);
-    },
-  );
+  const topBooks = await getConnection().createQueryBuilder().select('book');
 };
 
 export const createBook = async (request: Request, response: Response) => {
@@ -76,8 +65,8 @@ export const createBook = async (request: Request, response: Response) => {
 };
 
 export const updateBook = async (request: Request, response: Response) => {
-  const { isbn, title, description, releaseDate, numberOfPages, authorId } = request.body;
-  const id = request.params;
+  const { isbn, title, description, releaseDate, numberOfPages, authorId, category, removeCategory } = request.body;
+  const id = request.params.id;
   let { cover } = request.body;
 
   if (cover) {
@@ -91,7 +80,10 @@ export const updateBook = async (request: Request, response: Response) => {
   if (description) book.description = description;
   if (isbn) book.releaseDate = releaseDate;
   if (isbn) book.numberOfPages = numberOfPages;
+  if (category) book.categories.push(category);
   if (authorId) book.authors.push(authorId);
+
+  if (removeCategory) book.categories.splice(book.categories.indexOf(category), 1);
 
   validateEntity(book);
 
@@ -104,7 +96,7 @@ export const updateBook = async (request: Request, response: Response) => {
 };
 
 export const deleteBook = async (request: Request, response: Response) => {
-  const id = request.params;
+  const id = request.params.id;
   const book = await Book.findOneOrFail(id);
 
   await book.remove();
@@ -115,22 +107,16 @@ export const deleteBook = async (request: Request, response: Response) => {
 };
 
 export const getAverageRatingByBookId = async (request: Request, response: Response) => {
-  const id = request.params;
-  const book = await Book.findOneOrFail(id);
+  const id = request.params.id;
+  const book = await Book.findOneOrFail({
+    where: {
+      id: id,
+    },
+    relations: ['reviews'],
+  });
   const averageRating = book.reviews.reduce((acc, book) => acc + book.rating, 0) / book.reviews.length;
 
   return response.status(200).send({
     averageRating,
   });
-};
-
-module.exports = {
-  getBooks,
-  getTopBooks,
-  getBookById,
-  createBook,
-  updateBook,
-  deleteBook,
-  getBookByTitle,
-  getAverageRatingByBookId,
 };
