@@ -11,6 +11,8 @@ export const RankingBox: FC<BookDetails> = ({ title, id, rating, author, review,
     history.push(path);
   };
 
+  const score = rating === 'NaN' ? 'brak ocen' : rating;
+
   return (
     <BoxComponent data-testid="BoxId">
       <ImgContainer>
@@ -18,7 +20,7 @@ export const RankingBox: FC<BookDetails> = ({ title, id, rating, author, review,
       </ImgContainer>
       <BookTitleParagraph>{title}</BookTitleParagraph>
       <BookParagraph>{author}</BookParagraph>
-      <BookParagraph>Średnia ocena: {rating}</BookParagraph>
+      <BookParagraph>Średnia ocena: {score}</BookParagraph>
       <BoxReadMore onClick={readMoreHandler} data-testid="BoxReadMoreId">
         czytaj więcej
       </BoxReadMore>

@@ -39,7 +39,6 @@ export const BooksCatalogPage = () => {
         book.author = authors.map((author) => `${author.name} ${author.surname}`).join(', ');
         book.rating = rating[0]?.rating;
       }
-
       setTopBooks(result?.data);
     };
 
@@ -65,7 +64,7 @@ export const BooksCatalogPage = () => {
               title={book.title}
               author={book.author}
               review=""
-              rating={book.rating}
+              rating={String(parseFloat(parseFloat(book.rating).toFixed(2)))}
               cover={book.cover}
             />
           ))}

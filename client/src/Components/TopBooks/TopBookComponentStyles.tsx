@@ -28,7 +28,3 @@ export const TopBooksTitle = styled.h1`
 export const TitleDiv = styled.div`
   background: ${(props) => props.theme.backgrounds.lightTransparent};
 `;
-
-export const TitleDiv = styled.div`
-  background: ${(props) => props.theme.backgrounds.lightTransparent};
-`;
