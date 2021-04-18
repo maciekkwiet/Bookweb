@@ -1,81 +1,77 @@
 import pool from '../../configDB/config';
 import { Request, Response } from 'express';
 import { UserInfoRequest } from '../../types/requests';
+import { Book, Review, User } from '../../models';
+import validateEntity from '../../helpers/validateEntity';
 
-export const getReviews = (request: Request, response: Response) => {
-  pool.query('SELECT * FROM reviews', (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).json(results.rows);
+export const getReviews = async (request: Request, response: Response) => {
+  const reviews = await Review.find();
+
+  return response.status(200).send({
+    reviews,
   });
 };
 
-export const getReviewById = (request: Request, response: Response) => {
-  const id = parseInt(request.params.id);
+export const getReviewById = async (request: Request, response: Response) => {
+  const id = request.params.id;
 
-  pool.query('SELECT * FROM reviews WHERE id = $1', [id], (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).json(results.rows);
+  const review = await Review.findOneOrFail(id);
+
+  return response.status(200).send({
+    review,
   });
 };
 
-export const createReview = (request: UserInfoRequest, response: Response) => {
-  const { header, content, score, added_at, book_id, user_id } = request.body;
+export const createReview = async (request: UserInfoRequest, response: Response) => {
+  const { textContent, rating, bookId, userId } = request.body;
 
-  pool.query(
-    'INSERT INTO reviews (header, content, score, added_at, user_id, book_id) VALUES ($1, $2, $3, $4, $5, $6)',
-    [header, content, score, added_at, user_id, book_id],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(201).send(`Reviev added`);
-    },
-  );
-};
+  const user: User = await User.findOneOrFail(userId);
+  const book: Book = await Book.findOneOrFail(bookId);
 
-export const updateReview = (request: UserInfoRequest, response: Response) => {
-  const id = parseInt(request.params.id);
-  const { header, content, score, added_at } = request.body;
-  pool.query(
-    'UPDATE review SET header = $1, content= $2, score = $3 created_at = $4',
-    [header, content, score, added_at],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(200).send(`Review modified`);
-    },
-  );
-};
+  const review = new Review();
 
-export const deleteReview = (request: Request, response: Response) => {
-  const id = parseInt(request.params.id);
+  review.rating = rating;
+  review.textContent = textContent;
 
-  pool.query('DELETE FROM reviews WHERE id = $1', [id], (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).send(`Review deleted`);
+  review.book = book;
+  review.user = user;
+
+  await validateEntity(review);
+
+  await review.save();
+  return response.status(201).send({
+    message: 'Review created',
+    review,
   });
 };
 
-export const getAllReviewsByBookId = (request: Request, response: Response) => {
-  const id = parseInt(request.params.id);
+export const updateReview = async (request: UserInfoRequest, response: Response) => {
+  const id = request.params.id;
+  const { textContent, rating } = request.body;
 
-  pool.query(
-    'SELECT r.id review_id, r.content, r.score, r.added_at, r.user_id, r.book_id, u.id user_id, u.name, u.surname, u.avatar FROM reviews r INNER JOIN users u ON r.user_id = u.id WHERE book_id = $1',
-    [id],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(200).json(results.rows);
-    },
-  );
+  const review = await Review.findOneOrFail(id);
+
+  if (textContent) review.textContent = textContent;
+  if (rating) review.rating = rating;
+
+  await validateEntity(review);
+
+  await review.save();
+
+  return response.status(204).send({
+    message: 'Review has been updated..',
+  });
+};
+
+export const deleteReview = async (request: Request, response: Response) => {
+  const id = request.params.id;
+  const review = await Review.findOneOrFail(id);
+
+  await review.remove();
+
+  return response.status(204).send({
+    message: 'Review has been deleted..',
+  });
 };
 
 module.exports = {
@@ -84,5 +80,5 @@ module.exports = {
   createReview,
   updateReview,
   deleteReview,
-  getAllReviewsByBookId,
+  // getAllReviewsByBookId,
 };

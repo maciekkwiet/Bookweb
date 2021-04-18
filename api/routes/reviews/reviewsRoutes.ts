@@ -1,9 +1,10 @@
-const router = require('express').Router();
-import { getReviews, getReviewById, createReview, updateReview, deleteReview, getAllReviewsByBookId } from './reviews';
+const Router = require('express-promise-router');
+import { getReviews, getReviewById, createReview, updateReview, deleteReview } from './reviews';
+
+const router = new Router();
 
 router.get('/', getReviews);
 router.get('/:id', getReviewById);
-router.get('/all/:id', getAllReviewsByBookId);
 router.post('/', createReview);
 router.put('/:id', updateReview);
 router.delete('/:id', deleteReview);
