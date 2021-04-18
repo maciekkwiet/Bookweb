@@ -1,16 +1,29 @@
 require('dotenv').config();
+
+// DEV CONFIGURATION
 process.env['NODE_ENV'] = 'production';
+
 import * as express from 'express';
 import * as path from 'path';
 import * as morgan from 'morgan';
-import * as http from 'http';
 import * as winston from 'winston';
-const { createProxyMiddleware } = require('http-proxy-middleware');
-
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
-// import swaggerUi from 'swagger-ui-express';
 import dbConfig from './config/database';
+
+const { createProxyMiddleware } = require('http-proxy-middleware');
+// TODO - SWAGGER DOCCUMENTATION
+// import swaggerUi from 'swagger-ui-express';
+createConnection(dbConfig)
+  .then((_connection) => {
+    app.listen(port, () => {
+      console.log('Server is running on port - DB', port);
+    });
+  })
+  .catch((err) => {
+    console.log('Unable to connect to db', err);
+    process.exit(1);
+  });
 
 const logger = winston.add(new winston.transports.File({ filename: 'logfile.log', handleExceptions: true }));
 const myStream = {
@@ -18,24 +31,12 @@ const myStream = {
     logger.log('info', text);
   },
 };
-const apiProxy = createProxyMiddleware('/api', {
-  target: 'https://books-web-portal.herokuapp.com/',
-  changeOrigin: true,
-});
 
 const errorMiddleware = require('./middleware/errorMiddleware');
 const mountRoutes = require('./routes');
 
 const app = express();
-
-const server = http.createServer(app);
 const port = process.env.PORT || '3000';
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use(morgan('tiny', { stream: myStream }));
-app.use(express.json());
 
 app.all('/*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -48,31 +49,25 @@ app.disable('x-powered-by');
 
 mountRoutes(app);
 
+app.use(morgan('tiny', { stream: myStream }));
+app.use(express.json());
+
 if (process.env.NODE_ENV === 'production') {
+  const apiProxy = createProxyMiddleware('/api', {
+    target: 'https://books-web-portal.herokuapp.com/',
+    changeOrigin: true,
+  });
+
   app.use(express.static(path.join(__dirname, '../', '/client', '/build')));
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../', '/client', '/build', '/index.html'));
   });
   app.use('/api', apiProxy);
 }
+
 app.use(errorMiddleware);
 
 app.set('port', port);
-
-createConnection(dbConfig)
-  .then((_connection) => {
-    app.listen(port, () => {
-      console.log('Server is running on port - DB', port);
-    });
-  })
-  .catch((err) => {
-    console.log('Unable to connect to db', err);
-    process.exit(1);
-  });
-
-// server.listen(port);
-
-// console.log('Server listening on port ' + port);
 
 app.get('/', (request, response) => {
   response.json({ info: 'Teraz tylko robić :P' });
