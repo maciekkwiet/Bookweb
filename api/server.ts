@@ -1,12 +1,16 @@
 require('dotenv').config();
-
+process.env['NODE_ENV'] = 'production';
 import * as express from 'express';
 import * as path from 'path';
-import * as bodyParser from 'body-parser';
 import * as morgan from 'morgan';
 import * as http from 'http';
 import * as winston from 'winston';
 const { createProxyMiddleware } = require('http-proxy-middleware');
+
+import 'reflect-metadata';
+import { createConnection } from 'typeorm';
+// import swaggerUi from 'swagger-ui-express';
+import dbConfig from './config/database';
 
 const logger = winston.add(new winston.transports.File({ filename: 'logfile.log', handleExceptions: true }));
 const myStream = {
@@ -55,9 +59,20 @@ app.use(errorMiddleware);
 
 app.set('port', port);
 
-server.listen(port);
+createConnection(dbConfig)
+  .then((_connection) => {
+    app.listen(port, () => {
+      console.log('Server is running on port - DB', port);
+    });
+  })
+  .catch((err) => {
+    console.log('Unable to connect to db', err);
+    process.exit(1);
+  });
 
-console.log('Server listening on port ' + port);
+// server.listen(port);
+
+// console.log('Server listening on port ' + port);
 
 app.get('/', (request, response) => {
   response.json({ info: 'Teraz tylko robić :P' });
