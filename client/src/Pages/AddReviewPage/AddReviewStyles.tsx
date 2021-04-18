@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { MyBooksWrapper } from '../MyBooksPageStyles';
 import { theme } from '../../Theme';
 
 export const Flex = styled.div`
-  background: ${theme.backgrounds.bigCardGradient};
+  background: ${theme.backgrounds.darkTransparent};
   box-sizing: border-box;
   width: 100%;
   min-height: 100vh;
@@ -104,4 +105,11 @@ export const ReviewInput = styled.textarea`
 
 export const AddReview = styled.div`
   padding: 2rem 15% 0 15%;
+`;
+
+export const BookPageContainer = styled(MyBooksWrapper)`
+padding:0;
+overflow:hidden;
+margin:7vh auto;
+
 `;

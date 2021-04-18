@@ -8,6 +8,11 @@ import { format } from 'date-fns';
 import { BigLabel } from '../../Components/BigLabel/BigLabel';
 import StarRating from '../../Components/Star/StarRating';
 import { Button } from '../../Components/Button/Button';
+import { MyBooksPageWrapper } from '../MyBooksPageStyles';
+import { Header } from '../../Components/Header/Header';
+import { Navbar } from '../../Components/Navbar/Navbar';
+import { SearchingBarComponent } from '../../Components/SearchingBar/SearchingBarStyles'
+import { Footer } from '../MyBooksPageStyles'
 import {
   Flex,
   Title,
@@ -22,6 +27,7 @@ import {
   Review,
   ReviewInput,
   AddReview,
+  BookPageContainer,
 } from '../AddReviewPage/AddReviewStyles';
 
 type Book = {
@@ -88,37 +94,45 @@ export const AddReviewPage = () => {
   }, [id]);
 
   return (
-    <Flex>
-      <Title>
-        <BigLabel title={bookData?.title ?? ' '}></BigLabel>
-      </Title>
-      <Description>
-        <Information>
-          <Cover>
-            <BookImage src={bookData?.cover} />
-          </Cover>
-          <Info>
-            <InfoLine>{`${bookData?.name ?? ''} ${bookData?.surname ?? ''}`}</InfoLine>
-            <InfoLine>Data wydania: {format(bookData?.release_date ?? new Date(), 'YYYY-MM-DD')}</InfoLine>
-            <InfoLine>Liczba stron: {bookData?.num_pages}</InfoLine>
-            <InfoLine>ISBN: {bookData?.isbn}</InfoLine>
-            <InfoLine>Srednia ocen: {bookData?.average ?? 0}</InfoLine>
-          </Info>
-        </Information>
-        <Rating>
-          <Text>Twoja ocena:</Text>
-          <StarRating rate={0} getNumberOfStars={setUserStars} />
-        </Rating>
-      </Description>
-      <Review>
-        <ReviewInput
-          placeholder="Napisz co myślisz o tej książce...."
-          onChange={(e) => setUserReview(e.target.value)}
-        ></ReviewInput>
-      </Review>
-      <AddReview>
-        <Button children="Opublikuj" onClick={handleClick}></Button>
-      </AddReview>
-    </Flex>
+    <MyBooksPageWrapper>
+      <Header isLogged={true} />
+      <Navbar />
+      <SearchingBarComponent />
+      <BookPageContainer>
+        <Flex>
+          <Title>
+            <BigLabel title={bookData?.title ?? ' '}></BigLabel>
+          </Title>
+          <Description>
+            <Information>
+              <Cover>
+                <BookImage src={bookData?.cover} />
+              </Cover>
+              <Info>
+                <InfoLine>{`${bookData?.name ?? ''} ${bookData?.surname ?? ''}`}</InfoLine>
+                <InfoLine>Data wydania: {format(bookData?.release_date ?? new Date(), 'YYYY-MM-DD')}</InfoLine>
+                <InfoLine>Liczba stron: {bookData?.num_pages}</InfoLine>
+                <InfoLine>ISBN: {bookData?.isbn}</InfoLine>
+                <InfoLine>Srednia ocen: {bookData?.average ?? 0}</InfoLine>
+              </Info>
+            </Information>
+            <Rating>
+              <Text>Twoja ocena:</Text>
+              <StarRating rate={0} getNumberOfStars={setUserStars} />
+            </Rating>
+          </Description>
+          <Review>
+            <ReviewInput
+              placeholder="Napisz co myślisz o tej książce...."
+              onChange={(e) => setUserReview(e.target.value)}
+            ></ReviewInput>
+          </Review>
+          <AddReview>
+            <Button children="Opublikuj" onClick={handleClick}></Button>
+          </AddReview>
+        </Flex>
+      </BookPageContainer>
+      <Footer>&copy; CodersCamp VI BookWeb</Footer>
+    </MyBooksPageWrapper>
   );
 };
