@@ -1,17 +1,14 @@
-import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Book, Review } from '.';
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
   @Column()
   name!: string;
-
-  @Column()
-  surname!: string;
 
   @Column()
   email!: string;
