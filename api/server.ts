@@ -47,10 +47,10 @@ app.all('/*', (req, res, next) => {
 
 app.disable('x-powered-by');
 
-mountRoutes(app);
-
 app.use(morgan('tiny', { stream: myStream }));
 app.use(express.json());
+
+mountRoutes(app);
 
 if (process.env.NODE_ENV === 'production') {
   const apiProxy = createProxyMiddleware('/api', {
