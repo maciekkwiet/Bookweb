@@ -1,88 +1,100 @@
-import pool from '../../configDB/config';
 import { Request, Response } from 'express';
 
+import { Author } from '../../models';
+import validateEntity from '../../helpers/validateEntity';
+import { Like } from 'typeorm';
+
 export const getAuthors = async (request: Request, response: Response) => {
-  pool.query('SELECT * FROM authors ORDER BY id ASC', (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).json(results.rows);
-  });
+  const authors = await Author.find();
+
+  return response.status(200).send(authors);
 };
 
 export const getAuthorById = async (request: Request, response: Response) => {
-  const id = parseInt(request.params.id);
+  const id = request.params;
 
-  pool.query('SELECT * FROM authors WHERE id = $1', [id], (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).json(results.rows);
+  const author = await Author.findOneOrFail(id);
+
+  return response.status(200).send({
+    author,
   });
 };
 
-export const getBooksByAuthorId = async (request: Request, response: Response) => {
-  const id = parseInt(request.params.id);
+export async function getAuthorsBySurname(request: Request, response: Response) {
+  const { surname } = request.params;
 
-  pool.query(
-    'SELECT books.id, books.title FROM books INNER JOIN authors_books  ON books.id = authors_books.book_id WHERE authors_books.author_id = $1',
-    [id],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(200).json(results.rows);
-    }
-  );
+  const author = await Author.find({
+    where: {
+      surname: surname,
+    },
+  });
+
+  return response.status(200).send({
+    author,
+  });
+}
+
+export const getBooksByAuthorId = async (request: Request, response: Response) => {
+  const id = request.params;
+
+  const author = await Author.findOneOrFail({
+    where: id,
+    relations: ['books'],
+  });
+
+  const { books } = author;
+
+  return response.status(200).send({
+    books,
+  });
 };
 
 export const createAuthor = async (request: Request, response: Response) => {
   const { name, surname, description } = request.body;
 
-  pool.query(
-    'INSERT INTO authors (name, surname, description) VALUES ($1, $2, $3)',
-    [name, surname, description],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(201).send(`Author added`);
-    }
-  );
-};
+  const author = new Author();
+  author.name = name;
+  author.surname = surname;
+  author.description = description;
 
-export const updateAuthor = async (request: Request, response: Response) => {
-  const id = parseInt(request.params.id);
-  const { name, surname, description } = request.body;
+  await validateEntity(author);
 
-  pool.query(
-    'UPDATE authors SET name = $1, surname = $2, description = $3 WHERE id = $4',
-    [name, surname, description, id],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(200).send(`Author modified`);
-    }
-  );
-};
+  await author.save();
 
-export const deleteAuthor = async (request: Request, response: Response) => {
-  const id = parseInt(request.params.id);
-
-  pool.query('DELETE FROM authors WHERE id = $1', [id], (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).send(`Author deleted`);
+  return response.status(201).send({
+    message: 'Author added..',
+    author,
   });
 };
 
-module.exports = {
-  getAuthors,
-  getAuthorById,
-  getBooksByAuthorId,
-  createAuthor,
-  updateAuthor,
-  deleteAuthor,
+export const updateAuthor = async (request: Request, response: Response) => {
+  const id = request.params;
+  const { name, surname, description } = request.body;
+
+  const author = await Author.findOneOrFail(id);
+
+  if (name) author.name = name;
+  if (surname) author.surname = surname;
+  if (description) author.description = description;
+
+  validateEntity(author);
+
+  await author.save().then();
+
+  return response.status(200).send({
+    author,
+  });
 };
+
+export const deleteAuthor = async (request: Request, response: Response) => {
+  const id = request.params;
+
+  const author = await Author.findOneOrFail(id);
+  author.remove();
+
+  return response.status(200).send({
+    message: `Author ${author.name} ${author.surname} has been deleted`,
+  });
+};
+
+//module.exports
