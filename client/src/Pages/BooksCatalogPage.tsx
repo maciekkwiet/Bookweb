@@ -35,7 +35,9 @@ export const BooksCatalogPage = () => {
 
       for (let book of result?.data) {
         const { data: authors } = await Axios.get(`/api/books/${book.id}/authors`);
+        const { data: rating } = await Axios.get(`/api/books/average/${book.id}`);
         book.author = authors.map((author) => `${author.name} ${author.surname}`).join(', ');
+        book.rating = rating[0]?.rating;
       }
 
       setTopBooks(result?.data);
@@ -63,7 +65,7 @@ export const BooksCatalogPage = () => {
               title={book.title}
               author={book.author}
               review=""
-              rating={String(parseFloat(parseFloat(book.rating).toFixed(2)))}
+              rating={book.rating}
               cover={book.cover}
             />
           ))}
