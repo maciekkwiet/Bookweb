@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Axios } from '../../helpers/axios';
 import { useParams, useHistory } from 'react-router-dom';
-
+import { MyBooksPageWrapper } from '../MyBooksPageStyles';
+import { Header } from '../../Components/Header/Header';
+import { Navbar } from '../../Components/Navbar/Navbar';
+import { SearchingBarComponent } from '../../Components/SearchingBar/SearchingBarStyles'
+import { Footer } from '../MyBooksPageStyles'
 import { BigLabel } from '../../Components/BigLabel/BigLabel';
 import StarRating from '../../Components/Star/StarRating';
 import { Button } from '../../Components/Button/Button';
@@ -26,6 +30,7 @@ import {
   UserName,
   WhenAdded,
   ReviewText,
+  BookPageContainer,
 } from './BookPageStyles';
 
 type Book = {
@@ -80,53 +85,62 @@ export const BookPage = () => {
   }, [id]);
 
   return (
-    <Flex>
-      <Title>
-        <BigLabel title={bookData?.title} />
-      </Title>
-      <BookInformation>
-        <Information>
-          <Cover>
-            <BookImage src={bookData?.cover} />
-          </Cover>
-          <Info>
-            <InfoLine>{`${bookData?.name ?? ''} ${bookData?.surname ?? ''}`}</InfoLine>
-            <InfoLine>
-              Data wydania: {bookData?.release_date.toString().slice(0, 10) ?? new Date().toISOString().slice(0, 10)}
-            </InfoLine>
-            <InfoLine>Liczba stron: {bookData?.num_pages}</InfoLine>
-            <InfoLine>ISBN: {bookData?.isbn}</InfoLine>
-            <InfoLine>Srednia ocen: {bookData?.average ?? 0}</InfoLine>
-            <Stars>{bookData && <StarRating disabled rate={bookData?.average} getNumberOfStars></StarRating>}</Stars>
-          </Info>
-          <Buttons>
-            <Button onClick={() => console.log('dodaj na polke')} children={'Dodaj na polke'}></Button>
-            <Button disabled onClick={() => console.log('soonTM')} children={'Sprawdz gdzie zdobyc'}></Button>
-            <Button onClick={handleRouteChange} children={'Ocen ksiazke'}></Button>
-          </Buttons>
-        </Information>
-        <Description>
-          <p>{bookData?.description}</p>
-        </Description>
-      </BookInformation>
-      {bookData?.reviews && (
-        <Reviews>
-          <ReviewsTitle>Opinie czytelnikow:</ReviewsTitle>
-          {bookData.reviews.map((review) => (
-            <Review key={review.review_id}>
-              <UserInfoBox>
-                <AvatarBox>
-                  <Avatar src={review.avatar} />
-                </AvatarBox>
-                <UserName>{`${review.name} ${review.surname}`}</UserName>
-                <WhenAdded>{review.added_at.toString().slice(0, 10)}</WhenAdded>
-                <StarRating disabled getNumberOfStars rate={review.score}></StarRating>
-              </UserInfoBox>
-              <ReviewText>{review.content}</ReviewText>
-            </Review>
-          ))}
-        </Reviews>
-      )}
-    </Flex>
+    <MyBooksPageWrapper>
+      <Header isLogged={true} />
+      <Navbar />
+      <SearchingBarComponent />
+      <BookPageContainer>
+        <Flex>
+          <Title>
+            <BigLabel title={bookData?.title} />
+          </Title>
+          <BookInformation>
+            <Information>
+              <Cover>
+                <BookImage src={bookData?.cover} />
+              </Cover>
+              <Info>
+                <InfoLine>{`${bookData?.name ?? ''} ${bookData?.surname ?? ''}`}</InfoLine>
+                <InfoLine>
+                  Data wydania: {bookData?.release_date.toString().slice(0, 10) ?? new Date().toISOString().slice(0, 10)}
+                </InfoLine>
+                <InfoLine>Liczba stron: {bookData?.num_pages}</InfoLine>
+                <InfoLine>ISBN: {bookData?.isbn}</InfoLine>
+                <InfoLine>Srednia ocen: {bookData?.average ?? 0}</InfoLine>
+                <Stars>{bookData && <StarRating disabled rate={bookData?.average} getNumberOfStars></StarRating>}</Stars>
+              </Info>
+              <Buttons>
+                <Button onClick={() => console.log('dodaj na polke')} children={'Dodaj na polke'}></Button>
+                <Button disabled onClick={() => console.log('soonTM')} children={'Sprawdz gdzie zdobyc'}></Button>
+                <Button onClick={handleRouteChange} children={'Ocen ksiazke'}></Button>
+              </Buttons>
+            </Information>
+            <Description>
+              <p>{bookData?.description}</p>
+            </Description>
+          </BookInformation>
+          {bookData?.reviews && (
+            <Reviews>
+              <ReviewsTitle>Opinie czytelnikow:</ReviewsTitle>
+              {bookData.reviews.map((review) => (
+                <Review key={review.review_id}>
+                  <UserInfoBox>
+                    <AvatarBox>
+                      <Avatar src={review.avatar} />
+                    </AvatarBox>
+                    <UserName>{`${review.name} ${review.surname}`}</UserName>
+                    <WhenAdded>{review.added_at.toString().slice(0, 10)}</WhenAdded>
+                    <StarRating disabled getNumberOfStars rate={review.score}></StarRating>
+                  </UserInfoBox>
+                  <ReviewText>{review.content}</ReviewText>
+                </Review>
+              ))}
+            </Reviews>
+          )}
+
+        </Flex>
+      </BookPageContainer>
+      <Footer>&copy; CodersCamp VI BookWeb</Footer>
+    </MyBooksPageWrapper>
   );
 };
