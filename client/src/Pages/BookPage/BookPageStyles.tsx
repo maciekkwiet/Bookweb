@@ -181,8 +181,7 @@ export const ReviewText = styled.p`
 `;
 
 export const BookPageContainer = styled(MyBooksWrapper)`
-padding:0;
-overflow:hidden;
-margin:7vh auto;
-
+  padding:0;
+  overflow:hidden;
+  margin:7vh auto;
 `

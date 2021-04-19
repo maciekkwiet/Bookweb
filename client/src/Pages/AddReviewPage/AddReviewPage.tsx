@@ -110,7 +110,9 @@ export const AddReviewPage = () => {
               </Cover>
               <Info>
                 <InfoLine>{`${bookData?.name ?? ''} ${bookData?.surname ?? ''}`}</InfoLine>
-                <InfoLine>Data wydania: {format(bookData?.release_date ?? new Date(), 'YYYY-MM-DD')}</InfoLine>
+                <InfoLine>
+                  Data wydania: {bookData?.release_date.toString().slice(0, 10) ?? new Date().toISOString().slice(0, 10)}
+                </InfoLine>
                 <InfoLine>Liczba stron: {bookData?.num_pages}</InfoLine>
                 <InfoLine>ISBN: {bookData?.isbn}</InfoLine>
                 <InfoLine>Srednia ocen: {bookData?.average ?? 0}</InfoLine>

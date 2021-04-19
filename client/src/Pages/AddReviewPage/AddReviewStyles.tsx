@@ -108,8 +108,7 @@ export const AddReview = styled.div`
 `;
 
 export const BookPageContainer = styled(MyBooksWrapper)`
-padding:0;
-overflow:hidden;
-margin:7vh auto;
-
+  padding:0;
+  overflow:hidden;
+  margin:7vh auto;
 `;

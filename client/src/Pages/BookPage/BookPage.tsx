@@ -137,7 +137,6 @@ export const BookPage = () => {
               ))}
             </Reviews>
           )}
-
         </Flex>
       </BookPageContainer>
       <Footer>&copy; CodersCamp VI BookWeb</Footer>
