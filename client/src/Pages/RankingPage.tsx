@@ -46,7 +46,7 @@ export const RankingPage = () => {
               title={book.title}
               author={book.author}
               review=""
-              rating={String(parseFloat(parseFloat(book.rating).toFixed(2)))}
+              rating={Math.round(book.rating)}
               cover={book.cover}
             />
           ))}

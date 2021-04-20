@@ -25,7 +25,7 @@ export const LoggedHomePage = () => {
   const urlInProgress = `/api/book-groups/${email}/do%20przeczytania/bookShelves`;
   const urlWantToRead = `/api/book-groups/${email}/chcę%20przeczytać/bookShelves`;
 
-  const handleSubmit = () => { };
+  const handleSubmit = () => {};
 
   const [topBooks, setTopBooks] = useState<BookDetailsType[]>([]);
 
@@ -68,7 +68,7 @@ export const LoggedHomePage = () => {
                 title={book.title}
                 author={book.author}
                 review=""
-                rating={String(parseFloat(parseFloat(book.rating).toFixed(2)))}
+                rating={Math.round(book.rating)}
                 cover={book.cover}
               />
             ))}

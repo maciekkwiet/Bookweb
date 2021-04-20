@@ -11,7 +11,7 @@ export const RankingBox: FC<BookDetails> = ({ title, id, rating, author, review,
     history.push(path);
   };
 
-  const score = rating === 'NaN' ? 'brak ocen' : rating;
+  const score = isNaN(rating) ? 'brak ocen' : rating;
 
   return (
     <BoxComponent data-testid="BoxId">
