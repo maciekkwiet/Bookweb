@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { Axios } from '../../helpers/axios';
+import { useToasts } from 'react-toast-notifications';
 import { Modal } from '../Modal/Modal';
 import { BigLabel } from '../BigLabel/BigLabel';
 import { Button } from '../Button/Button';
@@ -18,9 +20,8 @@ import {
   ButtonWrapper,
   AddImageLabel,
 } from './AddBookModalStyles';
-// import { useFormik } from 'formik'
 
-export const AddBookModal = ({ showModal, setShowModal, children }) => {
+export const AddBookModal = ({ showModal, setShowModal }) => {
   const [image, setImage] = useState<File | null>();
   const [preview, setPreview] = useState<string | null>();
   const [values, setValues] = useState({
@@ -32,8 +33,28 @@ export const AddBookModal = ({ showModal, setShowModal, children }) => {
     num_pages: 0,
     release_date: new Date(),
     description: '',
-    cover: File,
+    cover: '',
   });
+  const { addToast } = useToasts();
+
+  const handleClick = async () => {
+    try {
+      // console.log(values);
+      // Access to XMLHttpRequest at 'http://localhost:8080/api/books/' from origin 'http://localhost:3000' has been
+      // blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP
+      //  ok status.
+      await Axios.post('/api/books/', values);
+      addToast(`Dodano książkę:  ${values?.title}`, {
+        appearance: 'success',
+        autoDismiss: true,
+      });
+    } catch (err) {
+      addToast(`Nie udało się dodać książki: ${values?.title}`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -47,41 +68,24 @@ export const AddBookModal = ({ showModal, setShowModal, children }) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === 'image') {
       setImage(file);
-      // setValues({
-      //   ...values,
-      //   cover: file
-      // });
     }
   };
 
   useEffect(() => {
     if (image) {
       const reader = new FileReader();
+      reader.readAsDataURL(image);
       reader.onloadend = () => {
         setPreview(reader.result as string);
+        setValues({
+          ...values,
+          cover: reader.result as string,
+        });
       };
-      reader.readAsDataURL(image);
     } else {
       setPreview(null);
     }
-  }, [image]);
-
-  // const {getFieldProps, handleSubmit} = useFormik({
-  //   initialValues: {
-  //     isbn: "",
-  //     title: "",
-  //     name: "",
-  //     surname: "",
-  //     publisher_name: "",
-  //     num_pages: "",
-  //     release_date: "",
-  //     description: "",
-  //     cover: ""
-  //   },
-  //   onSubmit(values) {
-  //     return values;
-  //   }
-  // })
+  }, [image, values]);
 
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
@@ -101,7 +105,6 @@ export const AddBookModal = ({ showModal, setShowModal, children }) => {
                   value={values.isbn}
                   onChange={handleChange}
                   placeholder="ISBN"
-                  // {...getFieldProps("isbn")}
                   required
                 />
               </InputWrapper>
@@ -114,7 +117,6 @@ export const AddBookModal = ({ showModal, setShowModal, children }) => {
                   value={values.title}
                   onChange={handleChange}
                   placeholder="Tytuł książki"
-                  // {...getFieldProps("title")}
                   required
                 />
               </InputWrapper>
@@ -127,7 +129,6 @@ export const AddBookModal = ({ showModal, setShowModal, children }) => {
                   value={values.name}
                   onChange={handleChange}
                   placeholder="Imię autora"
-                  // {...getFieldProps("name")}
                   required
                 />
               </InputWrapper>
@@ -140,7 +141,6 @@ export const AddBookModal = ({ showModal, setShowModal, children }) => {
                   value={values.surname}
                   onChange={handleChange}
                   placeholder="Nazwisko autora"
-                  // {...getFieldProps("surname")}
                   required
                 />
               </InputWrapper>
@@ -153,7 +153,6 @@ export const AddBookModal = ({ showModal, setShowModal, children }) => {
                   value={values.publisher_name}
                   onChange={handleChange}
                   placeholder="Wydawnictwo"
-                  // {...getFieldProps("publisher_name")}
                 />
               </InputWrapper>
               <InputWrapper>
@@ -165,7 +164,6 @@ export const AddBookModal = ({ showModal, setShowModal, children }) => {
                   value={values.num_pages}
                   onChange={handleChange}
                   placeholder="Liczba stron"
-                  // {...getFieldProps("num_pages")}
                   required
                 />
               </InputWrapper>
@@ -177,7 +175,6 @@ export const AddBookModal = ({ showModal, setShowModal, children }) => {
                   name="release_date"
                   onChange={handleChange}
                   placeholder="Data wydania"
-                  // {...getFieldProps("release_date")}
                   required
                 />
               </InputWrapper>
@@ -202,10 +199,9 @@ export const AddBookModal = ({ showModal, setShowModal, children }) => {
           placeholder={'Opis książki'}
           value={values.description}
           onChange={handleChange}
-          // {...getFieldProps("description")}
         />
         <ButtonWrapper>
-          <Button type="submit" onClick={() => console.log(values)}>
+          <Button type="submit" onClick={handleClick}>
             Opublikuj
           </Button>
         </ButtonWrapper>
