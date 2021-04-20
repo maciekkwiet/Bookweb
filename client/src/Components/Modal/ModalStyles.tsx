@@ -22,11 +22,10 @@ export const ModalWrapper = styled.div`
 
 export const CloseModalButton = styled(MdClose)`
   cursor: pointer;
-  position: fixed;
-  top: 5%;
-  right: 5%;
+  position: relative;
+  left: 90%;
   width: 32px;
   height: 32px;
-  padding: 0;
+  padding-top: 1rem;
   z-index: 15;
 `;

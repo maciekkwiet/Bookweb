@@ -6,8 +6,8 @@ export const Modal = ({ showModal, setShowModal, children }) => {
       {showModal ? (
         <Background>
           <ModalWrapper>
-            {children}
             <CloseModalButton aria-label="Close modal" onClick={() => setShowModal((prev) => !prev)} />
+            {children}
           </ModalWrapper>
         </Background>
       ) : null}

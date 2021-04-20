@@ -9,7 +9,7 @@ export const Flex = styled.div`
 `;
 
 export const TitleWrapper = styled.div`
-  padding-top: 1rem;
+  padding-top: 0rem;
 `;
 
 export const Wrapper = styled.div`
