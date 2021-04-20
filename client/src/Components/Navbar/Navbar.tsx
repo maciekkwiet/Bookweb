@@ -18,7 +18,7 @@ export const Navbar = () => {
 
   return (
     <IconContext.Provider value={{ color: theme.colors.secondary }}>
-      <AddBookModal showModal={showModal} setShowModal={setShowModal}></AddBookModal>
+      <AddBookModal showModal={showModal} setShowModal={setShowModal} />
       <NavbarComponent>
         <NavContainer>
           <Burger onClick={handleClick} data-testid="BurgerId">
