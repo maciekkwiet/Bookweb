@@ -7,6 +7,7 @@ export interface InputProps {
   inputValue?: string;
   onChange?: (event) => void;
   isRequired?: boolean;
+  id?: string;
 }
 
 const Input = ({ type, placeholder, inputValue, onChange, isRequired = false, ...otherProps }: InputProps) => {

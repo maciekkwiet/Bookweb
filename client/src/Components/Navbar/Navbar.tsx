@@ -3,16 +3,22 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
 import { theme } from '../../Theme';
 import { NavbarComponent, NavContainer, NavMenu, Burger, NavItem, NavLinks } from './NavbarStyles';
+import { AddBookModal } from '../AddBookModal/AddBookModal';
 
 export type NavbarComponentProps = {};
 
 export const Navbar = () => {
   const [click, setClick] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleClick = () => setClick(!click);
+  const handleOpenModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
   return (
     <IconContext.Provider value={{ color: theme.colors.secondary }}>
+      <AddBookModal showModal={showModal} setShowModal={setShowModal} />
       <NavbarComponent>
         <NavContainer>
           <Burger onClick={handleClick} data-testid="BurgerId">
@@ -23,7 +29,9 @@ export const Navbar = () => {
               <NavLinks to="/bookscatalog">Katalog książek</NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinks to="/addnewbook">Dodaj książkę</NavLinks>
+              <NavLinks to="#" onClick={handleOpenModal}>
+                Dodaj książkę
+              </NavLinks>
             </NavItem>
             <NavItem>
               <NavLinks to="/mybooks">Moje książki</NavLinks>

@@ -9,10 +9,10 @@ import { AuthorPage } from '../Pages/AuthorPage';
 import { BookPage } from '../Pages/BookPage/BookPage';
 import { BooksCatalogPage } from '../Pages/BooksCatalogPage';
 import { ProvidersCatalogPage } from '../Pages/ProvidersCatalogPage';
-import { RegisterHomePage } from '../Pages/RegisterHomePage';
 import { AddNewBookPage } from '../Pages/AddNewBookPage';
 import { AddReviewPage } from '../Pages/AddReviewPage/AddReviewPage';
 import { LoggedHomePage } from '../Pages/LoggedHomePage';
+import Navbar from '../Components/Navbar/Navbar';
 
 export const AppRoutes = () => {
   return (
@@ -29,6 +29,7 @@ export const AppRoutes = () => {
         <Route path={AppRoute.AddNewBook} component={AddNewBookPage} />
         <Route path={AppRoute.AddReview} component={AddReviewPage} />
         <Route path={AppRoute.WojtekPage} component={LoggedHomePage} />
+        <Route path={AppRoute.testPage} component={Navbar} />
         <Redirect to={AppRoute.Home} />
       </Switch>
     </BrowserRouter>

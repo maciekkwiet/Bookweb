@@ -11,4 +11,5 @@ export enum AppRoute {
   AddNewBook = '/addnewbook',
   AddReview = '/addreview/:id',
   WojtekPage = '/wojtek',
+  testPage = '/test',
 }
