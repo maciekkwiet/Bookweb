@@ -1,7 +1,8 @@
 import { LogDiv, UserName } from './LoggedDivStyles';
 import { Avatar } from '../Avatar/Avatar';
 
-export const LoggedDiv = ({ userID, userName }) => {
+
+export const LoggedDiv = ({ userName }) => {
   return (
     <LogDiv>
       <Avatar />

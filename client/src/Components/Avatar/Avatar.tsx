@@ -11,9 +11,8 @@ export const Avatar: FC = () => {
   const user = useSelector((state: RootState) => state.user.user);
 
   useEffect(() => {
-    if (user) {
-      setAvatarImage('https://data.whicdn.com/images/346235402/original.jpg');
-      // setAvatarImage(user[0].avatar);
+    if (user?.avatar) {
+      setAvatarImage(user.avatar);
     }
   }, [user]);
 
